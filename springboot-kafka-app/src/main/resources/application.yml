@@ -1,0 +1,11 @@
+spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      group-id: boot
+    bootstrap-servers: kafka:9092
+
+
+topic:
+  boot: Topic3
+
