@@ -4,6 +4,9 @@ WORKDIR /opt/demo_app
 
 COPY tmp/ ./
 
-CMD ["/bin/sh", "-c", "java -jar kafka-*.jar --spring.config.location=application.yml"]
+COPY jmx_prometheus_javaagent-0.15.0.jar ./
+COPY config.yml ./
+
+CMD ["/bin/sh", "-c", "java -javaagent:./jmx_prometheus_javaagent-0.15.0.jar=8090:config.yml -jar kafka-*.jar --spring.config.location=application.yml"]
 EXPOSE 8090
 
