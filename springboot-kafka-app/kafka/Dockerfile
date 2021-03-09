@@ -17,12 +17,12 @@ ENV PATH ${PATH}:${KAFKA_HOME}/bin
 ADD start-kafka.sh /usr/bin/start-kafka.sh
 ADD broker-list.sh /usr/bin/broker-list.sh
 ADD create-topics.sh /usr/bin/create-topics.sh
-ADD jmx_prometheus_javaagent-0.12.0.jar /usr/bin/jmx_prometheus_javaagent-0.12.0.jar
+ADD jmx_prometheus_javaagent-0.15.0.jar /usr/bin/jmx_prometheus_javaagent-0.15.0.jar
 ADD kafka-2_0_0.yml /usr/bin/kafka-2_0_0.yml
 # The scripts need to have executable permission
 RUN chmod a+x /usr/bin/start-kafka.sh && \
     chmod a+x /usr/bin/broker-list.sh && \
     chmod a+x /usr/bin/create-topics.sh && \
-    chmod a+x /usr/bin/jmx_prometheus_javaagent-0.12.0.jar
+    chmod a+x /usr/bin/jmx_prometheus_javaagent-0.15.0.jar
 CMD ["start-kafka.sh"]
 
