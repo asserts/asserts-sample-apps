@@ -27,7 +27,7 @@ services:
     depends_on:
       - zookeeper
   spring_boot:
-    build: .
+    build: ""
     ports:
       - "8090:8090"
     depends_on:

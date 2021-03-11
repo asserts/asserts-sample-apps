@@ -2,7 +2,7 @@ FROM java:8
 
 WORKDIR /opt/demo_app
 
-COPY tmp/ ./
+COPY tmp ./
 
 COPY jmx_prometheus_javaagent-0.15.0.jar ./
 COPY kafka-connect.yml ./
