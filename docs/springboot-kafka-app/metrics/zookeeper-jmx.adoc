@@ -1,0 +1,494 @@
+= Zookeeper
+
+== JMX Metrics
+
+    add_dead_watcher_stall_time 0.0
+    
+    approximate_data_size 10702.0
+    
+    avg_latency 0.6704
+    
+    bytes_received_count 12628.0
+    
+    close_session_prep_time_count 1.0
+    close_session_prep_time_sum 3.0
+    close_session_prep_time{quantile="0.5",} NaN
+    close_session_prep_time{quantile="0.9",} NaN
+    close_session_prep_time{quantile="0.99",} NaN
+    
+    commit_commit_proc_req_queued_count 0.0
+    commit_commit_proc_req_queued_sum 0.0
+    commit_commit_proc_req_queued{quantile="0.5",} NaN
+    
+    commit_count 0.0
+    
+    commit_process_time_count 0.0
+    commit_process_time_sum 0.0
+    commit_process_time{quantile="0.5",} NaN
+    
+    commit_propagation_latency_count 0.0
+    commit_propagation_latency_sum 0.0
+    commit_propagation_latency{quantile="0.5",} NaN
+    commit_propagation_latency{quantile="0.9",} NaN
+    commit_propagation_latency{quantile="0.99",} NaN
+    
+    concurrent_request_processing_in_commit_processor_count 0.0
+    concurrent_request_processing_in_commit_processor_sum 0.0
+    concurrent_request_processing_in_commit_processor{quantile="0.5",} NaN
+    
+    connection_drop_count 0.0
+    connection_drop_probability 0.0
+    connection_rejected 0.0
+    connection_request_count 1.0
+    connection_revalidate_count 0.0
+    
+    connection_token_deficit_count 1.0
+    connection_token_deficit_sum 0.0
+    connection_token_deficit{quantile="0.5",} NaN
+    
+    dbinittime_count 1.0
+    dbinittime_sum 33.0
+    dbinittime{quantile="0.5",} NaN
+    
+    dead_watchers_cleaner_latency_count 0.0
+    dead_watchers_cleaner_latency_sum 0.0
+    dead_watchers_cleaner_latency{quantile="0.5",} NaN
+    dead_watchers_cleaner_latency{quantile="0.9",} NaN
+    dead_watchers_cleaner_latency{quantile="0.99",} NaN
+    dead_watchers_cleared 0.0
+    dead_watchers_queued 0.0
+    
+    diff_count 0.0
+    
+    digest_mismatches_count 0.0
+    
+    election_time_count 0.0
+    election_time_sum 0.0
+    election_time{quantile="0.5",} NaN
+    
+    ensemble_auth_fail 0.0
+    ensemble_auth_skip 0.0
+    ensemble_auth_success 0.0
+    
+    ephemerals_count 2.0
+   
+    follower_sync_time_count 0.0
+    follower_sync_time_sum 0.0
+    follower_sync_time{quantile="0.5",} NaN
+    
+    fsynctime_count 19.0
+    fsynctime_sum 2.0
+    fsynctime{quantile="0.5",} NaN
+    
+    global_sessions 1.0
+    
+    inflight_diff_count_count 0.0
+    inflight_diff_count_sum 0.0
+    inflight_diff_count{quantile="0.5",} NaN
+    inflight_snap_count_count 0.0
+    inflight_snap_count_sum 0.0
+    inflight_snap_count{quantile="0.5",} NaN
+    
+    jvm_buffer_pool_capacity_bytes{pool="direct",} 221813.0
+    jvm_buffer_pool_capacity_bytes{pool="mapped",} 0.0
+    jvm_buffer_pool_used_buffers{pool="direct",} 13.0
+    jvm_buffer_pool_used_buffers{pool="mapped",} 0.0
+    jvm_buffer_pool_used_bytes{pool="direct",} 221813.0
+    jvm_buffer_pool_used_bytes{pool="mapped",} 0.0
+    
+    jvm_classes_loaded 3237.0
+    jvm_classes_loaded_total 3237.0
+    jvm_classes_unloaded_total 0.0
+    
+    jvm_gc_collection_seconds_count{gc="Copy",} 0.0
+    jvm_gc_collection_seconds_count{gc="MarkSweepCompact",} 1.0
+    jvm_gc_collection_seconds_sum{gc="Copy",} 0.0
+    jvm_gc_collection_seconds_sum{gc="MarkSweepCompact",} 0.026
+    
+    jvm_info{version="11.0.10+9-LTS",vendor="BellSoft",runtime="OpenJDK Runtime Environment",} 1.0
+    
+    jvm_memory_bytes_committed{area="heap",} 1.037959168E9
+    jvm_memory_bytes_committed{area="nonheap",} 3.4603008E7
+    jvm_memory_bytes_init{area="heap",} 1.073741824E9
+    jvm_memory_bytes_init{area="nonheap",} 7667712.0
+    jvm_memory_bytes_max{area="heap",} 1.037959168E9
+    jvm_memory_bytes_max{area="nonheap",} -1.0
+    jvm_memory_bytes_used{area="heap",} 8.7451704E7
+    jvm_memory_bytes_used{area="nonheap",} 3.0345256E7
+    
+    jvm_memory_pool_allocated_bytes_total{pool="CodeHeap 'non-nmethods'",} 1155456.0
+    jvm_memory_pool_allocated_bytes_total{pool="CodeHeap 'non-profiled nmethods'",} 574080.0
+    jvm_memory_pool_allocated_bytes_total{pool="CodeHeap 'profiled nmethods'",} 4220160.0
+    jvm_memory_pool_allocated_bytes_total{pool="Compressed Class Space",} 2169672.0
+    jvm_memory_pool_allocated_bytes_total{pool="Eden Space",} 2.06163648E8
+    jvm_memory_pool_allocated_bytes_total{pool="Metaspace",} 2.1180184E7
+    jvm_memory_pool_allocated_bytes_total{pool="Tenured Gen",} 7279256.0
+    jvm_memory_pool_bytes_committed{pool="CodeHeap 'non-nmethods'",} 2555904.0
+    jvm_memory_pool_bytes_committed{pool="CodeHeap 'non-profiled nmethods'",} 2555904.0
+    jvm_memory_pool_bytes_committed{pool="CodeHeap 'profiled nmethods'",} 4325376.0
+    jvm_memory_pool_bytes_committed{pool="Compressed Class Space",} 2490368.0
+    jvm_memory_pool_bytes_committed{pool="Eden Space",} 2.86326784E8
+    jvm_memory_pool_bytes_committed{pool="Metaspace",} 2.2675456E7
+    jvm_memory_pool_bytes_committed{pool="Survivor Space",} 3.5782656E7
+    jvm_memory_pool_bytes_committed{pool="Tenured Gen",} 7.15849728E8
+    jvm_memory_pool_bytes_init{pool="CodeHeap 'non-nmethods'",} 2555904.0
+    jvm_memory_pool_bytes_init{pool="CodeHeap 'non-profiled nmethods'",} 2555904.0
+    jvm_memory_pool_bytes_init{pool="CodeHeap 'profiled nmethods'",} 2555904.0
+    jvm_memory_pool_bytes_init{pool="Compressed Class Space",} 0.0
+    jvm_memory_pool_bytes_init{pool="Eden Space",} 2.86326784E8
+    jvm_memory_pool_bytes_init{pool="Metaspace",} 0.0
+    jvm_memory_pool_bytes_init{pool="Survivor Space",} 3.5782656E7
+    jvm_memory_pool_bytes_init{pool="Tenured Gen",} 7.15849728E8
+    jvm_memory_pool_bytes_max{pool="CodeHeap 'non-nmethods'",} 5828608.0
+    jvm_memory_pool_bytes_max{pool="CodeHeap 'non-profiled nmethods'",} 1.22916864E8
+    jvm_memory_pool_bytes_max{pool="CodeHeap 'profiled nmethods'",} 1.22912768E8
+    jvm_memory_pool_bytes_max{pool="Compressed Class Space",} 1.073741824E9
+    jvm_memory_pool_bytes_max{pool="Eden Space",} 2.86326784E8
+    jvm_memory_pool_bytes_max{pool="Metaspace",} -1.0
+    jvm_memory_pool_bytes_max{pool="Survivor Space",} 3.5782656E7
+    jvm_memory_pool_bytes_max{pool="Tenured Gen",} 7.15849728E8
+    jvm_memory_pool_bytes_used{pool="CodeHeap 'non-nmethods'",} 1162496.0
+    jvm_memory_pool_bytes_used{pool="CodeHeap 'non-profiled nmethods'",} 606720.0
+    jvm_memory_pool_bytes_used{pool="CodeHeap 'profiled nmethods'",} 4319744.0
+    jvm_memory_pool_bytes_used{pool="Compressed Class Space",} 2284376.0
+    jvm_memory_pool_bytes_used{pool="Eden Space",} 8.0172448E7
+    jvm_memory_pool_bytes_used{pool="Metaspace",} 2.197192E7
+    jvm_memory_pool_bytes_used{pool="Survivor Space",} 0.0
+    jvm_memory_pool_bytes_used{pool="Tenured Gen",} 7279256.0
+    
+    jvm_pause_time_ms_count 0.0
+    jvm_pause_time_ms_sum 0.0
+    jvm_pause_time_ms{quantile="0.5",} NaN
+    jvm_pause_time_ms{quantile="0.9",} NaN
+    jvm_pause_time_ms{quantile="0.99",} NaN
+    
+    jvm_threads_current 34.0
+    jvm_threads_daemon 10.0
+    jvm_threads_deadlocked 0.0
+    jvm_threads_deadlocked_monitor 0.0
+    jvm_threads_peak 34.0
+    jvm_threads_started_total 34.0
+    jvm_threads_state{state="BLOCKED",} 0.0
+    jvm_threads_state{state="NEW",} 0.0
+    jvm_threads_state{state="RUNNABLE",} 10.0
+    jvm_threads_state{state="TERMINATED",} 0.0
+    jvm_threads_state{state="TIMED_WAITING",} 17.0
+    jvm_threads_state{state="WAITING",} 7.0
+    
+    large_requests_rejected 0.0
+    
+    last_client_response_size 16.0
+    
+    learner_commit_received_count 0.0
+    learner_proposal_received_count 0.0
+    
+    local_sessions 0.0
+    
+    local_write_committed_time_ms_count 0.0
+    local_write_committed_time_ms_sum 0.0
+    local_write_committed_time_ms{quantile="0.5",} NaN
+    local_write_committed_time_ms{quantile="0.9",} NaN
+    local_write_committed_time_ms{quantile="0.99",} NaN
+    
+    looking_count 0.0
+    
+    max_client_response_size 600.0
+    max_file_descriptor_count 1048576.0
+    max_latency 8.0
+    
+    min_client_response_size 16.0
+    min_latency 0.0
+    
+    netty_queued_buffer_capacity_count 0.0
+    netty_queued_buffer_capacity_sum 0.0
+    netty_queued_buffer_capacity{quantile="0.5",} NaN
+    
+    node_changed_watch_count_count 0.0
+    node_changed_watch_count_sum 0.0
+    node_changed_watch_count{quantile="0.5",} NaN
+    
+    node_children_watch_count_count 0.0
+    node_children_watch_count_sum 0.0
+    node_children_watch_count{quantile="0.5",} NaN
+    
+    node_created_watch_count_count 1.0
+    node_created_watch_count_sum 1.0
+    node_created_watch_count{quantile="0.5",} NaN
+    
+    node_deleted_watch_count_count 0.0
+    node_deleted_watch_count_sum 0.0
+    node_deleted_watch_count{quantile="0.5",} NaN
+    
+    num_alive_connections 1.0
+    
+    om_commit_process_time_ms_count 0.0
+    om_commit_process_time_ms_sum 0.0
+    om_commit_process_time_ms{quantile="0.5",} NaN
+    om_commit_process_time_ms{quantile="0.9",} NaN
+    om_commit_process_time_ms{quantile="0.99",} NaN
+    
+    om_proposal_process_time_ms_count 0.0
+    om_proposal_process_time_ms_sum 0.0
+    om_proposal_process_time_ms{quantile="0.5",} NaN
+    om_proposal_process_time_ms{quantile="0.9",} NaN
+    om_proposal_process_time_ms{quantile="0.99",} NaN
+    
+    open_file_descriptor_count 64.0
+    
+    outstanding_changes_queued 11.0
+    outstanding_changes_removed 11.0
+    outstanding_requests 0.0
+    outstanding_tls_handshake 0.0
+    
+    packets_received 859.0
+    packets_sent 860.0
+    
+    pending_session_queue_size_count 0.0
+    pending_session_queue_size_sum 0.0
+    pending_session_queue_size{quantile="0.5",} NaN
+    
+    prep_process_time_count 450.0
+    prep_process_time_sum 23.0
+    prep_process_time{quantile="0.5",} 0.0
+    
+    prep_processor_queue_size_count 451.0
+    prep_processor_queue_size_sum 1.0
+    prep_processor_queue_size{quantile="0.5",} 0.0
+    prep_processor_queue_time_ms_count 450.0
+    prep_processor_queue_time_ms_sum 35.0
+    prep_processor_queue_time_ms{quantile="0.5",} 0.0
+    prep_processor_queue_time_ms{quantile="0.9",} 0.0
+    prep_processor_queue_time_ms{quantile="0.99",} 1.0
+    
+    prep_processor_request_queued 450.0
+
+    process_cpu_seconds_total 8.38
+    process_max_fds 1048576.0
+    process_open_fds 64.0
+    process_resident_memory_bytes 1.20025088E8
+    process_start_time_seconds 1.615425252057E9
+    process_virtual_memory_bytes 5.346471936E9
+    
+    propagation_latency_count 19.0
+    propagation_latency_sum 37.0
+    propagation_latency{quantile="0.5",} NaN
+    propagation_latency{quantile="0.9",} NaN
+    propagation_latency{quantile="0.99",} NaN
+    
+    proposal_ack_creation_latency_count 0.0
+    proposal_ack_creation_latency_sum 0.0
+    proposal_ack_creation_latency{quantile="0.5",} NaN
+    proposal_ack_creation_latency{quantile="0.9",} NaN
+    proposal_ack_creation_latency{quantile="0.99",} NaN
+    
+    proposal_count 0.0
+    
+    proposal_latency_count 0.0
+    proposal_latency_sum 0.0
+    proposal_latency{quantile="0.5",} NaN
+    proposal_latency{quantile="0.9",} NaN
+    proposal_latency{quantile="0.99",} NaN
+    
+    quit_leading_due_to_disloyal_voter 0.0
+    
+    quorum_ack_latency_count 0.0
+    quorum_ack_latency_sum 0.0
+    quorum_ack_latency{quantile="0.5",} NaN
+    quorum_ack_latency{quantile="0.9",} NaN
+    quorum_ack_latency{quantile="0.99",} NaN
+    
+    read_commit_proc_issued_count 0.0
+    read_commit_proc_issued_sum 0.0
+    read_commit_proc_issued{quantile="0.5",} NaN
+    read_commit_proc_req_queued_count 0.0
+    read_commit_proc_req_queued_sum 0.0
+    read_commit_proc_req_queued{quantile="0.5",} NaN
+    
+    read_commitproc_time_ms_count 0.0
+    read_commitproc_time_ms_sum 0.0
+    read_commitproc_time_ms{quantile="0.5",} NaN
+    read_commitproc_time_ms{quantile="0.9",} NaN
+    read_commitproc_time_ms{quantile="0.99",} NaN
+    
+    read_final_proc_time_ms_count 0.0
+    read_final_proc_time_ms_sum 0.0
+    read_final_proc_time_ms{quantile="0.5",} NaN
+    read_final_proc_time_ms{quantile="0.9",} NaN
+    read_final_proc_time_ms{quantile="0.99",} NaN
+    
+    read_per_namespace_count{key="admin",} 1.0
+    read_per_namespace_count{key="brokers",} 60.0
+    read_per_namespace_count{key="cluster",} 1.0
+    read_per_namespace_count{key="config",} 10.0
+    read_per_namespace_count{key="controller",} 2.0
+    read_per_namespace_count{key="controller_epoch",} 1.0
+    read_per_namespace_count{key="feature",} 3.0
+    read_per_namespace_count{key="isr_change_notification",} 1.0
+    read_per_namespace_count{key="latest_producer_id_block",} 1.0
+    read_per_namespace_count{key="log_dir_event_notification",} 1.0
+    
+    read_per_namespace_sum{key="admin",} 88.0
+    read_per_namespace_sum{key="brokers",} 12213.0
+    read_per_namespace_sum{key="cluster",} 124.0
+    read_per_namespace_sum{key="config",} 1165.0
+    read_per_namespace_sum{key="controller",} 212.0
+    read_per_namespace_sum{key="controller_epoch",} 86.0
+    read_per_namespace_sum{key="feature",} 304.0
+    read_per_namespace_sum{key="isr_change_notification",} 92.0
+    read_per_namespace_sum{key="latest_producer_id_block",} 157.0
+    read_per_namespace_sum{key="log_dir_event_notification",} 95.0
+    
+    read_per_namespace{key="admin",quantile="0.5",} NaN
+    read_per_namespace{key="brokers",quantile="0.5",} NaN
+    read_per_namespace{key="cluster",quantile="0.5",} NaN
+    read_per_namespace{key="config",quantile="0.5",} NaN
+    read_per_namespace{key="controller",quantile="0.5",} NaN
+    read_per_namespace{key="controller_epoch",quantile="0.5",} NaN
+    read_per_namespace{key="feature",quantile="0.5",} NaN
+    read_per_namespace{key="isr_change_notification",quantile="0.5",} NaN
+    read_per_namespace{key="latest_producer_id_block",quantile="0.5",} NaN
+    read_per_namespace{key="log_dir_event_notification",quantile="0.5",} NaN
+    
+    readlatency_count 431.0
+    readlatency_sum 259.0
+    readlatency{quantile="0.5",} 1.0
+    readlatency{quantile="0.9",} 1.0
+    readlatency{quantile="0.99",} 2.0
+    
+    reads_after_write_in_session_queue_count 0.0
+    reads_after_write_in_session_queue_sum 0.0
+    reads_after_write_in_session_queue{quantile="0.5",} NaN
+    
+    reads_issued_from_session_queue_count 0.0
+    reads_issued_from_session_queue_sum 0.0
+    reads_issued_from_session_queue{quantile="0.5",} NaN
+    
+    request_commit_queued 0.0
+    
+    request_throttle_wait_count 0.0
+    
+    requests_in_session_queue_count 0.0
+    requests_in_session_queue_sum 0.0
+    requests_in_session_queue{quantile="0.5",} NaN
+    
+    response_packet_cache_hits 4.0
+    response_packet_cache_misses 61.0
+    response_packet_get_children_cache_hits 2.0
+    response_packet_get_children_cache_misses 11.0
+    
+    revalidate_count 0.0
+    
+    server_write_committed_time_ms_count 0.0
+    server_write_committed_time_ms_sum 0.0
+    server_write_committed_time_ms{quantile="0.5",} NaN
+    server_write_committed_time_ms{quantile="0.9",} NaN
+    server_write_committed_time_ms{quantile="0.99",} NaN
+    
+    session_queues_drained_count 0.0
+    session_queues_drained_sum 0.0
+    session_queues_drained{quantile="0.5",} NaN
+    
+    sessionless_connections_expired 0.0
+    
+    snap_count 0.0
+    
+    snapshottime_count 1.0
+    snapshottime_sum 4.0
+    snapshottime{quantile="0.5",} NaN
+    
+    stale_replies 0.0
+    stale_requests 0.0
+    stale_requests_dropped 0.0
+    stale_sessions_expired 1.0
+    
+    startup_snap_load_time_count 1.0
+    startup_snap_load_time_sum 14.0
+    startup_snap_load_time{quantile="0.5",} NaN
+    
+    startup_txns_load_time_count 1.0
+    startup_txns_load_time_sum 12.0
+    startup_txns_load_time{quantile="0.5",} NaN
+    startup_txns_loaded_count 1.0
+    startup_txns_loaded_sum 35.0
+    startup_txns_loaded{quantile="0.5",} NaN
+    
+    sync_process_time_count 19.0
+    sync_process_time_sum 7.0
+    sync_process_time{quantile="0.5",} NaN
+    sync_processor_batch_size_count 19.0
+    sync_processor_batch_size_sum 19.0
+    sync_processor_batch_size{quantile="0.5",} NaN
+    sync_processor_queue_and_flush_time_ms_count 19.0
+    sync_processor_queue_and_flush_time_ms_sum 19.0
+    sync_processor_queue_and_flush_time_ms{quantile="0.5",} NaN
+    sync_processor_queue_and_flush_time_ms{quantile="0.9",} NaN
+    sync_processor_queue_and_flush_time_ms{quantile="0.99",} NaN
+    sync_processor_queue_flush_time_ms_count 19.0
+    sync_processor_queue_flush_time_ms_sum 9.0
+    sync_processor_queue_flush_time_ms{quantile="0.5",} NaN
+    sync_processor_queue_flush_time_ms{quantile="0.9",} NaN
+    sync_processor_queue_flush_time_ms{quantile="0.99",} NaN
+    sync_processor_queue_size_count 451.0
+    sync_processor_queue_size_sum 8.0
+    sync_processor_queue_size{quantile="0.5",} 0.0
+    sync_processor_queue_time_ms_count 450.0
+    sync_processor_queue_time_ms_sum 42.0
+    sync_processor_queue_time_ms{quantile="0.5",} 0.0
+    sync_processor_queue_time_ms{quantile="0.9",} 1.0
+    sync_processor_queue_time_ms{quantile="0.99",} 1.0
+    sync_processor_request_queued 450.0
+    
+    time_waiting_empty_pool_in_commit_processor_read_ms_count 0.0
+    time_waiting_empty_pool_in_commit_processor_read_ms_sum 0.0
+    time_waiting_empty_pool_in_commit_processor_read_ms{quantile="0.5",} NaN
+    
+    tls_handshake_exceeded 0.0
+    
+    unrecoverable_error_count 0.0
+    
+    updatelatency_count 18.0
+    updatelatency_sum 42.0
+    updatelatency{quantile="0.5",} NaN
+    updatelatency{quantile="0.9",} NaN
+    updatelatency{quantile="0.99",} NaN
+    
+    uptime 2065733.0
+    
+    watch_count 13.0
+    
+    write_batch_time_in_commit_processor_count 0.0
+    write_batch_time_in_commit_processor_sum 0.0
+    write_batch_time_in_commit_processor{quantile="0.5",} NaN
+    
+    write_commit_proc_issued_count 0.0
+    write_commit_proc_issued_sum 0.0
+    write_commit_proc_issued{quantile="0.5",} NaN
+    write_commit_proc_req_queued_count 0.0
+    write_commit_proc_req_queued_sum 0.0
+    write_commit_proc_req_queued{quantile="0.5",} NaN
+    write_commitproc_time_ms_count 0.0
+    write_commitproc_time_ms_sum 0.0
+    write_commitproc_time_ms{quantile="0.5",} NaN
+    write_commitproc_time_ms{quantile="0.9",} NaN
+    write_commitproc_time_ms{quantile="0.99",} NaN
+    
+    write_final_proc_time_ms_count 0.0
+    write_final_proc_time_ms_sum 0.0
+    write_final_proc_time_ms{quantile="0.5",} NaN
+    write_final_proc_time_ms{quantile="0.9",} NaN
+    write_final_proc_time_ms{quantile="0.99",} NaN
+    
+    write_per_namespace_count{key="brokers",} 6.0
+    write_per_namespace_count{key="controller",} 4.0
+    write_per_namespace_count{key="controller_epoch",} 2.0
+    write_per_namespace_count{key="latest_producer_id_block",} 2.0
+    write_per_namespace_sum{key="brokers",} 894.0
+    write_per_namespace_sum{key="controller",} 152.0
+    write_per_namespace_sum{key="controller_epoch",} 36.0
+    write_per_namespace_sum{key="latest_producer_id_block",} 178.0
+    write_per_namespace{key="brokers",quantile="0.5",} NaN
+    write_per_namespace{key="controller",quantile="0.5",} NaN
+    write_per_namespace{key="controller_epoch",quantile="0.5",} NaN
+    write_per_namespace{key="latest_producer_id_block",quantile="0.5",} NaN
+    
+    znode_count 135.0
