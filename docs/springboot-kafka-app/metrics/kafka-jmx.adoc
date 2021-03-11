@@ -1,0 +1,489 @@
+= Kafka
+
+== JMX Metrics
+
+    java_lang_classloading_loadedclasscount 6890.0
+    java_lang_classloading_totalloadedclasscount 6890.0
+    java_lang_classloading_unloadedclasscount 0.0
+    java_lang_classloading_verbose 0.0
+    
+    java_lang_compilation_compilationtimemonitoringsupported 1.0
+    java_lang_compilation_totalcompilationtime 6494.0
+    
+    java_lang_memory_heapmemoryusage_committed 1.073741824E9
+    java_lang_memory_heapmemoryusage_init 1.073741824E9
+    java_lang_memory_heapmemoryusage_max 1.073741824E9
+    java_lang_memory_heapmemoryusage_used 1.99965696E8
+    java_lang_memory_nonheapmemoryusage_committed 8.3083264E7
+    java_lang_memory_nonheapmemoryusage_init 7667712.0
+    java_lang_memory_nonheapmemoryusage_max -1.0
+    java_lang_memory_nonheapmemoryusage_used 7.7758928E7
+    java_lang_memory_objectpendingfinalizationcount 0.0
+    java_lang_memory_verbose 1.0
+    
+    java_lang_operatingsystem_availableprocessors 1.0
+    java_lang_operatingsystem_committedvirtualmemorysize 8.10625024E9
+    java_lang_operatingsystem_freephysicalmemorysize 1.6351178752E10
+    java_lang_operatingsystem_freeswapspacesize 4.2949632E9
+    java_lang_operatingsystem_maxfiledescriptorcount 1048576.0
+    java_lang_operatingsystem_openfiledescriptorcount 212.0
+    java_lang_operatingsystem_processcpuload 0.0
+    java_lang_operatingsystem_processcputime 1.914E10
+    java_lang_operatingsystem_systemcpuload 0.0
+    java_lang_operatingsystem_systemloadaverage 1.1
+    java_lang_operatingsystem_totalphysicalmemorysize 1.6794206208E10
+    java_lang_operatingsystem_totalswapspacesize 4.2949632E9
+    
+    java_lang_runtime_bootclasspathsupported 0.0
+    java_lang_runtime_pid 1.0
+    java_lang_runtime_starttime 1.615425273291E12
+    java_lang_runtime_uptime 265692.0
+    
+    java_lang_threading_currentthreadallocatedbytes 2288128.0
+    java_lang_threading_currentthreadcputime 6.6368499E7
+    java_lang_threading_currentthreadcputimesupported 1.0
+    java_lang_threading_currentthreadusertime 5.0E7
+    java_lang_threading_daemonthreadcount 37.0
+    java_lang_threading_objectmonitorusagesupported 1.0
+    java_lang_threading_peakthreadcount 69.0
+    java_lang_threading_synchronizerusagesupported 1.0
+    java_lang_threading_threadallocatedmemoryenabled 1.0
+    java_lang_threading_threadallocatedmemorysupported 1.0
+    java_lang_threading_threadcontentionmonitoringenabled 0.0
+    java_lang_threading_threadcontentionmonitoringsupported 1.0
+    java_lang_threading_threadcount 69.0
+    java_lang_threading_threadcputimeenabled 1.0
+    java_lang_threading_threadcputimesupported 1.0
+    java_lang_threading_totalstartedthreadcount 70.0
+    
+    jmx_config_reload_failure_created 1.615425272786E9
+    jmx_config_reload_failure_total 0.0
+    jmx_config_reload_success_created 1.615425272785E9
+    jmx_config_reload_success_total 0.0
+    
+    jmx_exporter_build_info{version="0.15.0",name="jmx_prometheus_httpserver",} 1.0
+    
+    jmx_scrape_cached_beans 0.0
+    jmx_scrape_duration_seconds 1.8216821
+    jmx_scrape_error 0.0
+    
+    kafka_controller_controllerchannelmanager_queuesize_value{broker_id="0",} 0.0
+    kafka_controller_controllerchannelmanager_totalqueuesize_value 0.0
+    
+    kafka_controller_controllerstats_autoleaderbalancerateandtimems_count 1.0
+    kafka_controller_controllerstats_controlledshutdownrateandtimems_count 0.0
+    kafka_controller_controllerstats_controllerchangerateandtimems_count 2.0
+    kafka_controller_controllerstats_controllershutdownrateandtimems_count 0.0
+    kafka_controller_controllerstats_isrchangerateandtimems_count 0.0
+    kafka_controller_controllerstats_leaderandisrresponsereceivedrateandtimems_count 1.0
+    kafka_controller_controllerstats_leaderelectionrateandtimems_count 0.0
+    kafka_controller_controllerstats_listpartitionreassignmentrateandtimems_count 0.0
+    kafka_controller_controllerstats_logdirchangerateandtimems_count 0.0
+    kafka_controller_controllerstats_manualleaderbalancerateandtimems_count 1.0
+    kafka_controller_controllerstats_partitionreassignmentrateandtimems_count 0.0
+    kafka_controller_controllerstats_topicchangerateandtimems_count 0.0
+    kafka_controller_controllerstats_topicdeletionrateandtimems_count 0.0
+    kafka_controller_controllerstats_topicuncleanleaderelectionenablerateandtimems_count 0.0
+    kafka_controller_controllerstats_uncleanleaderelectionenablerateandtimems_count 0.0
+    kafka_controller_controllerstats_uncleanleaderelectionspersec_count 0.0
+    kafka_controller_controllerstats_updatefeaturesrateandtimems_count 0.0
+    
+    kafka_controller_kafkacontroller_activecontrollercount_value 1.0
+    kafka_controller_kafkacontroller_controllerstate_value 0.0
+    kafka_controller_kafkacontroller_globalpartitioncount_value 51.0
+    kafka_controller_kafkacontroller_globaltopiccount_value 2.0
+    kafka_controller_kafkacontroller_offlinepartitionscount_value 0.0
+    kafka_controller_kafkacontroller_preferredreplicaimbalancecount_value 0.0
+    kafka_controller_kafkacontroller_replicasineligibletodeletecount_value 0.0
+    kafka_controller_kafkacontroller_replicastodeletecount_value 0.0
+    kafka_controller_kafkacontroller_topicsineligibletodeletecount_value 0.0
+    kafka_controller_kafkacontroller_topicstodeletecount_value 0.0
+    
+    kafka_log_log_logendoffset{partition="0",topic="Topic3",} 5927.0
+    kafka_log_log_logstartoffset{partition="0",topic="Topic3",} 0.0
+    kafka_log_log_numlogsegments{partition="0",topic="Topic3",} 1.0
+    kafka_log_log_size{partition="0",topic="Topic3",} 467722.0
+
+    kafka_log_log_logendoffset{partition="0",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="1",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="10",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="11",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="12",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="13",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="14",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="15",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="16",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="17",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="18",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="19",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="2",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="20",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="21",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="22",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="23",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="24",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="25",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="26",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="27",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="28",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="29",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="3",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="30",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="31",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="32",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="33",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="34",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="35",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="36",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="37",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="38",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="39",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="4",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="40",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="41",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="42",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="43",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="44",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="45",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="46",topic="__consumer_offsets",} 5923.0
+    kafka_log_log_logendoffset{partition="47",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="48",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="49",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="5",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="6",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="7",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="8",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logendoffset{partition="9",topic="__consumer_offsets",} 0.0
+    
+    kafka_log_log_logstartoffset{partition="0",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="1",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="10",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="11",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="12",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="13",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="14",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="15",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="16",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="17",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="18",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="19",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="2",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="20",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="21",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="22",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="23",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="24",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="25",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="26",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="27",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="28",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="29",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="3",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="30",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="31",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="32",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="33",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="34",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="35",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="36",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="37",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="38",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="39",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="4",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="40",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="41",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="42",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="43",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="44",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="45",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="46",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="47",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="48",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="49",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="5",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="6",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="7",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="8",topic="__consumer_offsets",} 0.0
+    kafka_log_log_logstartoffset{partition="9",topic="__consumer_offsets",} 0.0
+    
+    kafka_log_log_numlogsegments{partition="0",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="1",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="10",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="11",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="12",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="13",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="14",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="15",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="16",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="17",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="18",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="19",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="2",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="20",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="21",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="22",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="23",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="24",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="25",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="26",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="27",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="28",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="29",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="3",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="30",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="31",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="32",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="33",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="34",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="35",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="36",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="37",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="38",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="39",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="4",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="40",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="41",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="42",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="43",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="44",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="45",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="46",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="47",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="48",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="49",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="5",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="6",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="7",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="8",topic="__consumer_offsets",} 1.0
+    kafka_log_log_numlogsegments{partition="9",topic="__consumer_offsets",} 1.0
+    
+    kafka_log_log_size{partition="0",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="1",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="10",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="11",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="12",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="13",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="14",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="15",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="16",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="17",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="18",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="19",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="2",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="20",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="21",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="22",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="23",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="24",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="25",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="26",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="27",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="28",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="29",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="3",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="30",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="31",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="32",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="33",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="34",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="35",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="36",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="37",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="38",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="39",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="4",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="40",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="41",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="42",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="43",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="44",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="45",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="46",topic="__consumer_offsets",} 664602.0
+    kafka_log_log_size{partition="47",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="48",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="49",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="5",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="6",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="7",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="8",topic="__consumer_offsets",} 0.0
+    kafka_log_log_size{partition="9",topic="__consumer_offsets",} 0.0
+    
+    kafka_network_processor_idlepercent_value{network_processor="0",} 1.0
+    kafka_network_processor_idlepercent_value{network_processor="1",} 1.0
+    kafka_network_processor_idlepercent_value{network_processor="2",} 1.0
+    kafka_network_processor_idlepercent_value{network_processor="3",} 1.0
+    kafka_network_processor_idlepercent_value{network_processor="4",} 1.0
+    kafka_network_processor_idlepercent_value{network_processor="5",} 0.9979827703169063
+    
+    kafka_network_requestmetrics_requestspersec_count{request="ApiVersions, version=3",} 5.0
+    kafka_network_requestmetrics_requestspersec_count{request="Fetch, version=11",} 504.0
+    kafka_network_requestmetrics_requestspersec_count{request="FetchConsumer, version=11",} 506.0
+    kafka_network_requestmetrics_requestspersec_count{request="FindCoordinator, version=3",} 1.0
+    kafka_network_requestmetrics_requestspersec_count{request="Heartbeat, version=4",} 84.0
+    kafka_network_requestmetrics_requestspersec_count{request="JoinGroup, version=7",} 2.0
+    kafka_network_requestmetrics_requestspersec_count{request="LeaderAndIsr, version=4",} 1.0
+    kafka_network_requestmetrics_requestspersec_count{request="Metadata, version=1",} 1.0
+    kafka_network_requestmetrics_requestspersec_count{request="Metadata, version=9",} 2.0
+    kafka_network_requestmetrics_requestspersec_count{request="OffsetCommit, version=8",} 253.0
+    kafka_network_requestmetrics_requestspersec_count{request="OffsetFetch, version=7",} 1.0
+    kafka_network_requestmetrics_requestspersec_count{request="Produce, version=8",} 253.0
+    kafka_network_requestmetrics_requestspersec_count{request="SyncGroup, version=5",} 1.0
+    kafka_network_requestmetrics_requestspersec_count{request="UpdateMetadata, version=6",} 2.0
+    
+    kafka_server_brokertopicmetrics_bytesinpersec_count{topic="Topic3",} 19987.0
+    kafka_server_brokertopicmetrics_bytesinpersec_count{topic="__consumer_offsets",} 28763.0
+    kafka_server_brokertopicmetrics_bytesinpersec_oneminuterate{topic="Topic3",} 79.23115084809483
+    kafka_server_brokertopicmetrics_bytesinpersec_oneminuterate{topic="__consumer_offsets",} 113.43909258759953
+    kafka_server_brokertopicmetrics_bytesoutpersec_count{topic="Topic3",} 19908.0
+    kafka_server_brokertopicmetrics_bytesoutpersec_oneminuterate{topic="Topic3",} 79.10895006617449
+    
+    kafka_server_brokertopicmetrics_messagesinpersec_count{topic="Topic3",} 253.0
+    kafka_server_brokertopicmetrics_messagesinpersec_count{topic="__consumer_offsets",} 255.0
+    kafka_server_brokertopicmetrics_messagesinpersec_oneminuterate{topic="Topic3",} 1.002925960102466
+    kafka_server_brokertopicmetrics_messagesinpersec_oneminuterate{topic="__consumer_offsets",} 1.006740480503979
+    
+    kafka_server_brokertopicmetrics_total_bytesinpersec_count 48559.0
+    kafka_server_brokertopicmetrics_total_bytesinpersec_oneminuterate 188.05089009153764
+    
+    kafka_server_brokertopicmetrics_total_bytesoutpersec_count 19987.0
+    kafka_server_brokertopicmetrics_total_bytesoutpersec_oneminuterate 77.73261937959263
+    
+    kafka_server_brokertopicmetrics_total_bytesrejectedpersec_count 0.0
+    kafka_server_brokertopicmetrics_total_bytesrejectedpersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_failedfetchrequestspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_failedfetchrequestspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_failedproducerequestspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_failedproducerequestspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_fetchmessageconversionspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_fetchmessageconversionspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_invalidmagicnumberrecordspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_invalidmagicnumberrecordspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_invalidmessagecrcrecordspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_invalidmessagecrcrecordspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_invalidoffsetorsequencerecordspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_invalidoffsetorsequencerecordspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_messagesinpersec_count 508.0
+    kafka_server_brokertopicmetrics_total_messagesinpersec_oneminuterate 1.968453353737606
+    
+    kafka_server_brokertopicmetrics_total_nokeycompactedtopicrecordspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_nokeycompactedtopicrecordspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_producemessageconversionspersec_count 0.0
+    kafka_server_brokertopicmetrics_total_producemessageconversionspersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_reassignmentbytesinpersec_count 0.0
+    kafka_server_brokertopicmetrics_total_reassignmentbytesinpersec_oneminuterate 0.0
+    kafka_server_brokertopicmetrics_total_reassignmentbytesoutpersec_count 0.0
+    kafka_server_brokertopicmetrics_total_reassignmentbytesoutpersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_replicationbytesinpersec_count 0.0
+    kafka_server_brokertopicmetrics_total_replicationbytesinpersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_replicationbytesoutpersec_count 0.0
+    kafka_server_brokertopicmetrics_total_replicationbytesoutpersec_oneminuterate 0.0
+    
+    kafka_server_brokertopicmetrics_total_totalfetchrequestspersec_count 505.0
+    kafka_server_brokertopicmetrics_total_totalfetchrequestspersec_oneminuterate 1.9681838842054185
+    
+    kafka_server_brokertopicmetrics_total_totalproducerequestspersec_count 508.0
+    kafka_server_brokertopicmetrics_total_totalproducerequestspersec_oneminuterate 1.9709756843059973
+    
+    kafka_server_brokertopicmetrics_totalfetchrequestspersec_count{topic="Topic3",} 506.0
+    kafka_server_brokertopicmetrics_totalfetchrequestspersec_oneminuterate{topic="Topic3",} 2.0055328018467846
+    
+    kafka_server_brokertopicmetrics_totalproducerequestspersec_count{topic="Topic3",} 253.0
+    kafka_server_brokertopicmetrics_totalproducerequestspersec_count{topic="__consumer_offsets",} 255.0
+    
+    kafka_server_brokertopicmetrics_totalproducerequestspersec_oneminuterate{topic="Topic3",} 1.002925960102466
+    kafka_server_brokertopicmetrics_totalproducerequestspersec_oneminuterate{topic="__consumer_offsets",} 1.006740480503979
+    
+    kafka_server_controllermutation_queue_size 0.0
+    
+    kafka_server_delayedfetchmetrics_total_expirespersec_fetchertype_consumer_count 252.0
+    kafka_server_delayedfetchmetrics_total_expirespersec_fetchertype_consumer_oneminuterate 0.9998021397382855
+    kafka_server_delayedfetchmetrics_total_expirespersec_fetchertype_follower_count 0.0
+    kafka_server_delayedfetchmetrics_total_expirespersec_fetchertype_follower_oneminuterate 0.0
+    
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_alteracls_value 0.0
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_deleterecords_value 0.0
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_electleader_value 0.0
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_fetch_value 1.0
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_heartbeat_value 1.0
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_produce_value 0.0
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_rebalance_value 0.0
+    kafka_server_delayedoperationpurgatory_numdelayedoperations_topic_value 0.0
+    
+    kafka_server_delayedoperationpurgatory_purgatorysize_alteracls_value 0.0
+    kafka_server_delayedoperationpurgatory_purgatorysize_deleterecords_value 0.0
+    kafka_server_delayedoperationpurgatory_purgatorysize_electleader_value 0.0
+    kafka_server_delayedoperationpurgatory_purgatorysize_fetch_value 1.0
+    kafka_server_delayedoperationpurgatory_purgatorysize_heartbeat_value 2.0
+    kafka_server_delayedoperationpurgatory_purgatorysize_produce_value 0.0
+    kafka_server_delayedoperationpurgatory_purgatorysize_rebalance_value 1.0
+    kafka_server_delayedoperationpurgatory_purgatorysize_topic_value 0.0
+    
+    kafka_server_fetch_queue_size 0.0
+    
+    kafka_server_fetchsessioncache_total_incrementalfetchsessionevictionspersec_count 0.0
+    kafka_server_fetchsessioncache_total_incrementalfetchsessionevictionspersec_oneminuterate 0.0
+    
+    kafka_server_fetchsessioncache_total_numincrementalfetchpartitionscached_value 1.0
+    kafka_server_fetchsessioncache_total_numincrementalfetchsessions_value 1.0
+    
+    kafka_server_kafkarequesthandlerpool_total_requesthandleravgidlepercent_count 2.62104230316E11
+    kafka_server_kafkarequesthandlerpool_total_requesthandleravgidlepercent_oneminuterate 0.9997898775627143
+    
+    kafka_server_kafkaserver_total_brokerstate_value 3.0
+    kafka_server_kafkaserver_total_linux_disk_read_bytes_value 0.0
+    kafka_server_kafkaserver_total_linux_disk_write_bytes_value 1425408.0
+    kafka_server_kafkaserver_total_yammer_metrics_count_value 1144.0
+    
+    kafka_server_produce_queue_size 0.0
+    
+    kafka_server_replicaalterlogdirsmanager_total_deadthreadcount_clientid_replicaalterlogdirs_value 0.0
+    kafka_server_replicaalterlogdirsmanager_total_failedpartitionscount_clientid_replicaalterlogdirs_value 0.0
+    kafka_server_replicaalterlogdirsmanager_total_maxlag_clientid_replicaalterlogdirs_value 0.0
+    kafka_server_replicaalterlogdirsmanager_total_minfetchrate_clientid_replicaalterlogdirs_value 0.0
+    
+    kafka_server_replicafetchermanager_deadthreadcount_value{client_id="Replica",} 0.0
+    kafka_server_replicafetchermanager_failedpartitionscount_value{client_id="Replica",} 0.0
+    kafka_server_replicafetchermanager_maxlag_value{client_id="Replica",} 0.0
+    kafka_server_replicafetchermanager_minfetchrate_value{client_id="Replica",} 0.0
+    
+    kafka_server_replicamanager_total_atminisrpartitioncount_value 51.0
+    kafka_server_replicamanager_total_failedisrupdatespersec_count 0.0
+    kafka_server_replicamanager_total_failedisrupdatespersec_oneminuterate 0.0
+    kafka_server_replicamanager_total_isrexpandspersec_count 0.0
+    kafka_server_replicamanager_total_isrexpandspersec_oneminuterate 0.0
+    kafka_server_replicamanager_total_isrshrinkspersec_count 0.0
+    kafka_server_replicamanager_total_isrshrinkspersec_oneminuterate 0.0
+    kafka_server_replicamanager_total_leadercount_value 51.0
+    kafka_server_replicamanager_total_offlinereplicacount_value 0.0
+    kafka_server_replicamanager_total_partitioncount_value 51.0
+    kafka_server_replicamanager_total_reassigningpartitions_value 0.0
+    kafka_server_replicamanager_total_underminisrpartitioncount_value 0.0
+    kafka_server_replicamanager_total_underreplicatedpartitions_value 0.0
+    
+    kafka_server_request_queue_size 0.0
+    
+    kafka_server_sessionexpirelistener_total_zookeeperauthfailurespersec_count 0.0
+    kafka_server_sessionexpirelistener_total_zookeeperauthfailurespersec_oneminuterate 0.0
+    kafka_server_sessionexpirelistener_total_zookeeperdisconnectspersec_count 0.0
+    kafka_server_sessionexpirelistener_total_zookeeperdisconnectspersec_oneminuterate 0.0
+    kafka_server_sessionexpirelistener_total_zookeeperexpirespersec_count 0.0
+    kafka_server_sessionexpirelistener_total_zookeeperexpirespersec_oneminuterate 0.0
+    kafka_server_sessionexpirelistener_total_zookeeperreadonlyconnectspersec_count 0.0
+    kafka_server_sessionexpirelistener_total_zookeeperreadonlyconnectspersec_oneminuterate 0.0
+    kafka_server_sessionexpirelistener_total_zookeepersaslauthenticationspersec_count 0.0
+    kafka_server_sessionexpirelistener_total_zookeepersaslauthenticationspersec_oneminuterate 0.0
+    kafka_server_sessionexpirelistener_total_zookeepersyncconnectspersec_count 1.0
+    kafka_server_sessionexpirelistener_total_zookeepersyncconnectspersec_oneminuterate 0.0026247457473881994
+    
+    kafka_server_zookeeperclientmetrics_total_zookeeperrequestlatencyms_count 108.0

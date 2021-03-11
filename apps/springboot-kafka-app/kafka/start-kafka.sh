@@ -57,7 +57,7 @@ cat $KAFKA_HOME/config/server.properties
 
 #exec $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties &
 
-export KAFKA_OPTS="-javaagent:/usr/bin/jmx_prometheus_javaagent-0.12.0.jar=7071:/usr/bin/kafka-2_0_0.yml"
+export KAFKA_OPTS="-javaagent:/usr/bin/jmx_prometheus_javaagent-0.15.0.jar=7071:/usr/bin/kafka-2_0_0.yml"
 
 create-topics.sh &
 exec $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties

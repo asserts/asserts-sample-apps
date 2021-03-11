@@ -1,0 +1,147 @@
+= Quickstart Guide
+Jeremy Rios <jrios@asserts.ai>
+:toc:
+:toclevels: 4
+:toc-placement!:
+:icons: font
+
+ifdef::env-github[]
+// env-browser[:relfilesuffix: .adoc]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+SpringBoot-Sample-App::
+This Quickstart guide walks you through the general steps to run the *SpringBoot-Kafka-App* on your local machine along with:
+* *Kafka*
+* *Zookeeper*
+* *Prometheus*
+
+toc::[]
+
+[IMPORTANT]
+Ensure you have xref:../prereqs.adoc[prerequisites] installed and available on your $PATH environment variable before attempting to run this sample app locally
+
+[IMPORTANT]
+====
+Ensure Docker is running
+
+.macOS
+    $open -a docker
+====
+
+== Kind
+
+=== Metric Info
+The following metrics are available using kind:
+
+SpringBoot-Kafka-App::
+* xref:metrics/springboot-kafka-app-jmx.adoc[JMX]
+
+Kafka::
+* xref:metrics/kafka-jmx.adoc[JMX]
+* xref:metrics/kafka-exporter.adoc[Kafka Exporter]
+
+ZooKeeper::
+* xref:metrics/zookeeper-jmx.adoc[JMX]
+
+=== Build Info
+Kind method is using *Helm v3* to install:
+
+* *bitnami/zookeeper* v6.5.2
+* *bitnami/kafka* v12.10.0
+* *kube-prometheus-stack* v11.1.6 (*Conditional*)
+** *localdev.enabled=true*
+
+=== Build, Deploy & Run
+. Change directories into *springboot-kafka-app* dir
+
+    $ cd apps/springboot-kafka-app/
+
+. Run *kind-deploy.sh* script to:
+.. Create *kind-kafka* cluster
+.. Clean & build *springboot-kafka-app*.jar
+.. Build *Docker* image for *ai.asserts.springboot-kafka-app*
+.. Load *Docker* image into *kind-kafka* cluster
+.. Create *springboot-kafka-app* namespace in *kind-kafka* cluster
+.. Install *Helm Chart* for *springboot-kafka-app* on *kind-kafka* cluster
+
+    $ ./kind-deploy.sh
+
+. Port forward Prometheus running in *kind-kafka* cluster to localhost
+
+    $ kubectl -n springboot-kafka-app port-forward prometheus-prometheus-prometheus-0 9090:9090
+
+. Open Prometheus in browser
+
+    $ open http://localhost:9090/graph
+
+=== Cleanup/Teardown
+
+. Change directories into** springboot-kafka-app** dir
+
+    $ cd apps/springboot-kafka-app/
+
+. Run *kind-cleanup.sh* script to delete *kind-kafa* cluster
+
+    $ ./kind-cleanup.sh
+
+
+== Docker Compose
+
+=== Metric Info
+
+This method is currently only generating the following metrics:
+
+* *JMX* for *SpringBoot-Kafka-App*
+**  rules => apps/springboot-kafka-app/kafka-connect.yml
+* *JMX* for *Kafka*
+**  rules => apps/springboot-kafka-app/kafka/kafka-2_0_0.yml
+
+[WARNING]
+====
+*Zookeeper JMX* metrics and *Kafka Exporter* metrics are not implemented for this method yet
+====
+
+=== Build Info
+
+Docker-Compose method is running:
+
+SpringBoot-Kafka-App::
+* -javaagent *jmx_prometheus_javaagent-0.15.0.jar*
+
+Zookeeper::
+* image: *wurstmeister/zookeeper*
+
+Kafka::
+* wurstmeister Dockerfile
+* kafka_version=2.7.0
+* -javaagent *jmx_prometheus_javaagent-0.15.0.jar*
+
+Prometheus::
+* image: *prom/prometheus:v2.25.0*
+
+=== Build, Deploy & Run
+. Change directories into *springboot-kafka-app* dir
+
+    $ cd apps/springboot-kafka-app/
+
+. Run *run.sh* script to build, deploy & run in Kind Cluster
+
+    $ ./run.sh
+
+. Open Prometheus in browser
+
+    $ open http://localhost:9090/graph
+
+=== Cleanup/Teardown
+. Change directories into *springboot-kafka-app* dir
+
+    $ cd apps/springboot-kafka-app/
+
+. Run the *docker-compose down* command
+
+    $ docker-compose down

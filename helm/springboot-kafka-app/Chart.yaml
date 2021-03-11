@@ -1,0 +1,22 @@
+apiVersion: v2
+name: springboot-kafka-app
+description: A Kafka & Zookeeper demo app for Asserts
+type: application
+
+# This is the chart version.
+version: 0.1.0
+
+# This is the version number of the application being deployed.
+appVersion: "latest"
+
+dependencies: # A list of the chart requirements (optional)
+  - name: zookeeper
+    version: "6.5.2"
+    repository: "@bitnami"
+  - name: kafka
+    version: "12.10.0"
+    repository: "@bitnami"
+  - condition: localdev.enabled
+    name: kube-prometheus-stack
+    version: "11.1.6"
+    repository: "https://prometheus-community.github.io/helm-charts"

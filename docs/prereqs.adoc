@@ -1,0 +1,111 @@
+= Prereqs
+Jeremy Rios <jrios@asserts.ai>
+:toc:
+:toc-placement!:
+:icons: font
+:imagesdir: ./images
+
+ifdef::env-github[]
+// env-browser[:relfilesuffix: .adoc]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+:url-dd-mac-dmg: https://desktop.docker.com/mac/stable/Docker.dmg
+:url-dd-mac-install: https://docs.docker.com/docker-for-mac/install/
+:url-dd-win-exe: https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe
+:url-dd-win-install: https://docs.docker.com/docker-for-windows/install/
+:url-kind-install: https://kind.sigs.k8s.io/docs/user/quick-start/#installation
+:url-helm-install: https://helm.sh/docs/intro/install/
+
+toc::[]
+
+// Docker
+
+== Docker & Docker Compose
+Docker & Docker Compose are the bare essentials for running docker-compose via CLI. Compose comes pre bundled with Docker Desktop so if you already have it installed your good to go.
+
+=== Check if Already Installed
+
+. Check if *Docker* is installed
+
+  $ docker -v
+Docker version 20.10.2, build 2291f61
+
+. Check if *Docker Compose* is installed
+
+  $ docker-compose -v
+docker-compose version 1.27.4, build 40524192
+
+=== I don't have it
+
+* macOS
+** {url-dd-mac-dmg}[Docker.dmg]
+** {url-dd-mac-install}[Install Docker Desktop on Mac]
+
+* Windows
+** {url-dd-win-exe}[Docker Desktop Installer.exe]
+** {url-dd-win-install}[Install Docker Desktop on Windows]
+
+// Kind
+
+== Kind
+
+Kind is a tool for running Kubernetes clusters locally using Docker container “nodes”.
+It was primarily designed for testing Kubernetes itself, but is well suited for local development.
+
+=== Check if Already Installed
+
+.Check for *Kind* version
+
+  $ kind --version
+  0.10.0
+
+=== I don't have it
+
+* macOS
+
+.Homebrew Formulae for *Kind*:
+
+  $ brew install kind
+
+* Windows
+
+.Chocolatey
+
+    $ choco install kind
+
+{url-kind-install}[More Options for installing Kind]
+
+// Helm
+
+== Helm 3
+
+Helm is the package manager for Kubernetes
+
+=== Check if Already Installed
+.Check for *Helm* version
+
+  $ helm version
+  version.BuildInfo{Version:"v3.5.0", GitCommit:"32c22239423b3b4ba6706d450bd044baffdcf9e6", GitTreeState:"dirty", GoVersion:"go1.15.6"}
+
+IMPORTANT: Version must be v3.0.0 or greater
+
+=== I don't have it
+
+* macOS
+
+.Homebrew Formula for *Helm*
+
+  $ brew install helm
+
+* Windows
+
+.Chocolatey
+
+  $ choco install kubernetes-helm
+
+{url-helm-install}[More options for installing Helm]
