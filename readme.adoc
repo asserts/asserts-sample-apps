@@ -26,19 +26,22 @@ toc::[]
 
 ==== Metrics
 
-SpringBoot-Kafka-App::
-* xref:docs/springboot-kafka-app/metrics/springboot-kafka-app-jmx.adoc[JMX]
+|===
+|*Service* |*Metrics Exporter*
 
-Kafka::
-* xref:docs/springboot-kafka-app/metrics/kafka-jmx.adoc[JMX]
-* xref:docs/springboot-kafka-app/metrics/kafka-exporter.adoc[Kafka Exporter]
+|SpringBoot-Kafka-App
+|xref:docs/springboot-kafka-app/metrics/springboot-kafka-app-jmx.adoc[JMX]
 
-ZooKeeper::
-* xref:docs/springboot-kafka-app/metrics/zookeeper-jmx.adoc[JMX]
+|Kafka
+|xref:docs/springboot-kafka-app/metrics/kafka-jmx.adoc[JMX], xref:docs/springboot-kafka-app/metrics/kafka-exporter.adoc[Kafka Exporter]
 
-==== Quickstart Guide
+|ZooKeeper
+|xref:docs/springboot-kafka-app/metrics/zookeeper-jmx.adoc[JMX]
+|===
 
-* xref:docs/springboot-kafka-app/quickstart.adoc[SpringBoot-Sample-App Quickstart]
+==== Running Locally
+
+* xref:docs/springboot-kafka-app/quickstart.adoc[Quickstart Guide]
 
 
 // Sample App 2

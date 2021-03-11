@@ -36,9 +36,20 @@ Ensure Docker is running
 == Kind
 
 === Metric Info
+The following metrics are available using kind:
+
+SpringBoot-Kafka-App::
+* xref:metrics/springboot-kafka-app-jmx.adoc[JMX]
+
+Kafka::
+* xref:metrics/kafka-jmx.adoc[JMX]
+* xref:metrics/kafka-exporter.adoc[Kafka Exporter]
+
+ZooKeeper::
+* xref:metrics/zookeeper-jmx.adoc[JMX]
 
 === Build Info
-Kind method is using Helm v3 to install:
+Kind method is using *Helm v3* to install:
 
 * *bitnami/zookeeper* v6.5.2
 * *bitnami/kafka* v12.10.0
@@ -46,15 +57,15 @@ Kind method is using Helm v3 to install:
 ** *localdev.enabled=true*
 
 === Build, Deploy & Run
-. Change directories into springboot-kafka-app dir
+. Change directories into *springboot-kafka-app* dir
 
     $ cd apps/springboot-kafka-app/
 
 . Run *kind-deploy.sh* script to:
-.. Create kind-kafka cluster
+.. Create *kind-kafka* cluster
 .. Clean & build *springboot-kafka-app*.jar
-.. Build Docker image for *ai.asserts.springboot-kafka-app*
-.. Load Docker image into kind-kafka cluster
+.. Build *Docker* image for *ai.asserts.springboot-kafka-app*
+.. Load *Docker* image into *kind-kafka* cluster
 .. Create *springboot-kafka-app* namespace in *kind-kafka* cluster
 .. Install *Helm Chart* for *springboot-kafka-app* on *kind-kafka* cluster
 
@@ -70,7 +81,7 @@ Kind method is using Helm v3 to install:
 
 === Cleanup/Teardown
 
-. Change directories into springboot-kafka-app dir
+. Change directories into** springboot-kafka-app** dir
 
     $ cd apps/springboot-kafka-app/
 
@@ -82,7 +93,6 @@ Kind method is using Helm v3 to install:
 == Docker Compose
 
 === Metric Info
-
 
 This method is currently only generating the following metrics:
 
@@ -100,19 +110,22 @@ This method is currently only generating the following metrics:
 
 Docker-Compose method is running:
 
-* SpringBoot-Kafka-App
-** -javaagent jmx_prometheus_javaagent-0.15.0.jar
-* Zookeeper
-** image: *wurstmeister/zookeeper*
-* Kafka
-** wurstmeister Dockerfile
-** kafka_version=2.7.0
-** -javaagent jmx_prometheus_javaagent-0.15.0.jar
-* Prometheus
-** image: prom/prometheus:v2.25.0
+SpringBoot-Kafka-App::
+* -javaagent *jmx_prometheus_javaagent-0.15.0.jar*
+
+Zookeeper::
+* image: *wurstmeister/zookeeper*
+
+Kafka::
+* wurstmeister Dockerfile
+* kafka_version=2.7.0
+* -javaagent *jmx_prometheus_javaagent-0.15.0.jar*
+
+Prometheus::
+* image: *prom/prometheus:v2.25.0*
 
 === Build, Deploy & Run
-. Change directories into springboot-kafka-app dir
+. Change directories into *springboot-kafka-app* dir
 
     $ cd apps/springboot-kafka-app/
 
@@ -125,10 +138,10 @@ Docker-Compose method is running:
     $ open http://localhost:9090/graph
 
 === Cleanup/Teardown
-. Change directories into springboot-kafka-app dir
+. Change directories into *springboot-kafka-app* dir
 
     $ cd apps/springboot-kafka-app/
 
-. Run docker-compose down command
+. Run the *docker-compose down* command
 
     $ docker-compose down

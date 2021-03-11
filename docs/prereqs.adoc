@@ -94,6 +94,8 @@ Helm is the package manager for Kubernetes
 
 IMPORTANT: Version must be v3.0.0 or greater
 
+=== I don't have it
+
 * macOS
 
 .Homebrew Formula for *Helm*

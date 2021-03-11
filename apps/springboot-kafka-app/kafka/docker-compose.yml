@@ -5,7 +5,7 @@ services:
     ports:
       - "2181:2181"
   kafka:
-    build: ""
+    build: .
     ports:
       - "9092:9092"
       - "7071:7071"
