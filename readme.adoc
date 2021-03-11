@@ -26,13 +26,15 @@ toc::[]
 
 ==== Metrics
 
-* SpringBoot-Kafka-App
-** xref:docs/springboot-kafka-app/metrics/springboot-kafka-app-jmx.adoc[JMX]
-* Kafka
-** xref:docs/springboot-kafka-app/metrics/kafka-jmx.adoc[JMX]
-** xref:docs/springboot-kafka-app/metrics/kafka-exporter.adoc[Kafka Exporter]
-* ZooKeeper
-** xref:docs/springboot-kafka-app/metrics/zookeeper-jmx.adoc[JMX]
+SpringBoot-Kafka-App::
+* xref:docs/springboot-kafka-app/metrics/springboot-kafka-app-jmx.adoc[JMX]
+
+Kafka::
+* xref:docs/springboot-kafka-app/metrics/kafka-jmx.adoc[JMX]
+* xref:docs/springboot-kafka-app/metrics/kafka-exporter.adoc[Kafka Exporter]
+
+ZooKeeper::
+* xref:docs/springboot-kafka-app/metrics/zookeeper-jmx.adoc[JMX]
 
 ==== Quickstart Guide
 
