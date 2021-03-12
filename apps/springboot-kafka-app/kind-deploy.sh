@@ -2,23 +2,10 @@
 
 set -o errexit
 
-echo "Checking if Kind cluster already exists"
-if [[ $(kind get clusters | grep kafka) ]]; then 
-    echo "Deleting existing kind-kafka cluster"
-    kind delete cluster --name=kafka
-fi
+. kind-cleanup.sh
 
 echo "Creating kind-kafka Cluster"
 kind create cluster --name=kafka
-
-rm -Rf tmp
-
-./gradlew clean processResources bootJar
-
-mkdir tmp
-cp build/libs/* tmp
-cp build/resources/main/*.yml tmp
-cp build/resources/main/*.properties tmp
 
 docker build -t ai.asserts.springboot-kafka-app .
 
