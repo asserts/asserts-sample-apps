@@ -129,9 +129,9 @@ Prometheus::
 
     $ cd apps/springboot-kafka-app/
 
-. Run *run.sh* script to build, deploy & run in Kind Cluster
+. Run *docker-compose up* command to build, deploy & run in Docker
 
-    $ ./run.sh
+    $ docker-compose up --build -d
 
 . Open Prometheus in browser
 
