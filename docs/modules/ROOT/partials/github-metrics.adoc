@@ -1,0 +1,13 @@
+|===
+|*Service* |*Metrics Exporter*
+
+|SpringBoot-Kafka-App
+|xref:../../springboot-kafka-app/pages/metrics/springboot-kafka-app-jmx.adoc[JMX]
+
+|Kafka
+|xref:../../springboot-kafka-app/pages/metrics/kafka-jmx.adoc[JMX], xref:../../springboot-kafka-app/pages/metrics/kafka-exporter.adoc[Kafka Exporter]
+
+|ZooKeeper
+|xref:../../springboot-kafka-app/pages/metrics/zookeeper-jmx.adoc[JMX]
+|===
+

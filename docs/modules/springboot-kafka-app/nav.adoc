@@ -1,9 +1,10 @@
-* xref:quickstart.adoc[Quickstart Guide]
+* SpringBoot-Kafka-App
+** xref:quickstart.adoc[Quickstart Guide]
 ** Metrics
 *** SpringBoot-Kafka-App
-*** xref:springboot-kafka-app-jmx.adoc[]
+**** xref:metrics/springboot-kafka-app-jmx.adoc[]
 *** Kafka
-*** xref:kafka-exporter.adoc[]
-*** xref:kafka-jmx.adoc[]
+**** xref:metrics/kafka-exporter.adoc[]
+**** xref:metrics/kafka-jmx.adoc[]
 *** ZooKeeper
-*** xref:zookeeper-jmx.adoc[]
+**** xref:metrics/zookeeper-jmx.adoc[]

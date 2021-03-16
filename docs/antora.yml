@@ -2,4 +2,5 @@ name: sample-apps
 title: Sample Apps
 version: master
 nav:
+- modules/ROOT/nav.adoc
 - modules/springboot-kafka-app/nav.adoc

@@ -1,0 +1,11 @@
+ifdef::env-github[]
+:toc:
+:toc-placement!:
+:icons: font
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+toc::[]
+endif::[]
