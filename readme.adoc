@@ -1,10 +1,10 @@
-include::docs/modules/ROOT/pages/index.adoc[lines=1..2]
+include::docs/private/modules/ROOT/pages/index.adoc[lines=1..2]
 
-include::docs/modules/ROOT/partials/github-page-attributes.adoc[]
+include::docs/private/modules/ROOT/partials/github-page-attributes.adoc[]
 
-include::docs/modules/ROOT/pages/index.adoc[lines=4..7]
+include::docs/private/modules/ROOT/pages/index.adoc[lines=4..7]
 
-include::docs/modules/ROOT/partials/github-metrics.adoc[]
+include::docs/private/modules/ROOT/partials/github-metrics.adoc[]
 //|===
 //|*Service* |*Metrics Exporter*
 //
@@ -18,7 +18,7 @@ include::docs/modules/ROOT/partials/github-metrics.adoc[]
 //|xref:docs/modules/springboot-kafka-app/pages/metrics/zookeeper-jmx.adoc[JMX]
 //|===
 
-include::docs/modules/ROOT/pages/index.adoc[lines=22]
+include::docs/private/modules/ROOT/pages/index.adoc[lines=22]
 
-* xref:docs/modules/springboot-kafka-app/pages/quickstart.adoc[Quickstart Guide]
+* xref:docs/private/modules/springboot-kafka-app/pages/quickstart.adoc[Quickstart Guide]
 
