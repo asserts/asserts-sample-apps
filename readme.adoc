@@ -1,52 +1,24 @@
-= Sample Apps
-Jeremy Rios <jrios@asserts.ai>
-:toc:
-:toclevels: 4
-:toc-placement!:
-:icons: font
-:imagesdir: ./docs/images
+include::docs/modules/ROOT/pages/index.adoc[lines=1..2]
 
-ifdef::env-github[]
-// env-browser[:relfilesuffix: .adoc]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
+include::docs/modules/ROOT/partials/github-page-attributes.adoc[]
 
+include::docs/modules/ROOT/pages/index.adoc[lines=4..7]
 
-
-toc::[]
-
-== Sample Apps
-
-// SpringBoot Kafaka App
-=== SpringBoot Kafaka App
-
-==== Metrics
-
-|===
-|*Service* |*Metrics Exporter*
-
-|SpringBoot-Kafka-App
-|xref:docs/springboot-kafka-app/metrics/springboot-kafka-app-jmx.adoc[JMX]
-
-|Kafka
-|xref:docs/springboot-kafka-app/metrics/kafka-jmx.adoc[JMX], xref:docs/springboot-kafka-app/metrics/kafka-exporter.adoc[Kafka Exporter]
-
-|ZooKeeper
-|xref:docs/springboot-kafka-app/metrics/zookeeper-jmx.adoc[JMX]
-|===
-
-==== Running Locally
-
-* xref:docs/springboot-kafka-app/quickstart.adoc[Quickstart Guide]
-
-
-// Sample App 2
-//=== Sample App 2
+include::docs/modules/ROOT/partials/github-metrics.adoc[]
+//|===
+//|*Service* |*Metrics Exporter*
 //
-//==== Metrics
+//|SpringBoot-Kafka-App
+//|xref:docs/modules/springboot-kafka-app/pages/metrics/springboot-kafka-app-jmx.adoc[JMX]
 //
-//==== Quickstart Guide
+//|Kafka
+//|xref:docs/modules/springboot-kafka-app/pages/metrics/kafka-jmx.adoc[JMX], xref:docs/modules/springboot-kafka-app/pages/metrics/kafka-exporter.adoc[Kafka Exporter]
+//
+//|ZooKeeper
+//|xref:docs/modules/springboot-kafka-app/pages/metrics/zookeeper-jmx.adoc[JMX]
+//|===
+
+include::docs/modules/ROOT/pages/index.adoc[lines=22]
+
+* xref:docs/modules/springboot-kafka-app/pages/quickstart.adoc[Quickstart Guide]
+
