@@ -23,7 +23,7 @@ This Quickstart guide walks you through the general steps to run the *SpringBoot
 toc::[]
 
 [IMPORTANT]
-Ensure you have xref:../prereqs.adoc[prerequisites] installed and available on your $PATH environment variable before attempting to run this sample app locally
+Ensure you have xref:ROOT:prereqs.adoc[prerequisites] installed and available on your $PATH environment variable before attempting to run this sample app locally
 
 [IMPORTANT]
 ====
