@@ -1,0 +1,10 @@
+{
+    "ignorePatterns": [
+        { "pattern": "https://deadlink.com" },
+        { "pattern": "https://demo.tsdb.monitoring.dev.asserts.ai/insert/" },
+        { "pattern": "http://host.docker.internal" },
+        { "pattern": "https://local" },
+        { "pattern": "http://local" },
+        { "pattern": "https://github.com/" }
+    ]
+}
