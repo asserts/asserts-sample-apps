@@ -19,7 +19,7 @@ public class Sender {
 
 
   public void send(String topic, String data) {
-    LOGGER.info("sending data='{}' to topic='{}'", data, topic);
+    //LOGGER.info("sending data='{}' to topic='{}'", data, topic);
     kafkaTemplate.send(topic, data);
   }
 }

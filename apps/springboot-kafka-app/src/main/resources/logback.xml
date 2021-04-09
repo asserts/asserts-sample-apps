@@ -7,11 +7,22 @@
     </encoder>
   </appender>
 
-  <logger name="com.codenotfound" level="INFO" />
-  <logger name="org.springframework" level="WARN" />
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <File>mylog.log</File>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
 
 
-  <root level="WARN">
+  <logger name="org.kafka.demo.app" level="INFO" />
+  <!--<logger name="org.springframework" level="WARN" />-->
+
+
+  <root level="INFO">
+    <appender-ref ref = "FILE"/>
     <appender-ref ref="STDOUT" />
   </root>
 

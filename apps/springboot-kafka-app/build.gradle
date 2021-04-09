@@ -19,6 +19,12 @@ dependencies {
 			"org.springframework.boot:spring-boot-starter-web:2.4.2",
 			"org.springframework.kafka:spring-kafka:2.5.11.RELEASE",
 			"org.springframework.kafka:spring-kafka-test:2.5.11.RELEASE",
+			"org.postgresql:postgresql:42.1.4",
+			"org.springframework.metrics:spring-metrics:0.5.1.RELEASE",
+			"io.micrometer:micrometer-registry-prometheus:1.6.3",
+			"io.prometheus:simpleclient_common:0.8.1",
+			"io.prometheus:simpleclient_servlet:0.8.1",
+			"org.springframework.boot:spring-boot-starter-data-jpa:1.5.6.RELEASE",
 
 
 	)

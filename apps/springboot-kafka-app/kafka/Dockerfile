@@ -1,7 +1,7 @@
 FROM anapsix/alpine-java
 
 ARG kafka_version=2.7.0
-ARG scala_version=2.12
+ARG scala_version=2.13
 
 MAINTAINER wurstmeister
 
@@ -25,4 +25,3 @@ RUN chmod a+x /usr/bin/start-kafka.sh && \
     chmod a+x /usr/bin/create-topics.sh && \
     chmod a+x /usr/bin/jmx_prometheus_javaagent-0.15.0.jar
 CMD ["start-kafka.sh"]
-
