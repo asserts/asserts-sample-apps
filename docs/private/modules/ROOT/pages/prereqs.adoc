@@ -1,19 +1,7 @@
 = Prereqs
 Jeremy Rios <jrios@asserts.ai>
-:toc:
-:toc-placement!:
-:icons: font
-:imagesdir: ./images
 
-ifdef::env-github[]
-// env-browser[:relfilesuffix: .adoc]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
-
+// URLs
 :url-dd-mac-dmg: https://desktop.docker.com/mac/stable/Docker.dmg
 :url-dd-mac-install: https://docs.docker.com/docker-for-mac/install/
 :url-dd-win-exe: https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe
@@ -21,7 +9,6 @@ endif::[]
 :url-kind-install: https://kind.sigs.k8s.io/docs/user/quick-start/#installation
 :url-helm-install: https://helm.sh/docs/intro/install/
 
-toc::[]
 
 // Docker
 

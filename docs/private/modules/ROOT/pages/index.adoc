@@ -1,0 +1,32 @@
+= Sample Apps
+Jeremy Rios <jrios@asserts.ai>
+
+// SpringBoot Kafaka App
+== SpringBoot Kafaka App
+
+=== Metrics
+
+|===
+|*Service* |*Metrics Exporter*
+
+|SpringBoot-Kafka-App
+|xref:springboot-kafka-app:metrics/springboot-kafka-app-jmx.adoc[JMX]
+
+|Kafka
+|xref:springboot-kafka-app:metrics/kafka-jmx.adoc[JMX], xref:springboot-kafka-app:metrics/kafka-exporter.adoc[Kafka Exporter]
+
+|ZooKeeper
+|xref:springboot-kafka-app:metrics/zookeeper-jmx.adoc[JMX]
+|===
+
+=== Running Locally
+
+* xref:springboot-kafka-app:quickstart.adoc[Quickstart Guide]
+
+
+// Sample App 2
+//=== Sample App 2
+//
+//==== Metrics
+//
+//==== Quickstart Guide
