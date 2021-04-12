@@ -1,52 +1,50 @@
-version: '3.1'
+version: '3.9'
 services:
-  postgresql:
+  pgsql:
     image: postgres:13.1
-    container_name: pg-kafka
+    container_name: postgres
     ports:
       - "5433:5433"
     environment:
       - POSTGRES_USER=user1
       - POSTGRES_PASSWORD=user1
     volumes:
-      - ./postgres.conf:/etc/postgresql/postgresql.conf
-      - ./postgres-data:/var/lib/postgresql/data
-    #entrypoint: ["/bin/sh","-c"]
+      - ./docker/pgsql/postgres.conf:/etc/postgresql/postgresql.conf
+      - ./docker/pgsql/postgres-data:/var/lib/postgresql/data
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
-    #restart: always
-  postgresexport:
-    image: anapsix/alpine-java
-    links:
-      - "postgresql:pgsql"
+
+  pgexporter:
+    image: quay.io/prometheuscommunity/postgres-exporter
+    container_name: pg_exporter
     ports:
       - "9187:9187"
     environment:
       - PG_EXPORTER_EXTEND_QUERY_PATH=/var/lib/pg_query.yaml
-      - DATA_SOURCE_NAME=postgresql://user1:user1@pgsql:5433/postgres?sslmode=disable
+      - DATA_SOURCE_NAME=postgresql://user1:user1@pgsql/postgres?sslmode=disable
     volumes:
-      - ./postgres_exporter:/var/lib/postgres_exporter
-      - ./pg_query.yaml:/var/lib/pg_query.yaml
-    command: /var/lib/postgres_exporter
+      - ./docker/pgexporter/postgres_exporter:/var/lib/postgres_exporter
+      - ./docker/pgexporter/pg_query.yaml:/var/lib/pg_query.yaml
     depends_on:
-      - postgresql
+      - pgsql
+
   zookeeper:
     image: wurstmeister/zookeeper
+    container_name: zookeeper
     ports:
       - "2181:2181"
+
   kafka:
     build:
       context: kafka
       dockerfile: Dockerfile
     hostname: kafka
     container_name: kafka
-    links:
-      - zookeeper:zk
     ports:
       - "9092:9092"
       - "7071:7071"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
-      KAFKA_ZOOKEEPER_CONNECT: zk:2181
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_CREATE_TOPICS: "Topic3:1:1"
@@ -55,23 +53,24 @@ services:
      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
-  spring_boot:
+
+  springboot-kafka-app:
+    container_name: springboot-kafka-app
     build: .
-    links:
-      - "postgresql:pgsql"
     ports:
-      - "8090:8090"
       - "8095:8095"
     depends_on:
       - kafka
       - zookeeper
-      - postgresql
-      - postgresexport
+      - pgsql
+      - pgexporter
+
   prometheus:
     image: prom/prometheus:v2.25.0
+    container_name: prometheus
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus/prometheus_data:/prometheus
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./docker/prometheus/prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
