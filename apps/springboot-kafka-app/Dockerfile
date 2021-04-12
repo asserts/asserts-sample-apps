@@ -20,7 +20,6 @@ RUN gradle bootJar --no-daemon
 
 # Stage 2 - Create a size optimized Image for our Service with only what we need to run
 FROM openjdk:8-jre-slim
-EXPOSE 8090
 EXPOSE 8095
 WORKDIR /opt/demo_app
 COPY --from=builder /home/gradle/app/build/libs/* ./
