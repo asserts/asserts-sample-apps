@@ -1,0 +1,13 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+
+# A simple Multi-Node cluster
+# 1 control plane node and 3 workers
+nodes:
+# Single control plane node
+- role: control-plane
+
+# 3 worker nodes
+- role: worker
+- role: worker
+- role: worker

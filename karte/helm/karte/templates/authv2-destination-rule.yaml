@@ -1,0 +1,9 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: "authv2"
+spec:
+  host: "authv2"
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN

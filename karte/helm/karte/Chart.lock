@@ -1,0 +1,9 @@
+dependencies:
+- name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 11.1.6
+- name: fluent-bit
+  repository: https://fluent.github.io/helm-charts
+  version: 0.12.3
+digest: sha256:0ef09cc8ccf2ffe4df4f5f8ca6e29ffdf4b747970904cdcf8002b929b109e484
+generated: "2021-02-25T10:05:45.63468-08:00"
