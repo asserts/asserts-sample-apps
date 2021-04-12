@@ -25,7 +25,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar
 *.war
 *.nar
 *.ear
@@ -43,8 +43,8 @@ hs_err_pid*
 
 **/prometheus_data
 
-helm/**/charts/
-helm/**/Chart.lock
+**/charts/
+**/Chart.lock
 
 apps/**/tmp
 
