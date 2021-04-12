@@ -4,6 +4,7 @@
 .gradle/
 **/node_modules/
 **/build/
+/bin/
 **/out/
 .DS_Store
 **/.project/
@@ -46,3 +47,6 @@ helm/**/charts/
 helm/**/Chart.lock
 
 apps/**/tmp
+
+# Docker volumes
+**/postgres-data/
