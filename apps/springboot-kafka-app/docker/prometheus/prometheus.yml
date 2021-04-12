@@ -24,17 +24,17 @@ scrape_configs:
 #    # metrics_path defaults to '/metrics'
 #    # scheme defaults to 'http'.
 #    static_configs:
-#      - targets: ['localhost:9090']
+#      - targets: ['host.docker.internal:9090']
 
   - job_name: 'kafka'
     static_configs:
-      - targets: ['kafka:7071']
+      - targets: ['host.docker.internal:7071']
 
   - job_name: 'demo-app'
     metrics_path: /kafka/actuator/prometheus
     static_configs:
-      - targets: ['spring_boot:8090','spring_boot:8095']
+      - targets: ['host.docker.internal:8095']
 
   - job_name: 'pg'
     static_configs:
-      - targets: ['pgsql:9187']
+      - targets: ['host.docker.internal:9187']
