@@ -27,7 +27,7 @@ public class SendAndReceive {
         LOGGER.info("Sending the Msg!!");
         try {
             for( int i=0; i < 1000; i++) {
-                sender.send(BOOT_TOPIC, "Hello Boot!"+i);
+                sender.send(BOOT_TOPIC, String.valueOf(i), "Hello Boot Parse My Data"+i);
             }
 
         }catch (Exception ex){

@@ -27,7 +27,7 @@ public class Receiver_Clear {
     }
 
 
-    @KafkaListener(topics = "${topic.boot}", containerFactory = "concurrentKafkaListenerContainerFactoryClear")
+    @KafkaListener(topics = "${topic.produce}", containerFactory = "concurrentKafkaListenerContainerFactoryClear")
     public void receive(ConsumerRecord<?, ?> consumerRecord) {
         //dbStore.insertData(consumerRecord.value().toString(), true);
         //LOGGER.info("Clearing Topic "+ consumerRecord.value().toString());

@@ -18,8 +18,8 @@ public class Sender {
   private KafkaTemplate<String, String> kafkaTemplate;
 
 
-  public void send(String topic, String data) {
+  public void send(String topic, String key, String data) {
     //LOGGER.info("sending data='{}' to topic='{}'", data, topic);
-    kafkaTemplate.send(topic, data);
+    kafkaTemplate.send(topic, key,data);
   }
 }

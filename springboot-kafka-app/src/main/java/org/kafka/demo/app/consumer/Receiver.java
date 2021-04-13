@@ -4,6 +4,7 @@ import java.util.concurrent.CountDownLatch;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.kafka.demo.app.DBStore;
+import org.kafka.demo.app.producer.Sender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class Receiver {
   //@Autowired
   //private DBStore dbStore;
 
+  @Autowired
+  private Sender sender;
+
   private CountDownLatch latch = new CountDownLatch(1);
 
   public CountDownLatch getLatch() {
@@ -27,7 +31,9 @@ public class Receiver {
 
   public long lastRecordTime = System.currentTimeMillis();
 
-  @KafkaListener(topics = "${topic.boot}", containerFactory = "concurrentKafkaListenerContainerFactory")
+  private String Topic_To = "Topic4";
+
+  @KafkaListener(topics = "${topic.produce}", containerFactory = "concurrentKafkaListenerContainerFactory")
   public void receive(ConsumerRecord<?, ?> consumerRecord) {
 
     if((System.currentTimeMillis()-lastRecordTime) > 1000 * 10){
@@ -35,6 +41,7 @@ public class Receiver {
       LOGGER.info("received data='{}'", consumerRecord.toString());
       lastRecordTime = System.currentTimeMillis();
     } else {
+      sender.send(Topic_To,consumerRecord.key().toString(),consumerRecord.value().toString());
       //dbStore.insertData(consumerRecord.value().toString(), false);
     }
     latch.countDown();

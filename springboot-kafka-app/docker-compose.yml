@@ -20,7 +20,7 @@ services:
       - "9187:9187"
     environment:
       - PG_EXPORTER_EXTEND_QUERY_PATH=/var/lib/pg_query.yaml
-      - DATA_SOURCE_NAME=postgresql://user1:user1@pgsql/postgres?sslmode=disable
+      - DATA_SOURCE_NAME=postgresql://user1:user1@pgsql:5433/postgres?sslmode=disable
     volumes:
       - ./docker/pgexporter/postgres_exporter:/var/lib/postgres_exporter
       - ./docker/pgexporter/pg_query.yaml:/var/lib/pg_query.yaml
@@ -47,7 +47,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_CREATE_TOPICS: "Topic3:1:1"
+      KAFKA_CREATE_TOPICS: "Topic3:1:1,Topic4:1:1,Topic5:1:1"
       KAFKA_MESSAGE_MAX_BYTES: 2000000
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock
@@ -59,6 +59,7 @@ services:
     build: .
     ports:
       - "8095:8095"
+      - "8090:8090"
     depends_on:
       - kafka
       - zookeeper

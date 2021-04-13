@@ -33,8 +33,25 @@ scrape_configs:
   - job_name: 'demo-app'
     metrics_path: /kafka/actuator/prometheus
     static_configs:
-      - targets: ['host.docker.internal:8095']
+      - targets: ['host.docker.internal:8095', 'host.docker.internal:8090']
+    metric_relabel_configs:
+      - source_labels: [ __name__, clientId ]
+        regex: kafka_.*;(.+)
+        target_label: client_id
+        replacement: $1
+        action: replace
+      - source_labels: [ __name__, clientId ]
+        regex: kafka_consumer_coordinator_.*;([^-]+)-([^-]+)-(.+)
+        target_label: group_id
+        replacement: $2
+        action: replace
 
   - job_name: 'pg'
     static_configs:
       - targets: ['host.docker.internal:9187']
+    metric_relabel_configs:
+      - source_labels: [ __name__, datname ]
+        regex: pg_.*;(.+)
+        target_label: data_source
+        replacement: $1
+        action: replace
