@@ -12,10 +12,10 @@ appVersion: "latest"
 dependencies: # A list of the chart requirements (optional)
   - name: zookeeper
     version: "6.5.2"
-    repository: "@bitnami"
+    repository: "https://charts.bitnami.com/bitnami"
   - name: kafka
     version: "12.10.0"
-    repository: "@bitnami"
+    repository: "https://charts.bitnami.com/bitnami"
   - condition: localdev.enabled
     name: kube-prometheus-stack
     version: "11.1.6"

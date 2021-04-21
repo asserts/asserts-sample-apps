@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: ai.asserts.springboot-kafka-app
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -39,7 +39,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8090
+  port: 8095
 
 ingress:
   enabled: false
