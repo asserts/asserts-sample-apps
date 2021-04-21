@@ -3,7 +3,7 @@
  *  Asserts, Inc. - All Rights Reserved
  */
 
-package org.kafka.demo.app;
+package org.mysql.demo;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;

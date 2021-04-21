@@ -1,0 +1,57 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java-library'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = '1.8'
+archivesBaseName = 'mysql-demo'
+
+dependencies {
+    implementation (
+            "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.2",
+            "com.google.guava:guava:28.1-jre",
+            "org.springframework.boot:spring-boot-starter-actuator:2.4.2",
+            "org.springframework.boot:spring-boot-starter-web:2.4.2",
+            "org.springframework.metrics:spring-metrics:0.5.1.RELEASE",
+            "io.micrometer:micrometer-registry-prometheus:1.6.3",
+            "io.prometheus:simpleclient_common:0.8.1",
+            "io.prometheus:simpleclient_servlet:0.8.1",
+            "mysql:mysql-connector-java:8.0.23",
+    )
+    compileOnly (
+            "org.projectlombok:lombok:1.18.12"
+
+    )
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+springBoot {
+    buildInfo()
+}
+
+bootJar {
+    enabled = true
+    manifest {
+        attributes(
+                "Implementation-Title": "Mysql Demo",
+                "Implementation-Vendor": "Demo",
+                "Implementation-Version": archiveVersion)
+    }
+}
+
+jar {
+    enabled = true
+}
+
+test {
+    useJUnitPlatform()
+}
