@@ -42,17 +42,20 @@ spec:
             {{- end }}
 
           ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
+            - name: springboot
+              containerPort: {{ .Values.service.springboot.port }}
+              protocol: TCP
+            - name: jmx
+              containerPort: {{ .Values.service.jmx.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: jmx
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: jmx
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

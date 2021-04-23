@@ -9,4 +9,5 @@ spec:
     matchLabels:
       app.kubernetes.io/name: springboot-kafka-app
   endpoints:
-  - port: http
+  - port: springboot
+  - port: jmx
