@@ -10,10 +10,10 @@ spec:
     - port: {{ .Values.service.springboot.port }}
       targetPort: http
       protocol: TCP
-      name: http
+      name: springboot
     - port: {{ .Values.service.jmx.port }}
       targetPort: http
       protocol: TCP
-      name: http
+      name: jmx
   selector:
     {{- include "springboot-kafka-app.selectorLabels" . | nindent 4 }}
