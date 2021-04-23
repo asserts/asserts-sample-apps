@@ -39,7 +39,10 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8095
+  springboot:
+    port: 8090
+  jmx:
+    port: 8095
 
 ingress:
   enabled: false
@@ -128,7 +131,7 @@ kafka:
       namespace: springboot-kafka-app
       interval: 30s
       scrapeTimeout: 15s
-  
+
 kube-prometheus-stack:
   fullnameOverride: "prometheus"
   nameOverride: "prometheus"
