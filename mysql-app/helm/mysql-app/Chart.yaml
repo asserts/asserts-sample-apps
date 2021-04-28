@@ -1,0 +1,22 @@
+apiVersion: v2
+name: mysql-app
+description: A mysql demo app for Asserts
+type: application
+
+# This is the chart version.
+version: 1.1.0
+
+# This is the version number of the application being deployed.
+appVersion: "latest"
+
+dependencies: # A list of the chart requirements (optional)
+  - name: mysql
+    version: "8.0.24"
+    repository: "https://charts.bitnami.com/bitnami"
+  - name: prometheus-mysql-exporter
+    version: "v0.11.0"
+    repository: "https://prometheus-community.github.io/helm-charts"
+  - condition: localdev.enabled
+    name: kube-prometheus-stack
+    version: "11.1.6"
+    repository: "https://prometheus-community.github.io/helm-charts"

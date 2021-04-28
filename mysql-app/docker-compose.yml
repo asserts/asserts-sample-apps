@@ -9,10 +9,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
 
-  adminer:
-    image: adminer
-    ports:
-      - 8080:8080
+  #adminer:
+  #  image: adminer
+  #  ports:
+  #    - 8080:8080
 
   exporter:
     image: prom/mysqld-exporter

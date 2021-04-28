@@ -1,0 +1,13 @@
+#!/bin/bash
+
+kubectx asserts-dev
+
+kubens mysql-app
+
+helm dep up .
+
+helm upgrade --install mysql-app . \
+  --set image.repository=543343501704.dkr.ecr.us-west-2.amazonaws.com/ai.asserts.mysql-app \
+  --atomic \
+  --debug \
+  $*

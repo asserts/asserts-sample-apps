@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mysql-app.fullname" . }}
+  labels:
+    {{- include "mysql-app.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.mysqlapp.port }}
+      targetPort: http
+      protocol: TCP
+      name: mysqlapp
+  selector:
+    {{- include "mysql-app.selectorLabels" . | nindent 4 }}

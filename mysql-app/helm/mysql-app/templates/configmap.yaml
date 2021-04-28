@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mysql-app.fullname" . }}
+  labels:
+    {{- include "mysql-app.labels" . | nindent 4 }}
+data:
+  {{ include "config-map-contents" . }}
