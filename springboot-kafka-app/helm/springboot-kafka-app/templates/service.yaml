@@ -8,11 +8,11 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.springboot.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.springboot.port }}
       protocol: TCP
       name: springboot
     - port: {{ .Values.service.jmx.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.jmx.port }}
       protocol: TCP
       name: jmx
   selector:
