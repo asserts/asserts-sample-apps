@@ -10,4 +10,5 @@ spec:
       app.kubernetes.io/name: springboot-kafka-app
   endpoints:
   - port: springboot
+    path: /kafka/actuator/prometheus
   - port: jmx
