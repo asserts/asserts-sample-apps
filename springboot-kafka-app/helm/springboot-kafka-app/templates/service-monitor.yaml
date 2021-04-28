@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: "{{ .Release.Name }}-springboot-kafka-app"
+  name: "{{ .Release.Name }}"
   labels:
     release: {{ .Release.Name }}
 spec:
