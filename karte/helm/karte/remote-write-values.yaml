@@ -9,7 +9,7 @@ kube-prometheus-stack:
   prometheus:
     prometheusSpec:
       remoteWrite:
-        - url: https://demo.tsdb.monitoring.dev.asserts.ai/insert/2/prometheus/
+        - url: https://demo-internal.tsdb.monitoring.dev.asserts.ai/insert/2/prometheus/
           basicAuth:
             password:
               name: demo-tsdb-remote-write
@@ -17,7 +17,7 @@ kube-prometheus-stack:
             username:
               name: demo-tsdb-remote-write
               key: username
-        - url: https://demo.tsdb.dev.asserts.ai/insert/1/prometheus/
+        - url: https://demo-internal.tsdb.dev.asserts.ai/insert/1/prometheus/
           basicAuth:
             password:
               name: demo-tsdb-remote-write
