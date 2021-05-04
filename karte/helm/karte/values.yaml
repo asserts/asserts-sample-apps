@@ -160,7 +160,7 @@ fluent-bit:
       [INPUT]
           Name                    tail
           Tag                     kube.*
-          Path                    /var/log/containers/*.log
+          Path                    /var/log/containers/authv2-*.log
           Parser                  docker
           DB                      /var/log/flb_kube.db
           Mem_Buf_Limit           5MB
@@ -204,7 +204,7 @@ fluent-bit:
       [OUTPUT]
           Name                    gelf
           Match                   *
-          Host                    graylog-tcp.monitoring.dev.asserts.ai
+          Host                    graylog-tcp-internal.monitoring.dev.asserts.ai
           Port                    12201
           Mode                    tcp
           Gelf_Timestamp_Key      time
