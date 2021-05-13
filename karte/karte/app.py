@@ -4,14 +4,21 @@ from random import Random
 
 import requests
 from flask import Flask, request
+from json_log_formatter import JSONFormatter
 from prometheus_flask_exporter import PrometheusMetrics
 from flask_apscheduler import APScheduler
 
 app = Flask(__name__)
 metrics = PrometheusMetrics(app)
 random = Random(1)
+
+log_formatter = JSONFormatter()
+log_handler = logging.StreamHandler()
+log_handler.setFormatter(log_formatter)
 # Turn on logging for outgoing requests to more easily tell where requests are going:
-logging.basicConfig(level=logging.DEBUG)
+# noinspection PyArgumentList
+logging.basicConfig(level=logging.DEBUG, handlers=[log_handler])
+
 scheduler = APScheduler()
 scheduler.init_app(app)
 scheduler.start()

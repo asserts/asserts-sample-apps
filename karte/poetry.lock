@@ -155,6 +155,14 @@ MarkupSafe = ">=0.23"
 i18n = ["Babel (>=0.8)"]
 
 [[package]]
+name = "json-log-formatter"
+version = "0.3.1"
+description = "JSON log formatter"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "markupsafe"
 version = "1.1.1"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -345,7 +353,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "364d502e5bcdfbf150df0b9d0d17c7a4fcb9eae0fe647b4439b17fe80dbef0f6"
+content-hash = "e5d79494bb1319969f11c1d46a5d34793673ff8efc8431d2804477bd230fb9d7"
 
 [metadata.files]
 apscheduler = [
@@ -398,6 +406,9 @@ itsdangerous = [
 jinja2 = [
     {file = "Jinja2-2.11.2-py2.py3-none-any.whl", hash = "sha256:f0a4641d3cf955324a89c04f3d94663aa4d638abe8f733ecd3582848e1c37035"},
     {file = "Jinja2-2.11.2.tar.gz", hash = "sha256:89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"},
+]
+json-log-formatter = [
+    {file = "JSON-log-formatter-0.3.1.tar.gz", hash = "sha256:03029bddba697d2f6c81419a80f1c58d3a89ae715336c6a88b370e7d2c983198"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},

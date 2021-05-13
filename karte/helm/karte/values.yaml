@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: 543343501704.dkr.ecr.us-west-2.amazonaws.com/ai.asserts.karte
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -170,17 +170,28 @@ fluent-bit:
       [FILTER]
           Name                    kubernetes
           Match                   kube.*
-          Merge_Log_Key           log
+          Merge_Log_Key           log_processed
           Merge_Log               On
-          Keep_Log                Off
+          Keep_Log                On
           Annotations             Off
           Labels                  Off
           K8S-Logging.Parser On
           K8S-Logging.Exclude On
       [FILTER]
           Name                nest
+          Match               *
+          Operation lift
+          Nested_under log_processed
+          Add_prefix log_proc_
+      # Filter out log messages that didn't come in the JSON format used by karte, in which the short log
+      # message is in the `message` property.
+      [FILTER]
+          Name                grep
+          Match               *
+          regex               log_proc_message .+
+      [FILTER]
+          Name                nest
           Match               kube.*
-          Wildcard            *_name
           Operation lift
           Nested_under kubernetes
           Add_prefix   kubernetes_
@@ -209,4 +220,4 @@ fluent-bit:
           Mode                    tcp
           Gelf_Timestamp_Key      time
           Gelf_Host_Key           stream
-          Gelf_Short_Message_Key  log
+          Gelf_Short_Message_Key  log_proc_message
