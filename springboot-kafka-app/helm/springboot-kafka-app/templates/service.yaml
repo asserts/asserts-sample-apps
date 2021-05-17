@@ -7,9 +7,13 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: {{ .Values.service.springboot.port }}
+      targetPort: {{ .Values.service.springboot.port }}
       protocol: TCP
-      name: http
+      name: springboot
+    - port: {{ .Values.service.jmx.port }}
+      targetPort: {{ .Values.service.jmx.port }}
+      protocol: TCP
+      name: jmx
   selector:
     {{- include "springboot-kafka-app.selectorLabels" . | nindent 4 }}

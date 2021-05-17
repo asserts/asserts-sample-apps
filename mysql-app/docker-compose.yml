@@ -1,0 +1,48 @@
+version: '3.1'
+services:
+
+  db:
+    image: mysql
+    ports:
+      - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+  exporter:
+    image: prom/mysqld-exporter
+    ports:
+      - 9104:9104
+    environment:
+      - DATA_SOURCE_NAME=root:example@(db:3306)/
+    depends_on:
+      - db
+
+  mysql-app:
+    build: .
+    ports:
+      - 8090:8090
+    depends_on:
+      - db
+      - exporter
+
+  prometheus:
+    image: prom/prometheus:v2.25.0
+    container_name: prometheus
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./docker/prometheus/prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+
+

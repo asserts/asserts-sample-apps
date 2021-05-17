@@ -21,12 +21,8 @@ RUN gradle bootJar --no-daemon
 # Stage 2 - Create a size optimized Image for our Service with only what we need to run
 FROM openjdk:8-jre-slim
 EXPOSE 8090
-EXPOSE 8095
-EXPOSE 8090
 WORKDIR /opt/demo_app
 COPY --from=builder /home/gradle/app/build/libs/* ./
 COPY --from=builder /home/gradle/app/build/resources/main/*.yml ./
 COPY --from=builder /home/gradle/app/build/resources/main/*.properties ./
-COPY jmx_prometheus_javaagent-0.15.0.jar ./
-COPY kafka-connect.yml ./
-CMD ["/bin/sh", "-c", "java -javaagent:./jmx_prometheus_javaagent-0.15.0.jar=8095:kafka-connect.yml -jar kafka-*.jar --spring.config.location=application.properties"]
+CMD ["/bin/sh", "-c", "java -jar mysql-*.jar --spring.config.location=application.properties"]
