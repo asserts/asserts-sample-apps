@@ -1,0 +1,66 @@
+plugins {
+    id 'org.springframework.boot'version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+sourceCompatibility = '1.8'
+archivesBaseName = 'orderplacement'
+
+dependencies {
+    implementation (
+            "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.2",
+            "com.google.guava:guava:28.1-jre",
+            "org.springframework.boot:spring-boot-starter-actuator:2.4.2",
+            "org.springframework.boot:spring-boot-starter-web:2.4.2",
+            "org.springframework.kafka:spring-kafka:2.5.11.RELEASE",
+            "org.springframework.kafka:spring-kafka-test:2.5.11.RELEASE",
+            "org.apache.kafka:kafka-clients:2.5.0",
+
+
+    )
+    compileOnly (
+            "org.projectlombok:lombok:1.18.12"
+
+    )
+
+    annotationProcessor "org.projectlombok:lombok:1.18.12"
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation (
+            "junit:junit:4.13",
+            "org.easymock:easymock:4.2",
+
+    )
+
+    testRuntimeOnly (
+            "org.junit.jupiter:junit-jupiter-engine:5.6.0",
+    )
+}
+
+
+springBoot {
+    buildInfo()
+}
+
+bootJar {
+    enabled = true
+    manifest {
+        attributes(
+                "Implementation-Title": "orderplacement",
+                "Implementation-Vendor": "Demo",
+                "Implementation-Version": archiveVersion)
+    }
+}
+
+jar {
+    enabled = true
+}
+
+test {
+    useJUnitPlatform()
+}
