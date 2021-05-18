@@ -8,10 +8,7 @@ plugins {
     id 'application'
 }
 
-sourceCompatibility = '1.8'
-archivesBaseName = 'auction'
 version = '0.0.1'
-mainClassName = "ai.asserts.sample.apps.auction.AuctionApplication"
 
 repositories {
     mavenCentral()
@@ -26,7 +23,9 @@ dependencies {
             "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion",
             "org.springframework.boot:spring-boot-starter-web:$springBootVersion",
             "org.springframework.metrics:spring-metrics:$springMetricsVersion",
-            "org.springframework.boot:spring-boot-starter:$springBootVersion"
+            "org.springframework.boot:spring-boot-starter:$springBootVersion",
+            "software.amazon.awssdk:dynamodb:2.16.39",
+            "software.amazon.awssdk:s3:2.16.39",
     )
 
     compileOnly(
@@ -49,12 +48,6 @@ test {
 
 bootJar {
     enabled = true
-    manifest {
-        attributes(
-                "Implementation-Title": "Api Server",
-                "Implementation-Vendor": "Asserts, Inc.",
-                "Implementation-Version": archiveVersion)
-    }
     archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
 }
 

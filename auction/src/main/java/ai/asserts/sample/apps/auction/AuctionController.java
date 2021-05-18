@@ -4,14 +4,23 @@
  */
 package ai.asserts.sample.apps.auction;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.valueOf;
@@ -21,7 +30,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @SuppressWarnings("unused")
+@Slf4j
 public class AuctionController {
+    private final String dynamoTableName;
+    private final String s3BucketName;
+
+    public AuctionController(@Value("${sample.app.dynamodb.table_name}") String dynamoTableName,
+                             @Value("${sample.app.s3.bucket_name}") String s3BucketName) {
+        this.dynamoTableName = dynamoTableName;
+        this.s3BucketName = s3BucketName;
+    }
+
     @RequestMapping(
             path = "/create-auction",
             produces = APPLICATION_JSON_VALUE,
@@ -80,11 +99,7 @@ public class AuctionController {
             produces = APPLICATION_JSON_VALUE,
             method = GET)
     public ResponseEntity<List<Bid>> listBids() {
-        List<Bid> bids = new ArrayList<>();
-        int numBids = (int) (500 * Math.random());
-        for (int i = 0; i < numBids; i++) {
-            bids.add(new Bid(i, 1, i, 300.0D, 15000));
-        }
+        List<Bid> bids = generateBids();
         return ResponseEntity.ok(bids);
     }
 
@@ -100,5 +115,58 @@ public class AuctionController {
         }
     }
 
+    @RequestMapping(
+            path = "/useCPU",
+            produces = APPLICATION_JSON_VALUE,
+            method = GET)
+    public ResponseEntity<String> useCPU() {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/Workbench_2021_03_11.json");
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ZipOutputStream zipOutputStream = new ZipOutputStream(out);
+            zipOutputStream.putNextEntry(new ZipEntry("Workbench_2021_03_11.json"));
+            FileCopyUtils.copy(inputStream, zipOutputStream);
+            return ResponseEntity.ok(out.toString());
+        } catch (Exception e) {
+            return new ResponseEntity<>("Internal Server error", INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @RequestMapping(
+            path = "/useMemory",
+            produces = APPLICATION_JSON_VALUE,
+            method = GET)
+    public ResponseEntity<String> useMemory() {
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            IntStream.rangeClosed(1, 10).forEach(_int -> {
+                try {
+                    InputStream inputStream = getClass().getResourceAsStream("/Workbench_2021_03_11.json");
+                    out.write(FileCopyUtils.copyToByteArray(inputStream));
+                } catch (IOException e) {
+                    log.error("Error out ", e);
+                }
+            });
+            return ResponseEntity.ok("Used Memory");
+        } catch (Exception e) {
+            return new ResponseEntity<>("Internal Server error", INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(
+            path = "/writeBidsToDynamo",
+            produces = APPLICATION_JSON_VALUE,
+            method = GET)
+    public ResponseEntity<String> writeBidsToDynamo() {
+        return ResponseEntity.ok("Wrote Bids");
+    }
+
+    List<Bid> generateBids() {
+        List<Bid> bids = new ArrayList<>();
+        int numBids = (int) (500 * Math.random());
+        for (int i = 0; i < numBids; i++) {
+            bids.add(new Bid(i, 1, i, 300.0D, 15000));
+        }
+        return bids;
+    }
 }
