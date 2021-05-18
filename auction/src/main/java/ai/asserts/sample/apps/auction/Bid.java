@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.With;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 @Getter
 @Setter
@@ -20,10 +22,16 @@ import lombok.With;
 @With
 @NoArgsConstructor
 @ToString
+@DynamoDbBean
 public class Bid {
-    private Integer id;
-    private Integer itemId;
-    private Integer bidderId;
+    private String id;
+    private String itemId;
+    private String bidderId;
     private Double price;
     private Integer quantity;
+
+    @DynamoDbPartitionKey
+    public String getId() {
+        return id;
+    }
 }
