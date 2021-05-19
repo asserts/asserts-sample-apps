@@ -7,6 +7,7 @@ package ai.asserts.sample.apps.auction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -113,6 +114,66 @@ public class TrafficGenerator {
                     }
                 }).get();
 
+
+                executorService.submit(() -> {
+                    for (int i = 0; i < 5; i++) {
+                        try {
+                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/readBidsFromDynamo",
+                                    HttpMethod.GET,
+                                    null,
+                                    new ParameterizedTypeReference<String>() {
+                                    }).getBody();
+                            log.info(response);
+                        } catch (Exception e) {
+                            log.error("Compression Error", e);
+                        }
+                    }
+                }).get();
+
+                executorService.submit(() -> {
+                    for (int i = 0; i < 5; i++) {
+                        try {
+                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/writeBidsToDynamo",
+                                    HttpMethod.POST,
+                                    new HttpEntity<>("Some Body"),
+                                    new ParameterizedTypeReference<String>() {
+                                    }).getBody();
+                            log.info(response);
+                        } catch (Exception e) {
+                            log.error("Compression Error", e);
+                        }
+                    }
+                }).get();
+
+                executorService.submit(() -> {
+                    for (int i = 0; i < 5; i++) {
+                        try {
+                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/readBidsFromS3",
+                                    HttpMethod.GET,
+                                    null,
+                                    new ParameterizedTypeReference<String>() {
+                                    }).getBody();
+                            log.info(response);
+                        } catch (Exception e) {
+                            log.error("Compression Error", e);
+                        }
+                    }
+                }).get();
+
+                executorService.submit(() -> {
+                    for (int i = 0; i < 5; i++) {
+                        try {
+                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/writeBidsToS3",
+                                    HttpMethod.POST,
+                                    new HttpEntity<>("Some Body"),
+                                    new ParameterizedTypeReference<String>() {
+                                    }).getBody();
+                            log.info(response);
+                        } catch (Exception e) {
+                            log.error("Compression Error", e);
+                        }
+                    }
+                }).get();
 
                 Thread.sleep(15000);
             } catch (Exception e) {
