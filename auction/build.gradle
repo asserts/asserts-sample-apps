@@ -25,7 +25,9 @@ dependencies {
             "org.springframework.metrics:spring-metrics:$springMetricsVersion",
             "org.springframework.boot:spring-boot-starter:$springBootVersion",
             "software.amazon.awssdk:dynamodb:2.16.39",
+            "software.amazon.awssdk:dynamodb-enhanced:2.11.4-PREVIEW",
             "software.amazon.awssdk:s3:2.16.39",
+            "software.amazon.awssdk:sts:2.16.39",
     )
 
     compileOnly(

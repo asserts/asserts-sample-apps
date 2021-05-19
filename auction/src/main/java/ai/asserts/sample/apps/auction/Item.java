@@ -21,7 +21,7 @@ import lombok.With;
 @NoArgsConstructor
 @ToString
 public class Item {
-    private Integer id;
+    private String id;
     private String name;
     private Double minBidPrice;
     private Double minQuantity;
