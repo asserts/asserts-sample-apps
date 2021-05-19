@@ -30,6 +30,16 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:7071']
 
+  - job_name: 'order-placement'
+    static_configs:
+      - targets: ['host.docker.internal:8096']
+    metric_relabel_configs:
+      - source_labels: [ __name__, clientId ]
+        regex: kafka_.*;(.+)
+        target_label: client_id
+        replacement: $1
+        action: replace
+
   - job_name: 'demo-app'
     metrics_path: /kafka/actuator/prometheus
     static_configs:

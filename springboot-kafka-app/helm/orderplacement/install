@@ -1,0 +1,13 @@
+#!/bin/bash
+
+kubectx asserts-dev
+
+kubens springboot-kafka-app
+
+helm dep up .
+
+helm upgrade --install orderplacement . \
+  --set image.repository=543343501704.dkr.ecr.us-west-2.amazonaws.com/ai.asserts.orderplacement \
+  --atomic \
+  --debug \
+  $*
