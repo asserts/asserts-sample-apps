@@ -90,7 +90,6 @@ configMap:
       kafka:
         consumer:
           auto-offset-reset: earliest
-          group-id: boot
         bootstrap-servers: kafka.springboot-kafka-app.svc.cluster.local:9092
 
     topic:
