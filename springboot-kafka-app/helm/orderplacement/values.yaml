@@ -90,7 +90,7 @@ configMap:
       kafka:
         consumer:
           auto-offset-reset: earliest
-        bootstrap-servers: kafka.springboot-kafka-app.svc.cluster.local:9092
+        bootstrap-servers: kafka.sample-apps.svc.cluster.local:9092
 
     topic:
       boot: orders
