@@ -9,7 +9,8 @@ version: 1.1.0
 # This is the version number of the application being deployed.
 appVersion: "latest"
 
-dependencies: # A list of the chart requirements (optional)
+# A list of the chart requirements (optional)
+dependencies:
   - name: zookeeper
     version: "6.5.2"
     repository: "https://charts.bitnami.com/bitnami"
@@ -20,3 +21,7 @@ dependencies: # A list of the chart requirements (optional)
     name: kube-prometheus-stack
     version: "11.1.6"
     repository: "https://prometheus-community.github.io/helm-charts"
+
+maintainers:
+  - name: Asserts
+    url: https://github.com/asserts
