@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-@Component
+//@Component
 @Slf4j
 public class StreamReceiver {
 

@@ -11,8 +11,8 @@ image:
   tag: ""
 
 imagePullSecrets: []
-nameOverride: "orderplacement"
-fullnameOverride: "orderplacement"
+nameOverride: "orderverifier"
+fullnameOverride: "orderverifier"
 
 #serviceAccount:
 #  # Specifies whether a service account should be created
@@ -40,7 +40,7 @@ securityContext: {}
 service:
   type: ClusterIP
   jmx:
-    port: 8096
+    port: 8097
 
 ingress:
   enabled: false
@@ -93,7 +93,7 @@ configMap:
         bootstrap-servers: kafka.sample-apps.svc.cluster.local:9092
 
     topic:
-      produce: orders
+      consume: orders
 
 localdev:
   enabled: false

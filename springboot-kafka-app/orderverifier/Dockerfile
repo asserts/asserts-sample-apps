@@ -28,4 +28,4 @@ COPY --from=builder /home/gradle/app/build/resources/main/*.yml ./
 COPY --from=builder /home/gradle/app/build/resources/main/*.properties ./
 COPY jmx_prometheus_javaagent-0.15.0.jar ./
 COPY kafka-connect.yml ./
-CMD ["/bin/sh", "-c", "java -javaagent:./jmx_prometheus_javaagent-0.15.0.jar=8097:kafka-connect.yml -jar orderverifier*.jar --spring.config.location=application.properties"]
+CMD ["/bin/sh", "-c", "java -javaagent:./jmx_prometheus_javaagent-0.15.0.jar=8097:kafka-connect.yml -jar orderverifier*.jar --spring.config.location=application.yml"]

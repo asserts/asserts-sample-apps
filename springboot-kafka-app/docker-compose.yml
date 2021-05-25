@@ -47,7 +47,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_CREATE_TOPICS: "Topic3:1:1,Topic4:1:1,Topic5:1:1,orders:1:1,verifiedorders:1:1,localorders:1:1,outstationorders:1:1"
+      KAFKA_CREATE_TOPICS: "orders:1:1,verifiedorders:1:1,localorders:1:1,outstationorders:1:1"
       KAFKA_MESSAGE_MAX_BYTES: 2000000
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock
@@ -74,18 +74,18 @@ services:
       - zookeeper
       - kafka
       - orderplacement
-#  ordercategorizer:
-#    build:
-#      context: ordercategorizer
-#      dockerfile: Dockerfile
-#    ports:
-#      - "8097:8097"
-#      - "8093:8093"
-#    depends_on:
-#      - zookeeper
-#      - kafka
-#      - orderplacement
-#      - orderverifier
+  ordercategorizer:
+    build:
+      context: ordercategorizer
+      dockerfile: Dockerfile
+    ports:
+      - "8098:8098"
+      - "8093:8093"
+    depends_on:
+      - zookeeper
+      - kafka
+      - orderplacement
+      - orderverifier
   springboot-kafka-app:
     container_name: springboot-kafka-app
     build: .
