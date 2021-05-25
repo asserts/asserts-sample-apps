@@ -59,8 +59,8 @@ public class AuctionController {
     private final String s3BucketName;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public AuctionController(@Value("${sample.app.dynamodb.table_name}") String dynamoTableName,
-                             @Value("${sample.app.s3.bucket_name}") String s3BucketName) {
+    public AuctionController(@Value("${AUCTION_APP_DYNAMO_TABLE:auction_app_bids}") String dynamoTableName,
+                             @Value("${AUCTION_APP_S3_BUCKET:sample-app-auction-bids}") String s3BucketName) {
         this.dynamoTableName = dynamoTableName;
         this.s3BucketName = s3BucketName;
     }
