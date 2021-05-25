@@ -23,12 +23,17 @@ import java.util.concurrent.Executors;
 @Component
 @Slf4j
 public class TrafficGenerator {
+    private final int sleepInterval;
 
-    public TrafficGenerator(@Value("${sample.app.role:server}") String role) {
+    public TrafficGenerator(@Value("${AUCTION_APP_ROLE:server}") String role,
+                            @Value("${CLIENT_SLEEP_INTERVAL_SECONDS:30}") int sleepInterval) {
         if ("test-client".equals(role)) {
+            this.sleepInterval = sleepInterval;
             log.info("Setting up test client thread to initiate test requests");
             ExecutorService executorService = Executors.newFixedThreadPool(1);
             executorService.submit(this::init);
+        } else {
+            this.sleepInterval = 0;
         }
     }
 
@@ -36,151 +41,153 @@ public class TrafficGenerator {
     public void init() {
         RestTemplate restTemplate = new RestTemplate();
         ExecutorService executorService = Executors.newFixedThreadPool(3);
-        do {
-            try {
-                log.info("About to send workload request..");
-                executorService.submit(() -> {
-                    try {
-                        List items = restTemplate.exchange("http://auction.app.dev.asserts.ai/items",
-                                HttpMethod.GET,
-                                null,
-                                new ParameterizedTypeReference<List<Item>>() {
-                                }).getBody();
-                        if (items != null) {
-                            log.info("Got " + items.size() + " bids");
-                        }
-                    } catch (Exception e) {
-                        log.error("Get Items error", e);
-                    }
-                }).get();
-
-                executorService.submit(() -> {
-                    try {
-                        List bids = restTemplate.exchange("http://auction.app.dev.asserts.ai/bids",
-                                HttpMethod.GET,
-                                null,
-                                new ParameterizedTypeReference<List<Bid>>() {
-                                }).getBody();
-                        if (bids != null) {
-                            log.info("Got " + bids.size() + " bids");
-                        }
-                    } catch (Exception e) {
-                        log.error("Get Bids error", e);
-                    }
-                }).get();
-
-                executorService.submit(() -> {
-                    try {
-                        String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/http/404",
-                                HttpMethod.GET,
-                                null,
-                                new ParameterizedTypeReference<String>() {
-                                }).getBody();
-                        if (response != null) {
-                            log.info(response);
-                        }
-                    } catch (Exception e) {
-                        log.error("HTTP Status 404", e);
-                    }
-                }).get();
-
-                executorService.submit(() -> {
-                    for (int i = 0; i < 5; i++) {
+        if (sleepInterval > 0) {
+            do {
+                try {
+                    log.info("About to send workload request..");
+                    executorService.submit(() -> {
                         try {
-                            restTemplate.exchange("http://auction.app.dev.asserts.ai/useCPU",
+                            List items = restTemplate.exchange("http://auction.app.dev.asserts.ai/items",
                                     HttpMethod.GET,
                                     null,
-                                    new ParameterizedTypeReference<String>() {
-                                    });
-                            log.info("Trigger CPU Usage ");
+                                    new ParameterizedTypeReference<List<Item>>() {
+                                    }).getBody();
+                            if (items != null) {
+                                log.info("Got " + items.size() + " bids");
+                            }
                         } catch (Exception e) {
-                            log.error("Compression Error", e);
+                            log.error("Get Items error", e);
                         }
-                    }
-                }).get();
+                    }).get();
 
-                executorService.submit(() -> {
-                    for (int i = 0; i < 5; i++) {
+                    executorService.submit(() -> {
                         try {
-                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/useMemory",
+                            List bids = restTemplate.exchange("http://auction.app.dev.asserts.ai/bids",
+                                    HttpMethod.GET,
+                                    null,
+                                    new ParameterizedTypeReference<List<Bid>>() {
+                                    }).getBody();
+                            if (bids != null) {
+                                log.info("Got " + bids.size() + " bids");
+                            }
+                        } catch (Exception e) {
+                            log.error("Get Bids error", e);
+                        }
+                    }).get();
+
+                    executorService.submit(() -> {
+                        try {
+                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/http/404",
                                     HttpMethod.GET,
                                     null,
                                     new ParameterizedTypeReference<String>() {
                                     }).getBody();
-                            log.info(response);
+                            if (response != null) {
+                                log.info(response);
+                            }
                         } catch (Exception e) {
-                            log.error("Compression Error", e);
+                            log.error("HTTP Status 404", e);
                         }
-                    }
-                }).get();
+                    }).get();
 
-
-                executorService.submit(() -> {
-                    for (int i = 0; i < 5; i++) {
-                        try {
-                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/readBidsFromDynamo",
-                                    HttpMethod.GET,
-                                    null,
-                                    new ParameterizedTypeReference<String>() {
-                                    }).getBody();
-                            log.info(response);
-                        } catch (Exception e) {
-                            log.error("Compression Error", e);
+                    executorService.submit(() -> {
+                        for (int i = 0; i < 5; i++) {
+                            try {
+                                restTemplate.exchange("http://auction.app.dev.asserts.ai/useCPU",
+                                        HttpMethod.GET,
+                                        null,
+                                        new ParameterizedTypeReference<String>() {
+                                        });
+                                log.info("Trigger CPU Usage ");
+                            } catch (Exception e) {
+                                log.error("Compression Error", e);
+                            }
                         }
-                    }
-                }).get();
+                    }).get();
 
-                executorService.submit(() -> {
-                    for (int i = 0; i < 5; i++) {
-                        try {
-                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/writeBidsToDynamo",
-                                    HttpMethod.POST,
-                                    new HttpEntity<>("Some Body"),
-                                    new ParameterizedTypeReference<String>() {
-                                    }).getBody();
-                            log.info(response);
-                        } catch (Exception e) {
-                            log.error("Compression Error", e);
+                    executorService.submit(() -> {
+                        for (int i = 0; i < 5; i++) {
+                            try {
+                                String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/useMemory",
+                                        HttpMethod.GET,
+                                        null,
+                                        new ParameterizedTypeReference<String>() {
+                                        }).getBody();
+                                log.info(response);
+                            } catch (Exception e) {
+                                log.error("Compression Error", e);
+                            }
                         }
-                    }
-                }).get();
+                    }).get();
 
-                executorService.submit(() -> {
-                    for (int i = 0; i < 5; i++) {
-                        try {
-                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/readBidsFromS3",
-                                    HttpMethod.GET,
-                                    null,
-                                    new ParameterizedTypeReference<String>() {
-                                    }).getBody();
-                            log.info(response);
-                        } catch (Exception e) {
-                            log.error("Compression Error", e);
+
+                    executorService.submit(() -> {
+                        for (int i = 0; i < 5; i++) {
+                            try {
+                                String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/readBidsFromDynamo",
+                                        HttpMethod.GET,
+                                        null,
+                                        new ParameterizedTypeReference<String>() {
+                                        }).getBody();
+                                log.info(response);
+                            } catch (Exception e) {
+                                log.error("Compression Error", e);
+                            }
                         }
-                    }
-                }).get();
+                    }).get();
 
-                executorService.submit(() -> {
-                    for (int i = 0; i < 5; i++) {
-                        try {
-                            String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/writeBidsToS3",
-                                    HttpMethod.POST,
-                                    new HttpEntity<>("Some Body"),
-                                    new ParameterizedTypeReference<String>() {
-                                    }).getBody();
-                            log.info(response);
-                        } catch (Exception e) {
-                            log.error("Compression Error", e);
+                    executorService.submit(() -> {
+                        for (int i = 0; i < 5; i++) {
+                            try {
+                                String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/writeBidsToDynamo",
+                                        HttpMethod.POST,
+                                        new HttpEntity<>("Some Body"),
+                                        new ParameterizedTypeReference<String>() {
+                                        }).getBody();
+                                log.info(response);
+                            } catch (Exception e) {
+                                log.error("Compression Error", e);
+                            }
                         }
-                    }
-                }).get();
+                    }).get();
 
-                Thread.sleep(15000);
-            } catch (Exception e) {
-                log.error("Thread error", e);
-                break;
+                    executorService.submit(() -> {
+                        for (int i = 0; i < 5; i++) {
+                            try {
+                                String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/readBidsFromS3",
+                                        HttpMethod.GET,
+                                        null,
+                                        new ParameterizedTypeReference<String>() {
+                                        }).getBody();
+                                log.info(response);
+                            } catch (Exception e) {
+                                log.error("Compression Error", e);
+                            }
+                        }
+                    }).get();
+
+                    executorService.submit(() -> {
+                        for (int i = 0; i < 5; i++) {
+                            try {
+                                String response = restTemplate.exchange("http://auction.app.dev.asserts.ai/writeBidsToS3",
+                                        HttpMethod.POST,
+                                        new HttpEntity<>("Some Body"),
+                                        new ParameterizedTypeReference<String>() {
+                                        }).getBody();
+                                log.info(response);
+                            } catch (Exception e) {
+                                log.error("Compression Error", e);
+                            }
+                        }
+                    }).get();
+
+                    Thread.sleep(sleepInterval * 1000);
+                } catch (Exception e) {
+                    log.error("Thread error", e);
+                    break;
+                }
             }
+            while (true);
         }
-        while (true);
     }
 }
