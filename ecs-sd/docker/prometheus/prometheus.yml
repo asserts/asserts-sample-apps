@@ -1,0 +1,28 @@
+# my global config
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 30s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  scrape_timeout: 15s
+  # scrape_timeout is set to the global default (10s).
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'ecs-sd-15s'
+    scrape_interval: 15s
+    file_sd_configs:
+      - files:
+        - /etc/prometheus/ecs-sd-files/15s-tasks.json
+
+#remote_write:
+#  - url: https://chief.tsdb.dev.asserts.ai/insert/0/prometheus/
+#    basic_auth:
+#      username: chief
+#      password: chieftenant
+#    queue_config:
+#      capacity: 10000
+#      max_samples_per_send: 10000
+#      max_shards: 10
+#    tls_config:
+#      insecure_skip_verify: true

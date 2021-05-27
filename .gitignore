@@ -50,3 +50,6 @@ apps/**/tmp
 
 # Docker volumes
 **/postgres-data/
+/ecs-sd/discover-ecs/env.file
+/ecs-sd/sd-files/
+/ecs-sd/docker/prometheus/ecs-sd-files/

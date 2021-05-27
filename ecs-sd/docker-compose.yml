@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  prometheus:
+    image: prom/prometheus:v2.25.0
+    container_name: prometheus-ecs
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./docker/prometheus/prometheus_data:/prometheus
+      - ./docker/prometheus/ecs-sd-files:/etc/prometheus/ecs-sd-files
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    depends_on:
+      - discover-ecs
+
+  discover-ecs:
+# These environment variables are meant to enable AWS Permissions in local testing
+# Just plugin the missing values from your env variables after the successful completion of `aws-dev` command
+#    environment:
+#      AWS_ACCESS_KEY_ID:
+#      AWS_DEFAULT_REGION: us-west-2
+#      AWS_REGION: us-west-2
+#      AWS_SECRET_ACCESS_KEY:
+#      AWS_SECURITY_TOKEN:
+    build:
+      context: discover-ecs
+      dockerfile: Dockerfile
+    hostname: discover-ecs
+    container_name: discover-ecs
+    volumes:
+      - ./docker/prometheus/ecs-sd-files:/app/ecs-sd-files
