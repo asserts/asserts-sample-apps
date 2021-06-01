@@ -30,3 +30,5 @@ From this directory, run:
 PyCharm
 =======
 To use with PyCharm, install the Poetry plugin.
+
+Testing if Git Diff Logic is working
