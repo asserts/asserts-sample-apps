@@ -12,6 +12,7 @@ node('sandbox') {
       stage_git()
 
       def gitDiff = sh script: "git diff --name-only master", returnStdout: true
+      def files = gitDiff.split("\n")
       // for (file in gitDiff) {
       //     file = file.trim()
       //     echo "${file}"
@@ -22,7 +23,8 @@ node('sandbox') {
       for (sampleApp in sampleApps) {
           sampleApp = sampleApp.trim()
           echo "${sampleApp}"
-        for (file in gitDiff) {
+        for (file in files) {
+          file = file.trim()
           def appChange = file.startsWith(sampleApp)
           echo "File: ${file}, begins with: ${sampleApp}, - ${appChange}"
         }
