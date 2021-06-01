@@ -12,7 +12,21 @@ node('sandbox') {
       stage_git()
 
       def gitDiff = sh script: "git diff --name-only master", returnStdout: true
-      echo "${gitDiff}"
+      // for (file in gitDiff) {
+      //     file = file.trim()
+      //     echo "${file}"
+      // }
+      def dirs = sh script: "ls -d */ | cut -f1 -d'/' ", returnStdout: true
+      // def dirs = sh script: "ls -d */", returnStdout: true
+      def sampleApps = dirs.split("\n")
+      for (sampleApp in sampleApps) {
+          sampleApp = sampleApp.trim()
+          echo "${sampleApp}"
+        for (file in gitDiff) {
+          def appChange = file.startsWith(sampleApp)
+          echo "File: ${file}, begins with: ${sampleApp}, - ${appChange}"
+        }
+      }
 
       // def file = readFile location
       // def lines = file.split("\n").trim()
