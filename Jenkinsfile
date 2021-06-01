@@ -11,7 +11,7 @@ node('sandbox') {
 
       stage_git()
 
-      def gitDiff = sh script: "git diff --name-only master > gitdiff.txt", returnStdout: true
+      def gitDiff = sh script: "git diff --name-only master", returnStdout: true
       echo "${gitDiff}"
 
       // def file = readFile location
