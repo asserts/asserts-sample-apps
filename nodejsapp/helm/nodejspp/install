@@ -1,0 +1,13 @@
+#!/bin/bash
+
+kubectx asserts-dev
+
+kubens nodejs-app
+
+helm dep up .
+
+helm upgrade --install nodejsapp . \
+  --set image.repository=543343501704.dkr.ecr.us-west-2.amazonaws.com/ai.asserts.nodejsapp \
+  --atomic \
+  --debug \
+  $*
