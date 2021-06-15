@@ -15,9 +15,8 @@ random = Random(1)
 log_formatter = JSONFormatter()
 log_handler = logging.StreamHandler()
 log_handler.setFormatter(log_formatter)
-# Turn on logging for outgoing requests to more easily tell where requests are going:
 # noinspection PyArgumentList
-logging.basicConfig(level=logging.DEBUG, handlers=[log_handler])
+logging.basicConfig(level=logging.ERROR, handlers=[log_handler])
 
 scheduler = APScheduler()
 scheduler.init_app(app)
