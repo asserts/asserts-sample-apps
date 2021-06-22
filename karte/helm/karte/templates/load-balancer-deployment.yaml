@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "authv2"
+  name: "load-balancer"
   labels:
     {{- include "karte.labels" . | nindent 4 }}
-    service: authv2
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -12,7 +11,6 @@ spec:
   selector:
     matchLabels:
       {{- include "karte.selectorLabels" . | nindent 6 }}
-      service: authv2
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -21,7 +19,6 @@ spec:
       {{- end }}
       labels:
         {{- include "karte.selectorLabels" . | nindent 8 }}
-        service: authv2
         app: {{ .Chart.Name }}
         version: {{ .Values.appVersion }}
         sidecar.istio.io/inject: "true"
@@ -51,8 +48,12 @@ spec:
               path: /
               port: http
           resources:
-            limits:
-              memory: "85Mi"
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: CALL_MAP_SERVICE
+              value: "true"
+            - name: UPDATE_MAP_DEPLOYMENT
+              value: "true"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
