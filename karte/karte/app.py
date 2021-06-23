@@ -1,12 +1,15 @@
 import logging
 import os
+from datetime import datetime
 from random import Random
 
 import requests
 from flask import Flask, request
 from json_log_formatter import JSONFormatter
+from kubernetes import config, client
 from prometheus_flask_exporter import PrometheusMetrics
 from flask_apscheduler import APScheduler
+from pytz import timezone
 
 app = Flask(__name__)
 metrics = PrometheusMetrics(app)
@@ -79,6 +82,54 @@ def call_additional_services():
     if service_name:
         r = requests.get(f'http://{service_name}/')
         assert r.status_code == 200
+
+
+should_call_map_service = os.getenv('CALL_MAP_SERVICE', default='') != ''
+should_update_map_deployment = os.getenv('UPDATE_MAP_DEPLOYMENT', default='') != ''
+
+
+@scheduler.task('interval', seconds=1)
+def call_map_service():
+    if should_call_map_service:
+        requests.get(f'http://map/map')
+
+
+@scheduler.task('interval', minutes=1)
+def update_map_deployment():
+    if should_update_map_deployment:
+        config.load_incluster_config()
+        v1 = client.AppsV1Api()
+        map_deployment = v1.read_namespaced_deployment('map', 'default')
+
+        auth_v2_env_var = _find_env_var_by_name(map_deployment, 'AUTHV2_PERCENTAGE')
+        if auth_v2_env_var is None:
+            print('Could not find AUTHV2_PERCENTAGE environment variable; ensure it is defined in map deployment.')
+        else:
+            desired_authv2_percentage = _calculate_desired_authv2_percentage()
+            if int(auth_v2_env_var.value) != desired_authv2_percentage:
+                auth_v2_env_var.value = str(desired_authv2_percentage)
+                print(f'Updating map service authv2 percentage to {auth_v2_env_var.value}.')
+                v1.patch_namespaced_deployment(name='map', namespace='default', body=map_deployment)
+
+
+def _find_env_var_by_name(deployment, name):
+    for env_var in deployment.spec.template.spec.containers[0].env:
+        if env_var.name == name:
+            return env_var
+    return None
+
+
+def _calculate_desired_authv2_percentage():
+    utc_now = datetime.utcnow()
+    us_pacific_tz = timezone('US/Pacific')
+    local_time = utc_now.astimezone(us_pacific_tz)
+
+    # Put the application in the problem state -- in which 10% of map service traffic is sent to the bad authv2
+    # service -- between 10:30 and 11am.
+    if local_time.hour == 10 and local_time.minute >= 30:
+        return 10
+    else:
+        return 0
 
 # The code below demonstrates various features of the Flask prometheus exporter.
 
