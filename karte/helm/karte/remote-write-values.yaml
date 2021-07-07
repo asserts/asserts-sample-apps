@@ -14,7 +14,6 @@ kube-prometheus-stack:
       externalLabels:
         asserts_env: stage
         asserts_site: demo
-        asserts_tenant: demo
       remoteWrite:
         - url: https://demo-internal.tsdb.monitoring.dev.asserts.ai/insert/2/prometheus/
           basicAuth:
