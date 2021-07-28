@@ -1,11 +1,13 @@
 {{- $labels := include "karte.labels" . }}
 {{- $selectorLabels := include "karte.selectorLabels" . }}
+{{- $namespace := include "karte.namespace" . }}
 {{- range .Values.additionalServices }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ . | quote }}
+  namespace: {{ $namespace }}
   labels:
     {{ $labels | nindent 4 }}
     service: {{ . }}

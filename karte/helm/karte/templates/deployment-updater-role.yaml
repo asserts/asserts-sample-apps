@@ -1,9 +1,11 @@
+{{- if .Values.problemStateEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: default
+  namespace: {{ include "karte.namespace" . }}
   name: deployment-updater
 rules:
 - apiGroups: ["apps"]
   resources: ["deployments"]
   verbs: ["get", "watch", "list", "update", "patch"]
+{{- end }}

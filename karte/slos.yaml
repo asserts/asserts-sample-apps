@@ -3,23 +3,8 @@ kind: SLO
 name: map-service-availability
 indicator:
   kind: Request
-  badEventCount: asserts:error:total{job="map", asserts_error_type="server_errors"}
-  totalEventCount: asserts:request:total{job="map"}
-entitySearch: "map services"
-objectives:
-  - ratio: 0.99
-    name: "Daily Availability"
-    window:
-      kind: Rolling
-      days: 1
----
-apiVersion: asserts/v1
-kind: SLO
-name: map-service-availability-weekly
-indicator:
-  kind: Request
-  badEventCount: asserts:error:total{job="map", asserts_error_type="server_errors"}
-  totalEventCount: asserts:request:total{job="map"}
+  badEventCount: asserts:error:total{job="map", asserts_error_type="server_errors", asserts_env="prod"}
+  totalEventCount: asserts:request:total{job="map", asserts_env="prod"}
 entitySearch: "map services"
 objectives:
   - ratio: 0.99
@@ -33,7 +18,7 @@ kind: SLO
 name: map-service-latency
 indicator:
   kind: Occurrence
-  measurement: asserts:latency:p99{job="map"}
+  measurement: asserts:latency:p99{job="map", asserts_env="prod"}
 entitySearch: "map services"
 objectives:
   - value: 2
@@ -48,7 +33,7 @@ kind: SLO
 name: map-service-max-traffic
 indicator:
   kind: Occurrence
-  measurement: sum(rate(asserts:request:total{job="map"}[1m]))
+  measurement: sum(rate(asserts:request:total{job="map", asserts_env="prod"}[1m]))
 entitySearch: "map services"
 objectives:
   - value: 10

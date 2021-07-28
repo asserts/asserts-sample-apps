@@ -2,9 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: "map"
+  namespace: {{ include "karte.namespace" . }}
   labels:
     {{- include "karte.labels" . | nindent 4 }}
     service: map
+    asserts_env: {{ .Values.service.assertsEnvironment }}
+    asserts_site: {{ .Values.service.assertsSite }}
 spec:
   type: {{ .Values.service.type }}
   ports:

@@ -1,8 +1,9 @@
+{{- if .Values.problemStateEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: update-deployments
-  namespace: default
+  namespace: {{ include "karte.namespace" . }}
 subjects:
 - kind: ServiceAccount
   name: default
@@ -11,3 +12,4 @@ roleRef:
   kind: Role
   name: deployment-updater
   apiGroup: rbac.authorization.k8s.io
+{{- end }}

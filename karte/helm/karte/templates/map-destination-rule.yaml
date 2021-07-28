@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: "map"
+  namespace: {{ include "karte.namespace" . }}
 spec:
   host: "map"
   trafficPolicy:
