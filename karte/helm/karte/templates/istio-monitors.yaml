@@ -1,6 +1,6 @@
 # Adapted from:
 # https://github.com/istio/istio/blob/4461a6b2324bceabd6f0ef3896ca1ca338180c45/samples/addons/extras/prometheus-operator.yaml
-
+{{- if .Values.problemStateEnabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -38,6 +38,22 @@ spec:
     - sourceLabels: [__meta_kubernetes_pod_name]
       action: replace
       targetLabel: pod_name
+    - sourceLabels: [ namespace ]
+      regex: "default"
+      replacement: prod
+      targetLabel: asserts_env
+    - sourceLabels: [ namespace ]
+      regex: "default"
+      replacement: us-west-2
+      targetLabel: asserts_site
+    - sourceLabels: [ namespace ]
+      regex: "karte-dev"
+      replacement: dev
+      targetLabel: asserts_env
+    - sourceLabels: [ namespace ]
+      regex: "karte-dev"
+      replacement: us-west-2
+      targetLabel: asserts_site
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -58,3 +74,4 @@ spec:
   endpoints:
   - port: http-monitoring
     interval: 15s
+{{- end }}

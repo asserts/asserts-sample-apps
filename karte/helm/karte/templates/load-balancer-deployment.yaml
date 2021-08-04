@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: "load-balancer"
+  namespace: {{ include "karte.namespace" . }}
   labels:
     {{- include "karte.labels" . | nindent 4 }}
 spec:
@@ -52,8 +53,10 @@ spec:
           env:
             - name: CALL_MAP_SERVICE
               value: "true"
+            {{- if .Values.problemStateEnabled }}
             - name: UPDATE_MAP_DEPLOYMENT
               value: "true"
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,0 +1,22 @@
+apiVersion: v2
+name: karte-umbrella
+description: A demo application for Asserts
+type: application
+version: 0.1.0
+appVersion: latest
+
+dependencies:
+  - name: kube-prometheus-stack
+    version: "17.1.0"
+    repository: "https://prometheus-community.github.io/helm-charts"
+  - name: fluent-bit
+    version: "0.12.3"
+    repository: "https://fluent.github.io/helm-charts"
+  - name: karte
+    version: "0.1.0"
+    repository: "file://../karte"
+    alias: karte-prod
+  - name: karte
+    version: "0.1.0"
+    repository: "file://../karte"
+    alias: karte-dev
