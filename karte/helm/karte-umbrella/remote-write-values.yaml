@@ -3,10 +3,6 @@ tenants:
     auth_enabled: true
     password: AgA/I5JpCPG9E0ofD1uwjL0j59klFZsmP6/lAt7L3X+E+wPJXmiKM3MhG3OjpEAukkuXCQC4Oepy/L0Rc1t6ZkimHxiyEZq1CvASXYs7OfKnsMygUOF/NA35V/hnRe/vTotPLSbGfcpxWNhUn8DCMQ1EeQ1Egc5+B4th3wBGf4N3ziO0QJOBZucJit/EXBjsegxWJePoJWtMqIXWG723OUZvPBQnKrJTrjY4cJk4HqemHmyv94sm9inhYboNSFzdA8+EdbUj7xUE0e8fwpsF6JV49VN4bzBNXD4/CBnkFoLmAcws3OQaGutzGPD98UpABqSwU4fOWBjZYG+BZRyM8x8UduFr+iv6JFBG2hgWLprhL5NTFvmVahq827GabE1yCPPSPhQmGgZEfj+Exrf5ma8iXxOKmji90hFAJxRyK/qvy/HuqoOqpTVBhE3WMGmHecWImNxAbSRjzxDyRok/u4MgVOsvzz8WVGIkUosSRK+sczmA9uO5SG068W3iWBem+AShf+r0Laban4LV3CC3wtrqPDx0HBo9rN1xN0ZRQZwBlgZtA+x+wtxUBfgZfsWGCxfH6SplNDMwIxEHnBiG7vkL/YtVUqMtEFFP6tfpIvm3dRvXaw+p9Mwk/9wGJUuE8P5udJDlsSUcBUzWYdI2OIUMbzc3/49OSFft1SupxuP0Xd6J+jIX8vDJSGXpS63LZzQBMeV9TcBKKxyf
     username: AgDGrHz6XYnp3ZdBsDBtZn3Hr52Efkw2n95/E3cZpB5607/1QCjJYwlIufW2MZj2tOcrM1kl/qxBhXoDwuUaLwkoEDlEHgx7RQLmJa5UfZkvH+QHpdRzIe4O7VMN9cUyvwF9iEMhi9BMVmjQ0HSI6204o5ilfekApJKtnUvK9HwmvrRVNXAdgMZgU9W/5txOv5zAICDte3wofu0dvb9CkukBHv3RSX9xCXwOJDfA4bkw4CV3kK5x7AvzAwB2VVjjA+Io0TZixz50aBssHmx+lzoJu5hJHOgRMYAsX3aIY2VcTkuHaAzlGOuuTtDI6xr/MXKwU/Hc1Vv59Z3sNV6IkseX28+q0PdbDqgz3Tyh1IyKhWgZC0x6UVhHnTFkEjEBghK8StLzVs39F6GUPDhXCoKIfF/XOhOdEgcCT3PyPzJ3h14FGZ41tmBV91DOJ3+KrlTGXOHMg/ns1lbp5H6n9xqWpRlJyp4v5jqnjH+ZYPeRTiFlESI2AsavJ1fF+JEzjb0TuC+V6Rd7D6Vjth+5qFolfM3kdCmJjHq9EjsTr+ycMfVo6wVHiKMGY5voZ3j0S4zlVqaxQTC6dLG7nhbUU8g/6/goc8RPiW5J2Pd1qgA0qtGOGyXG5svHGz6xXxIsTsh59Pt8uolMtX9eEOL0n/kI/Rf4TDLIGO6gP+JM7V9feJAimJRKEQ+a8jV4mvrq7Df8SfqB
-  - name: chief
-    auth_enabled: true
-    password: AgBZ4qcxZ++vTeV5eaoCzqE3uqkYY2/27aUASqXCGpWH6Rhx2f0lkKGhk/ej4P0muan/E4ax3rEfSoNGu8UqigOfa8v6CfV3YBoYPe4OncEnI4cMMxRNL8DsENqH/WcbHEN4a5tFUBBHqdhCPWec7QtiHCYo8xxaUtXehaiNs5gJ988Fhn2RV1h+LgscqBWiW1/3JehmB6S/ZscBiAfuLKlBIPuhftORRHEViI7oKrv4OUZfIjkkhuMVMnfXbavaeQoCIeYk2D4X9B0AOCt7CrZ6AI9pEeRI9JlHn5pjbJ8QSbySe3xyeB9MYTuNAtD9z2BScjSXVtYfCdIg1KVN0iNMteNXdYW+8UIQblB/xRPvDMXIiShruZVurh0o6vzi3k9d0BiiwOTpnFdSrc5zo41+dajfF8qMCl7FvhlxeyErFsr4cqQXOivntm6grEhyHIr41xcrYyHJW8cD+mO97nw3AfNSRZ5CdIr/S+8N3mLZS6C55xUljwYB7E4Cv2J7g6mGldfQFTEnJVJcAaMQrn9V8p/I7QvCYictRTENEoYnE6Jl7ezm02iGLyYdKIgHxquAp7RIlZcoA8C26jK6jRzKZQVuxWeu+2hwdWwlfphvVQN0voTJcapSVy5+PFw4HsVrVbG8Ds1X/U2eDQ3MvsGdeWdh3w40EmSmzJkFjisUOUyhHotEY9S2wwYx1UVWCWeUk02ABO8sfxy9fg==
-    username: AgCneAMxI5pd2QdkzV52MIpAl3A+j78PT0SVc/rBkJa3XLunzjB7Iyx+7QxloHbAJlM+YU2Pi8R+dONBfnd8jics6w3aH6lo5ieU0WdVaB6xW0xK+OrWDmkWQeaE6N+6XCpbEsxhdPT97pT0zzKDpUBfO/WeOtlXBfKcxR9oHorRPMo45k7C4u2e6jspI9G8TjhVASOGCOE2O2GeLHXj1dVh3wuMIKU0GnadrIHA/rKDNnVuuWtTtkvJNHao7hCaU6HU2RKfImGLkvuCBqrYfqgM8Lc0GKLReG/CqqCDiS4CXsg7PGnRq1Hctbj/ESQeQeJxdAGVa5FVc6z1Nk+jivQ6ptS+aD5p6woFOAfI4HlABcO9GeTfwRA0JiEN9I+8wVo+P7/xiupy0yxnJBB9mp2KULqf+AyMdyhm8Vx4dXJEjMdAG/lDpkFskIyWtFMRHFyrWIqq6sYkn2Ga2EjY8FjqR+Zghb6OiEWmAlr1/SZD7oFE64Cw4Y9Bd/eHqcW2/lftBMyu6nk7lUuLMKOAL3t1RgLi/QEinpuNNrF7aQdZ9/c7RKIsf6634VTvdBfhysZChMYdI2K+BDoD+IcRgjmXxgy6KuijXbi4FnGKi3FkLmakfFHhLEZ4bZc6lKav8WqN6Ng0Y+yPfApnSAT63N5ggQz4MnGEBzBNpaiEx9yaNA3wH0m7SJQRsDlVg/OwtNPNpd9yRg==
 
 kube-prometheus-stack:
   prometheus:
@@ -19,12 +15,4 @@ kube-prometheus-stack:
               key: password
             username:
               name: demo-tsdb-remote-write
-              key: username
-        - url: https://chief-internal.tsdb.dev.asserts.ai/insert/0/prometheus/
-          basicAuth:
-            password:
-              name: chief-tsdb-remote-write
-              key: password
-            username:
-              name: chief-tsdb-remote-write
               key: username
