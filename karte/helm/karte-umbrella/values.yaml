@@ -103,6 +103,10 @@ kube-prometheus-stack:
          replacement: us-west-2
          targetLabel: asserts_site
 
+  # Monitoring Kubernetes's control plane produces a lot of metrics which aren't needed for the demo, so turn it off.
+  kubeApiServer:
+    enabled: false
+
 
 fluent-bit:
   # Default values for fluent-bit.
