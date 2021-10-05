@@ -7,8 +7,12 @@ tenants:
 kube-prometheus-stack:
   prometheus:
     prometheusSpec:
+      externalLabels:
+        asserts_tenant: demo
+      replicaExternalLabelNameClear: true
+      prometheusExternalLabelNameClear: true
       remoteWrite:
-        - url: https://demo-internal.tsdb.monitoring.dev.asserts.ai/insert/2/prometheus/
+        - url: https://demo-internal.tsdb.monitoring.dev.asserts.ai/api/v1/write
           basicAuth:
             password:
               name: demo-tsdb-remote-write
