@@ -84,3 +84,6 @@ namespaceOverride: "default"
 tenant:
   auth:
     enabled: false
+
+postgres:
+  enabled: true

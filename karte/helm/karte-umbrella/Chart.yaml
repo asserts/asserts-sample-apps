@@ -12,6 +12,9 @@ dependencies:
   - name: fluent-bit
     version: "0.12.3"
     repository: "https://fluent.github.io/helm-charts"
+  - name: postgresql
+    version: "10.12.4"
+    repository: "https://charts.bitnami.com/bitnami"
   - name: karte
     version: "0.1.0"
     repository: "file://../karte"
