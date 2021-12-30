@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: "authv2"
+  namespace: {{ include "karte.namespace" . }}
   labels:
     {{- include "karte.labels" . | nindent 4 }}
     service: authv2
@@ -52,7 +53,7 @@ spec:
               port: http
           resources:
             limits:
-              memory: "52Mi"
+              memory: "85Mi"
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

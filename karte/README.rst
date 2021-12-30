@@ -17,15 +17,17 @@ From this directory, run:
 
 6. ``kubectl create ns prometheus``
 
-7. ``kubectl label namespace default istio-injection=enabled --overwrite``
+7. ``kubectl create ns karte-dev``
 
-8. ``cd helm``
+8. ``kubectl label namespace default istio-injection=enabled --overwrite``
 
-9. ``kubectl apply -f karte/istio-operator.yaml`` (note that the Istio operator must be installed before the application so that the Envoy sidecar is injected into each application pod).
+9. ``cd helm``
 
-10. ``helm dep up karte``
+10. ``kubectl apply -f karte-umbrella/istio-operator.yaml`` (note that the Istio operator must be installed before the application so that the Envoy sidecar is injected into each application pod).
 
-11. ``helm install karte --generate-name``
+11. ``helm dep up karte-umbrella``
+
+12. ``helm install karte-umbrella --generate-name``
 
 PyCharm
 =======

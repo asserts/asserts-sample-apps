@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "nodejsapp.fullname" . }}
+  labels:
+    {{- include "nodejsapp.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.jmx.port }}
+      targetPort: {{ .Values.service.jmx.port }}
+      protocol: TCP
+      name: jmx
+  selector:
+    {{- include "nodejsapp.selectorLabels" . | nindent 4 }}

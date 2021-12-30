@@ -1,0 +1,45 @@
+apiVersion: asserts/v1
+kind: SLO
+name: map-service-availability
+indicator:
+  kind: Request
+  badEventCount: asserts:error:total{job="map", asserts_error_type="server_errors", asserts_env="prod"}
+  totalEventCount: asserts:request:total{job="map", asserts_env="prod"}
+entitySearch: "map services"
+objectives:
+  - ratio: 0.99
+    name: "Weekly Availability"
+    window:
+      kind: Rolling
+      days: 7
+---
+apiVersion: asserts/v1
+kind: SLO
+name: map-service-latency
+indicator:
+  kind: Occurrence
+  measurement: asserts:latency:p99{job="map", asserts_env="prod"}
+entitySearch: "map services"
+objectives:
+  - value: 2
+    ratio: 0.99
+    name: "Tolerable"
+    window:
+      kind: Rolling
+      days: 30
+---
+apiVersion: asserts/v1
+kind: SLO
+name: map-service-max-traffic
+indicator:
+  kind: Occurrence
+  measurement: sum(rate(asserts:request:total{job="map", asserts_env="prod"}[1m]))
+entitySearch: "map services"
+objectives:
+  - value: 10
+    ratio: 0.99
+    name: "Max traffic"
+    window:
+      kind: Rolling
+      days: 30
+

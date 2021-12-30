@@ -1,0 +1,17 @@
+server:
+  port: 8090
+  servlet:
+    context-path: "/nodejsapp"
+
+# enable Prometheus metrics
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+    web:
+      exposure:
+        include: "info, health, prometheus"
+
+app:
+  uri: http://nodeserver:8000/data
+

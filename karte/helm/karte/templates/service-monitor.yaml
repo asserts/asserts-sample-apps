@@ -2,11 +2,15 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: "{{ .Release.Name }}-karte"
+  namespace: {{ include "karte.namespace" . }}
   labels:
     release: {{ .Release.Name }}
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: karte
+      app.kubernetes.io/instance: {{ .Release.Name }}
   endpoints:
   - port: http
+  targetLabels:
+    - asserts_env
+    - asserts_site
