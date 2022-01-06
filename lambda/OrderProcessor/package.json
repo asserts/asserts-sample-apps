@@ -1,0 +1,33 @@
+{
+  "name": "orderprocessor",
+  "version": "1.0.0",
+  "description": "Demo Lambda Function invoked through an SQS Message, which puts a message in an SQS Queue",
+  "main": "index.js",  
+  "dependencies": {
+    "prom-client": "14.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.6.4",
+    "aws-sdk": "^2.765.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asserts/sample-apps.git"
+  },
+  "keywords": [
+    "AWS",
+    "Lambda",
+    "NodeJS",
+    "Sample",
+    "application"
+  ],
+  "author": "radhakrishnan@asserts.ai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asserts/sample-apps/issues"
+  },
+  "homepage": "https://github.com/asserts/sample-apps#readme"
+}
