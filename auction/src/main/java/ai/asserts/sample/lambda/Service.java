@@ -42,12 +42,21 @@ public class Service {
         labels.put("asserts_entity_type", "Service");
         labels.put("asserts_request_type", "inbound");
         labels.put("asserts_source", "springboot");
+        labels.put("asserts_request_context", "/getApplicableDiscounts");
+
         metricFamilySamples.add(new Collector.MetricFamilySamples("asserts:latency:average", GAUGE, "",
                 Collections.singletonList(new Collector.MetricFamilySamples.Sample(
-                        "asserts:latency:avg",
+                        "asserts:latency:average",
                         new ArrayList<>(labels.keySet()),
                         new ArrayList<>(labels.values()),
                         latencyValue))));
+
+        metricFamilySamples.add(new Collector.MetricFamilySamples("asserts:latency:p99", GAUGE, "",
+                Collections.singletonList(new Collector.MetricFamilySamples.Sample(
+                        "asserts:latency:p99",
+                        new ArrayList<>(labels.keySet()),
+                        new ArrayList<>(labels.values()),
+                        latencyValue / 0.8))));
         return metricFamilySamples;
     }
 }

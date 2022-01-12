@@ -84,6 +84,17 @@ public abstract class BaseSimulator {
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_memory_utilization_avg", memoryUtilization));
         familySamples.add(buildFamily(functionLabels, "aws_lambda_memory_utilization_avg", memoryUtilization));
 
+        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_cpu_total_time_sum", 0.2 * invocations * latencyAvg));
+        familySamples.add(buildFamily(functionLabels, "aws_lambda_cpu_total_time_sum", 0.2 * invocations * latencyAvg));
+
+        double random = Math.random();
+        int successfulInvocations = invocations - errors;
+        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_tx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_rx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+
+        familySamples.add(buildFamily(functionLabels, "aws_lambda_tx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+        familySamples.add(buildFamily(functionLabels, "aws_lambda_rx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+
         int scrape_interval = 60;
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_invocations_sum", invocations * scrape_interval));
         familySamples.add(buildFamily(functionLabels, "aws_lambda_invocations_sum", invocations * scrape_interval));
