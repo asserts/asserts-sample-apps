@@ -25,7 +25,9 @@ public class SQSQueue extends MetricSource {
 
         SortedMap<String, String> labels = new TreeMap<>(region.labels());
         labels.putAll(tenant.labels());
-        labels.put("queue_name", name);
+        labels.put("topic", name);
+        labels.put("namespace", "AWS/SQS");
+        labels.put("cw_namespace", "AWS/SQS");
         familySamples.add(buildFamily(labels, "aws_sqs_number_of_messages_sent_sum", numMessagesSent));
 
         return familySamples;

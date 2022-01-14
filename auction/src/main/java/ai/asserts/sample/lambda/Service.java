@@ -26,10 +26,16 @@ public class Service {
     public List<Collector.MetricFamilySamples> getUpAndLatencyMetric(double latencyValue) {
         List<Collector.MetricFamilySamples> metricFamilySamples = new ArrayList<>();
         Map<String, String> labels = new TreeMap<>();
+        labels.putAll(tenant.labels());
+        labels.put("asserts_site", "us-west-2");
+        labels.put("asserts_env", "lambda-demo");
         labels.put("job", name);
         labels.put("container", name);
         labels.put("namespace", namespace);
-        labels.putAll(tenant.labels());
+        labels.put("service", name);
+        labels.put("pod", name + "-123");
+        labels.put("instance", "10.20.30.40:9090");
+
 
         metricFamilySamples.add(new Collector.MetricFamilySamples("up", GAUGE, "",
                 Collections.singletonList(new Collector.MetricFamilySamples.Sample(
