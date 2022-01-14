@@ -13,8 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MemorySaturationTest {
     @Test
     public void emitMetrics() {
-        Service service = new Service("service", "namespace");
-        MemorySaturation fixture = new MemorySaturation("Test", 5, 128, service);
+        Tenant chief = Tenant.builder()
+                .name("chief")
+                .build();
+        Function function = Function.builder()
+                .name("function")
+                .region(Region.builder()
+                        .name("us-west-2")
+                        .tenant(chief)
+                        .build())
+                .tenant(chief)
+                .build();
+        MemorySaturation fixture = new MemorySaturation(function);
 
         double memory = fixture.getMemoryUtilization();
         for (int i = 0; i < 40; i++) {

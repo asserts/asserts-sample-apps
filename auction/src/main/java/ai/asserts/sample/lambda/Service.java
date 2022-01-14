@@ -19,6 +19,7 @@ import static io.prometheus.client.Collector.Type.GAUGE;
 @AllArgsConstructor
 @Getter
 public class Service {
+    private final Tenant tenant;
     private final String name;
     private final String namespace;
 
@@ -28,9 +29,7 @@ public class Service {
         labels.put("job", name);
         labels.put("container", name);
         labels.put("namespace", namespace);
-        labels.put("asserts_tenant", "chief");
-        labels.put("tenant", "chief");
-        labels.putAll(ScenarioSimulator.TENANT_ENV_LABELS);
+        labels.putAll(tenant.labels());
 
         metricFamilySamples.add(new Collector.MetricFamilySamples("up", GAUGE, "",
                 Collections.singletonList(new Collector.MetricFamilySamples.Sample(

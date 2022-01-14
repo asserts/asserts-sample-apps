@@ -13,8 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ThrottleTest {
     @Test
     public void emitMetrics() {
-        Service service = new Service("service", "namespace");
-        Throttle fixture = new Throttle("Test", 5, 128, service);
+        Tenant tenant = Tenant.builder()
+                .name("chief")
+                .build();
+        Function function = Function.builder()
+                .name("function")
+                .region(Region.builder()
+                        .tenant(tenant)
+                        .name("us-west-2")
+                        .build())
+                .tenant(tenant)
+                .build();
+        Throttle fixture = new Throttle(function);
 
         for (int i = 0; i < 60; i++) {
             assertEquals(i, fixture.getStep());

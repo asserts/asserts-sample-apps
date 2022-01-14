@@ -13,8 +13,8 @@ public class Latency extends BaseSimulator {
     private final static double delta = 4000.0 / 40;
     private double latencyAvg = 500.0D;
 
-    public Latency(String name, Integer timeoutSeconds, Integer memoryMb, Service callsService) {
-        super(name, timeoutSeconds, memoryMb, callsService, 100);
+    public Latency(Function function) {
+        super(function, 100);
     }
 
     public List<Collector.MetricFamilySamples> emitMetrics() {
@@ -26,13 +26,10 @@ public class Latency extends BaseSimulator {
         } else if (60 <= step && step < 100) {
             latencyAvg -= delta;
         }
+        defaultLatencyAvgMs = latencyAvg;
+        defaultLatencyP99Ms = latencyAvg + 250.0D;
         step++;
-        return emitMetrics(defaultMemoryUtilization + 5 * random,
-                defaultInvocations + (random > 0.5D ? 2 : -2), 0, 0,
-                latencyAvg + random,
-                latencyAvg + 250.0D + random,
-                defaultFnExecutionsAvg + random,
-                defaultRegionalExecutionsAvg + random);
+        return super.emitMetrics();
     }
 
     @Override

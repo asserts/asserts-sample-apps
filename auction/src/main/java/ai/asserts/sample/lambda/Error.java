@@ -13,8 +13,8 @@ public class Error extends BaseSimulator {
     private final static double delta = 30.0D / 120;
     private double errorRate = 0.0D;
 
-    public Error(String name, Integer timeoutSeconds, Integer memoryMb, Service callsService) {
-        super(name, timeoutSeconds, memoryMb, callsService, 280);
+    public Error(Function function) {
+        super(function, 280);
     }
 
     public List<Collector.MetricFamilySamples> emitMetrics() {
@@ -26,15 +26,9 @@ public class Error extends BaseSimulator {
         } else if (160 <= step && step < 280) {
             errorRate -= delta;
         }
+        defaultErrors = (int) Math.ceil(defaultInvocations * 0.01 * errorRate);
         step++;
-        return emitMetrics(defaultMemoryUtilization + 5 * random,
-                defaultInvocations + (random > 0.5D ? 2 : -2),
-                (int) Math.ceil(defaultInvocations * errorRate * 0.01),
-                0,
-                defaultLatencyAvgMs + random,
-                defaultLatencyP99Ms + random,
-                defaultFnExecutionsAvg + random,
-                defaultRegionalExecutionsAvg + random);
+        return super.emitMetrics();
     }
 
     @Override

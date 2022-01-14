@@ -13,8 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RegionSaturationTest {
     @Test
     public void emitMetrics() {
-        Service service = new Service("service", "namespace");
-        RegionSaturation fixture = new RegionSaturation("Test", 5, 128, service);
+        Tenant chief = Tenant.builder()
+                .name("chief")
+                .build();
+        Function function = Function.builder()
+                .name("function")
+                .region(Region.builder()
+                        .name("us-west-2")
+                        .tenant(chief)
+                        .build())
+                .tenant(chief)
+                .build();
+        RegionSaturation fixture = new RegionSaturation(function);
 
         assertEquals(30.0D, fixture.getRegionalConcurrency());
         for (int i = 0; i < 40; i++) {

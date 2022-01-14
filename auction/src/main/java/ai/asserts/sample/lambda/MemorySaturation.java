@@ -13,11 +13,11 @@ import java.util.List;
 @Getter
 public class MemorySaturation extends BaseSimulator {
     public static final double delta = 47.0D / 40;
-    public static final double latencyAvg = 500.0D;
+    public static double latencyAvg = 500.0D;
     private double memoryUtilization = 50.0D;
 
-    public MemorySaturation(String name, Integer timeoutSeconds, Integer memoryMb, Service callsService) {
-        super(name, timeoutSeconds, memoryMb, callsService, 120);
+    public MemorySaturation(Function function) {
+        super(function, 120);
     }
 
     public List<Collector.MetricFamilySamples> emitMetrics() {
@@ -29,13 +29,14 @@ public class MemorySaturation extends BaseSimulator {
         } else if (80 <= step && step < 120) {
             memoryUtilization -= delta;
         }
+
+        // Memory saturation causes latency at some point
+        latencyAvg = 500.0D + memoryUtilization > 70.0D ? 500.0D * (memoryUtilization - 70.0D) / 50.0D : 0;
+        defaultLatencyAvgMs = latencyAvg;
+        defaultLatencyP99Ms = defaultLatencyAvgMs + 250.0D;
+        defaultMemoryUtilization = memoryUtilization;
         step++;
-        return emitMetrics(memoryUtilization,
-                defaultInvocations + random > 0.5D ? 2 : -2, 0, 0,
-                latencyAvg + random,
-                defaultLatencyP99Ms + random,
-                defaultFnExecutionsAvg + random,
-                defaultRegionalExecutionsAvg + random);
+        return super.emitMetrics();
     }
 
     @Override

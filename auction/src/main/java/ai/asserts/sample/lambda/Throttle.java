@@ -18,8 +18,8 @@ public class Throttle extends BaseSimulator {
     private double concurrency = 1.0D;
     private int throttles = 0;
 
-    public Throttle(String name, Integer timeoutSeconds, Integer memoryMb, Service callsService) {
-        super(name, timeoutSeconds, memoryMb, callsService, 120);
+    public Throttle(Function function) {
+        super(function, 120);
     }
 
     public List<Collector.MetricFamilySamples> emitMetrics() {
@@ -28,7 +28,6 @@ public class Throttle extends BaseSimulator {
         // Let throttling continue till 15 minutes
         // Ramp down to normal invocation in 10 minutes
         // Emit metrics every second
-        double random = Math.random();
         if (step < 40) {
             invocations += invocationsDelta;
             concurrency += concurrencyDelta;
@@ -42,11 +41,11 @@ public class Throttle extends BaseSimulator {
         } else if (step < 120) {
             invocations -= invocationsDelta;
         }
+        defaultInvocations = invocations;
+        defaultThrottles = throttles;
+        defaultFnExecutionsAvg = concurrency;
         step++;
-        return emitMetrics(defaultMemoryUtilization + 5 * random,
-                invocations, 0, throttles,
-                defaultLatencyAvgMs + random, defaultLatencyP99Ms + random,
-                concurrency, defaultRegionalExecutionsAvg + concurrency);
+        return super.emitMetrics();
     }
 
     @Override
