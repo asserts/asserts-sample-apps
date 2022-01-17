@@ -1,6 +1,16 @@
 # OVERVIEW
 
-This is a sample auction app built using SpringBoot. It is configured to report prometheus metrics. 
+This is a sample auction app built using SpringBoot. It is configured to report prometheus metrics. It generates data for AWS Lambda/SQS Queue integrations and other golden signals in a service. The Lambda metric generation is automatic and doesn't require any configuration.
+
+It will simulate the following Lambda functions and Saturation, Anomaly, Availability and Latency signals on the Lambda functions
+
+* CheckoutService writing to UserAnalytics, PaymentAnalytics and ChannelAnalytics SQS Queues and making a sync-call to DiscountService
+* UserAnalyticsService reading from UserAnalytics SQS Queue and writing to DataLakeInput SQS Queue
+* PaymentAnalyticsService reading from PaymentAnalytics SQS Queue and writing to DataLakeInput SQS Queue
+* ChannelAnalyticsService reading from ChannelAnalytics SQS Queue and writing to DataLakeInput SQS Queue
+* DataLakeStaging function reading from DataLakeInput
+
+
 It can operate in two modes. **server** mode and **test-client** mode
 
 ## Server Mode
