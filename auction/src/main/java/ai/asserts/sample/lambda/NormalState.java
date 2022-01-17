@@ -11,7 +11,7 @@ import java.util.List;
 public class NormalState extends BaseSimulator {
 
     public NormalState(Function function) {
-        this(function, 40);
+        this(function, 240);
     }
 
     public NormalState(Function function, int maxSteps) {

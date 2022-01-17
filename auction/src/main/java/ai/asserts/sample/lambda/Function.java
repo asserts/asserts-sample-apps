@@ -35,7 +35,8 @@ public class Function extends MetricSource {
     List<Collector.MetricFamilySamples> getMetrics(int scrape_interval,
                                                    double memoryUtilization,
                                                    int invocations,
-                                                   int errors, int throttles,
+                                                   int errors,
+                                                   int throttles,
                                                    double latencyAvg,
                                                    double latencyP99,
                                                    double fnExecutionsAvg) {

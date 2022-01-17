@@ -10,8 +10,8 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class Error extends BaseSimulator {
-    private final static double delta = 8.0D / 120;
-    private double errorRate = 0.0D;
+    private final static double delta = 10.0D / 120;
+    private double errorRatio = 0.0D;
 
     public Error(Function function) {
         super(function, 280);
@@ -22,11 +22,15 @@ public class Error extends BaseSimulator {
         // Emit metrics every second
         double random = Math.random();
         if (step < 120) {
-            errorRate += delta;
+            errorRatio += delta;
         } else if (160 <= step && step < 280) {
-            errorRate -= delta;
+            errorRatio -= delta;
         }
-        errorCount = (int) Math.ceil(invocationCount * 0.01 * errorRate);
+        errorCount = (int) Math.ceil(invocationCount * 0.01 * errorRatio);
+        System.out.printf("Invocations Count = %d, Error Count = %d, Error Ratio = %.3f%n",
+                invocationCount,
+                errorCount,
+                0.01 * errorRatio);
         step++;
         return super.emitMetrics();
     }
@@ -34,6 +38,6 @@ public class Error extends BaseSimulator {
     @Override
     public void reset() {
         step = 0;
-        errorRate = 0.0D;
+        errorRatio = 0.0D;
     }
 }

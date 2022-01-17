@@ -30,8 +30,6 @@ public class MemorySaturation extends BaseSimulator {
             memoryUtilization -= delta;
         }
 
-        // Memory saturation causes latency at some point
-        latencyAvg = 500.0D + memoryUtilization > 70.0D ? 500.0D * (memoryUtilization - 70.0D) / 50.0D : 0;
         latencyAvgMs = latencyAvg;
         latencyP99Ms = latencyAvgMs + 250.0D;
         memoryUtilizationPct = memoryUtilization;
