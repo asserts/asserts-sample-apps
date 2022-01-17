@@ -68,6 +68,7 @@ public class Service {
                         new ArrayList<>(labels.values()),
                         latencyTotal += invocationCount * latencyValue))));
 
+        labels.remove("instance");
         metricFamilySamples.add(new Collector.MetricFamilySamples("asserts:latency:p99", GAUGE, "",
                 Collections.singletonList(new Collector.MetricFamilySamples.Sample(
                         "asserts:latency:p99",
