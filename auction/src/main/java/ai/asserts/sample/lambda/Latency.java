@@ -26,8 +26,8 @@ public class Latency extends BaseSimulator {
         } else if (60 <= step && step < 100) {
             latencyAvg -= delta;
         }
-        defaultLatencyAvgMs = latencyAvg;
-        defaultLatencyP99Ms = latencyAvg + 250.0D;
+        latencyAvgMs = latencyAvg;
+        latencyP99Ms = latencyAvg + 250.0D;
         step++;
         return super.emitMetrics();
     }

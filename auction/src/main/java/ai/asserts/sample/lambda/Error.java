@@ -10,7 +10,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class Error extends BaseSimulator {
-    private final static double delta = 30.0D / 120;
+    private final static double delta = 8.0D / 120;
     private double errorRate = 0.0D;
 
     public Error(Function function) {
@@ -26,7 +26,7 @@ public class Error extends BaseSimulator {
         } else if (160 <= step && step < 280) {
             errorRate -= delta;
         }
-        defaultErrors = (int) Math.ceil(defaultInvocations * 0.01 * errorRate);
+        errorCount = (int) Math.ceil(invocationCount * 0.01 * errorRate);
         step++;
         return super.emitMetrics();
     }

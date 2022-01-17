@@ -19,7 +19,7 @@ import java.util.List;
 @Component
 public class ScenarioSimulator extends Collector implements InitializingBean {
     private final CollectorRegistry collectorRegistry;
-    private List<FunctionScenarios> scenarios = new ArrayList<>();
+    private final List<FunctionScenarios> scenarios = new ArrayList<>();
 
 
     public ScenarioSimulator(CollectorRegistry collectorRegistry) {
@@ -42,17 +42,47 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
                 .name("DataLakeInput")
                 .build();
 
+        SQSQueue userQueue = SQSQueue.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("UserAnalytics")
+                .build();
+
+        SQSQueue paymentQueue = SQSQueue.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("PaymentAnalytics")
+                .build();
+
+        SQSQueue channelQueue = SQSQueue.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("ChannelAnalytics")
+                .build();
+
+        SQSQueue ordersQueue = SQSQueue.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("Orders")
+                .build();
+
+        SQSQueue shipmentQueue = SQSQueue.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("Shipments")
+                .build();
+
+        SQSQueue returnsQueue = SQSQueue.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("Returns")
+                .build();
+
         Function lakeStaging = Function.builder()
                 .tenant(tenant)
                 .region(region)
                 .name("DataLakeStaging")
                 .inputQueue(lakeInput)
-                .build();
-
-        SQSQueue userQueue = SQSQueue.builder()
-                .tenant(tenant)
-                .region(region)
-                .name("UserAnalytics")
                 .build();
 
         Function userAnalyticsService = Function.builder()
@@ -63,24 +93,12 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
                 .outputQueues(ImmutableList.of(lakeInput))
                 .build();
 
-        SQSQueue paymentQueue = SQSQueue.builder()
-                .tenant(tenant)
-                .region(region)
-                .name("PaymentAnalytics")
-                .build();
-
         Function paymentsAnalyticsService = Function.builder()
                 .tenant(tenant)
                 .region(region)
                 .name("PaymentAnalyticsService")
                 .inputQueue(paymentQueue)
                 .outputQueues(ImmutableList.of(lakeInput))
-                .build();
-
-        SQSQueue channelQueue = SQSQueue.builder()
-                .tenant(tenant)
-                .region(region)
-                .name("ChannelAnalytics")
                 .build();
 
         Function channelAnalyticsService = Function.builder()
@@ -96,7 +114,29 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
                 .region(region)
                 .name("CheckoutService")
                 .callsServices(ImmutableList.of(discountService))
-                .outputQueues(ImmutableList.of(userQueue, paymentQueue, channelQueue))
+                .outputQueues(ImmutableList.of(userQueue, paymentQueue, channelQueue, ordersQueue))
+                .build();
+
+        Function orderProcessor = Function.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("OrderProcessor")
+                .inputQueue(ordersQueue)
+                .outputQueues(ImmutableList.of(shipmentQueue))
+                .build();
+
+        Function shipmentProcessor = Function.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("ShipmentProcessor")
+                .inputQueue(shipmentQueue)
+                .build();
+
+        Function returnProcessor = Function.builder()
+                .tenant(tenant)
+                .region(region)
+                .name("ReturnProcessor")
+                .inputQueue(returnsQueue)
                 .build();
 
         scenarios.add(buildCheckoutServiceScenarios(checkoutService));
@@ -104,12 +144,15 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
         scenarios.add(buildDataLakeScenarios(lakeStaging));
         scenarios.add(buildPaymentAnalyticsScenarios(paymentsAnalyticsService));
         scenarios.add(buildUserAnalyticsScenarios(userAnalyticsService));
+        scenarios.add(buildOrdersService(orderProcessor));
+        scenarios.add(buildShipmentService(shipmentProcessor));
+        scenarios.add(buildReturnsService(returnProcessor));
     }
 
     private FunctionScenarios buildDataLakeScenarios(Function lakeStaging) {
         FunctionScenarios lakeStagingScenarios = new FunctionScenarios(lakeStaging);
 
-        NormalState normalState2 = new NormalState(lakeStaging);
+        NormalState normalState2 = new NormalState(lakeStaging, 600);
         lakeStagingScenarios.getSimulators().add(normalState2);
         lakeStagingScenarios.getSimulators().add(new Throttle(lakeStaging));
         lakeStagingScenarios.getSimulators().add(normalState2);
@@ -120,61 +163,68 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
         return lakeStagingScenarios;
     }
 
-    private FunctionScenarios buildChannelAnalyticsScenarios(Function channelAnalyticsService) {
-        FunctionScenarios channelServiceScenarios = new FunctionScenarios(channelAnalyticsService);
+    private FunctionScenarios buildChannelAnalyticsScenarios(Function service) {
+        FunctionScenarios channelServiceScenarios = new FunctionScenarios(service);
 
-        NormalState normalState1 = new NormalState(channelAnalyticsService);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(new MemorySaturation(channelAnalyticsService));
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
+        channelServiceScenarios.getSimulators().add(new NormalState(service, 960));
+        channelServiceScenarios.getSimulators().add(new MemorySaturation(service));
         return channelServiceScenarios;
     }
 
-    private FunctionScenarios buildPaymentAnalyticsScenarios(Function channelAnalyticsService) {
-        FunctionScenarios channelServiceScenarios = new FunctionScenarios(channelAnalyticsService);
+    private FunctionScenarios buildOrdersService(Function service) {
+        FunctionScenarios channelServiceScenarios = new FunctionScenarios(service);
 
-        NormalState normalState1 = new NormalState(channelAnalyticsService);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(new MemorySaturation(channelAnalyticsService));
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
+        channelServiceScenarios.getSimulators().add(new NormalState(service, 1000));
+        channelServiceScenarios.getSimulators().add(new Latency(service));
         return channelServiceScenarios;
     }
 
-    private FunctionScenarios buildUserAnalyticsScenarios(Function channelAnalyticsService) {
-        FunctionScenarios channelServiceScenarios = new FunctionScenarios(channelAnalyticsService);
+    private FunctionScenarios buildShipmentService(Function service) {
+        FunctionScenarios channelServiceScenarios = new FunctionScenarios(service);
 
-        NormalState normalState1 = new NormalState(channelAnalyticsService);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(normalState1);
-        channelServiceScenarios.getSimulators().add(new MemorySaturation(channelAnalyticsService));
-        channelServiceScenarios.getSimulators().add(normalState1);
+        channelServiceScenarios.getSimulators().add(new NormalState(service, 2000));
+        channelServiceScenarios.getSimulators().add(new Latency(service));
         return channelServiceScenarios;
     }
 
-    private FunctionScenarios buildCheckoutServiceScenarios(Function checkoutService) {
-        NormalState normalState = new NormalState(checkoutService);
+    private FunctionScenarios buildReturnsService(Function service) {
+        FunctionScenarios channelServiceScenarios = new FunctionScenarios(service);
+        channelServiceScenarios.getSimulators().add(new NormalState(service, 320));
+        return channelServiceScenarios;
+    }
 
-        FunctionScenarios checkoutServiceScenarios = new FunctionScenarios(checkoutService);
+    private FunctionScenarios buildPaymentAnalyticsScenarios(Function service) {
+        FunctionScenarios channelServiceScenarios = new FunctionScenarios(service);
+
+        channelServiceScenarios.getSimulators().add(new NormalState(service, 640));
+        channelServiceScenarios.getSimulators().add(new MemorySaturation(service));
+        return channelServiceScenarios;
+    }
+
+    private FunctionScenarios buildUserAnalyticsScenarios(Function service) {
+        FunctionScenarios channelServiceScenarios = new FunctionScenarios(service);
+
+        channelServiceScenarios.getSimulators().add(new NormalState(service, 320));
+        channelServiceScenarios.getSimulators().add(new MemorySaturation(service));
+        return channelServiceScenarios;
+    }
+
+    private FunctionScenarios buildCheckoutServiceScenarios(Function service) {
+        NormalState normalState = new NormalState(service);
+
+        FunctionScenarios checkoutServiceScenarios = new FunctionScenarios(service);
 
         checkoutServiceScenarios.getSimulators().add(normalState);
-        checkoutServiceScenarios.getSimulators().add(new Error(checkoutService));
+        checkoutServiceScenarios.getSimulators().add(new Error(service));
 
         checkoutServiceScenarios.getSimulators().add(normalState);
-        checkoutServiceScenarios.getSimulators().add(new Latency(checkoutService));
+        checkoutServiceScenarios.getSimulators().add(new Latency(service));
 
         checkoutServiceScenarios.getSimulators().add(normalState);
-        checkoutServiceScenarios.getSimulators().add(new MemorySaturation(checkoutService));
+        checkoutServiceScenarios.getSimulators().add(new MemorySaturation(service));
 
         checkoutServiceScenarios.getSimulators().add(normalState);
-        checkoutServiceScenarios.getSimulators().add(new Throttle(checkoutService));
+        checkoutServiceScenarios.getSimulators().add(new Throttle(service));
         return checkoutServiceScenarios;
     }
 
@@ -186,9 +236,7 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
     @Override
     public List<MetricFamilySamples> collect() {
         List<MetricFamilySamples> samples = new ArrayList<>();
-        scenarios.forEach(scenario -> {
-            samples.addAll(scenario.getMetrics());
-        });
+        scenarios.forEach(scenario -> samples.addAll(scenario.getMetrics()));
         return samples;
     }
 

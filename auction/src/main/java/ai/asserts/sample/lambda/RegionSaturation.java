@@ -26,7 +26,7 @@ public class RegionSaturation extends NormalState {
         } else if (68 <= step && step < 108) {
             regionalConcurrency -= delta;
         }
-        defaultRegionalExecutionsAvg = regionalConcurrency;
+        regionalExecutionCountAvg = regionalConcurrency;
         return super.emitMetrics();
     }
 

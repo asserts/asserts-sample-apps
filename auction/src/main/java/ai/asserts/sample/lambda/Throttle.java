@@ -41,9 +41,9 @@ public class Throttle extends BaseSimulator {
         } else if (step < 120) {
             invocations -= invocationsDelta;
         }
-        defaultInvocations = invocations;
-        defaultThrottles = throttles;
-        defaultFnExecutionsAvg = concurrency;
+        invocationCount = invocations;
+        throttleCount = throttles;
+        fnExecutionCountAvg = concurrency;
         step++;
         return super.emitMetrics();
     }

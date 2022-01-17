@@ -11,7 +11,11 @@ import java.util.List;
 public class NormalState extends BaseSimulator {
 
     public NormalState(Function function) {
-        super(function, 40);
+        this(function, 40);
+    }
+
+    public NormalState(Function function, int maxSteps) {
+        super(function, maxSteps);
     }
 
     public List<Collector.MetricFamilySamples> emitMetrics() {
