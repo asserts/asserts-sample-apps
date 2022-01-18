@@ -27,7 +27,7 @@ public class Region extends MetricSource {
                 "namespace", "AWS/Lambda",
                 "region", name,
                 "asserts_site", name,
-                "asserts_env", "lambda-demo"
+                "asserts_env", "lambda"
         );
     }
 

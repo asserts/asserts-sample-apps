@@ -7,6 +7,7 @@ package ai.asserts.sample.lambda;
 import com.google.common.collect.ImmutableList;
 import io.prometheus.client.Collector;
 import io.prometheus.client.CollectorRegistry;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -15,16 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@SuppressWarnings("unused")
 @Component
+@Getter
 public class ScenarioSimulator extends Collector implements InitializingBean {
     private final CollectorRegistry collectorRegistry;
     private final List<FunctionScenarios> scenarios = new ArrayList<>();
 
-
     public ScenarioSimulator(CollectorRegistry collectorRegistry) {
         this.collectorRegistry = collectorRegistry;
-
         Tenant tenant = Tenant.builder()
                 .name("chief")
                 .build();
@@ -210,12 +209,9 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
     }
 
     private FunctionScenarios buildCheckoutServiceScenarios(Function service) {
-        NormalState normalState = new NormalState(service);
+        NormalState normalState = new NormalState(service, 960 * 4);
 
         FunctionScenarios checkoutServiceScenarios = new FunctionScenarios(service);
-
-        checkoutServiceScenarios.getSimulators().add(normalState);
-        checkoutServiceScenarios.getSimulators().add(new Error(service));
 
         checkoutServiceScenarios.getSimulators().add(normalState);
         checkoutServiceScenarios.getSimulators().add(new Latency(service));
@@ -225,6 +221,9 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
 
         checkoutServiceScenarios.getSimulators().add(normalState);
         checkoutServiceScenarios.getSimulators().add(new Throttle(service));
+
+        checkoutServiceScenarios.getSimulators().add(normalState);
+        checkoutServiceScenarios.getSimulators().add(new Error(service));
         return checkoutServiceScenarios;
     }
 

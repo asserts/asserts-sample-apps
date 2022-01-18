@@ -8,7 +8,9 @@ import com.google.common.collect.ImmutableList;
 import io.prometheus.client.Collector;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
+import java.util.SortedMap;
 
 import static io.prometheus.client.Collector.Type.GAUGE;
 
@@ -19,5 +21,15 @@ public class MetricSource {
                         new ArrayList<>(functionLabels.keySet()),
                         new ArrayList<>(functionLabels.values()),
                         metricValue)));
+    }
+
+    protected Collector.MetricFamilySamples metricSample(Collector.Type type, SortedMap<String, String> copy,
+                                                         String metricName, double value) {
+        return new Collector.MetricFamilySamples(metricName, type, "",
+                Collections.singletonList(new Collector.MetricFamilySamples.Sample(
+                        metricName,
+                        new ArrayList<>(copy.keySet()),
+                        new ArrayList<>(copy.values()),
+                        value)));
     }
 }

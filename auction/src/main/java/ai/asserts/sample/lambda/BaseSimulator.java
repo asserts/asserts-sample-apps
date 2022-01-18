@@ -44,9 +44,16 @@ public abstract class BaseSimulator {
     public List<Collector.MetricFamilySamples> emitMetrics() {
         int scrape_interval = 60;
         List<Collector.MetricFamilySamples> metrics = new ArrayList<>();
-        metrics.addAll(function.getMetrics(scrape_interval, memoryUtilizationPct, invocationCount, errorCount,
-                throttleCount, latencyAvgMs, latencyP99Ms, fnExecutionCountAvg));
-        metrics.addAll(function.getRegion().getMetrics(regionalExecutionCountAvg));
+        double random = Math.random();
+        metrics.addAll(function.getMetrics(scrape_interval,
+                memoryUtilizationPct + random * 3,
+                invocationCount,
+                errorCount,
+                throttleCount,
+                latencyAvgMs + 10 * random,
+                latencyP99Ms + 10 * random,
+                fnExecutionCountAvg + random));
+        metrics.addAll(function.getRegion().getMetrics(regionalExecutionCountAvg + random * 5));
         return metrics;
     }
 }
