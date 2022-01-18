@@ -42,6 +42,7 @@ public class Service extends MetricSource {
         labels.put("instance", "10.20.30.40:9090");
         labels.put("pod", "DiscountService-pod-123");
         labels.put("workload", name);
+        labels.put("asserts_source", "springboot");
 
         metricFamilySamples.add(new Collector.MetricFamilySamples("up", GAUGE, "",
                 Collections.singletonList(new Collector.MetricFamilySamples.Sample(
@@ -65,7 +66,7 @@ public class Service extends MetricSource {
         metricFamilySamples.add(metricSample(GAUGE, labels, "asserts:latency:count",
                 latencyCount += invocationCount));
 
-        metricFamilySamples.add(metricSample(GAUGE, labels, "asserts:latency:count",
+        metricFamilySamples.add(metricSample(GAUGE, labels, "asserts:latency:total",
                 latencyTotal += invocationCount * latencyValue));
 
         labels.remove("instance");
