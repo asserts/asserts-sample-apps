@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import static io.prometheus.client.Collector.Type.GAUGE;
 
 @Slf4j
 @Component
@@ -21,17 +25,17 @@ import java.util.List;
 public class ScenarioSimulator extends Collector implements InitializingBean {
     private final CollectorRegistry collectorRegistry;
     private final List<FunctionScenarios> scenarios = new ArrayList<>();
+    private final Tenant tenant = Tenant.builder()
+            .name("demo")
+            .build();
+
+    private final Region region = Region.builder()
+            .name("us-west-2")
+            .tenant(tenant)
+            .build();
 
     public ScenarioSimulator(CollectorRegistry collectorRegistry) {
         this.collectorRegistry = collectorRegistry;
-        Tenant tenant = Tenant.builder()
-                .name("demo")
-                .build();
-
-        Region region = Region.builder()
-                .name("us-west-2")
-                .tenant(tenant)
-                .build();
 
         Service discountService = new Service(tenant, "DiscountService", "promotion-services");
 
@@ -234,8 +238,13 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
 
     @Override
     public List<MetricFamilySamples> collect() {
+        MetricSource metricSource = new MetricSource();
         List<MetricFamilySamples> samples = new ArrayList<>();
         scenarios.forEach(scenario -> samples.addAll(scenario.getMetrics()));
+        SortedMap<String, String> labels = new TreeMap<>(tenant.labels());
+        labels.putAll(region.labels());
+        samples.add(metricSource.metricSample(GAUGE, labels,
+                "aws_exporter_scrape_interval", 60.0D));
         return samples;
     }
 
