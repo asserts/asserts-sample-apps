@@ -25,7 +25,7 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
     public ScenarioSimulator(CollectorRegistry collectorRegistry) {
         this.collectorRegistry = collectorRegistry;
         Tenant tenant = Tenant.builder()
-                .name("chief")
+                .name("demo")
                 .build();
 
         Region region = Region.builder()

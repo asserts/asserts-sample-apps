@@ -114,16 +114,17 @@ public class Function extends MetricSource {
 
         if (!CollectionUtils.isEmpty(callsServices)) {
             callsServices.forEach(callsService -> {
-                familySamples.addAll(callsService.getUpAndLatencyMetric(invocations, (latencyAvg - 250.0D) / 1000));
+                double outboundLatency = (latencyAvg - 250.0D) / 1000;
+                familySamples.addAll(callsService.getUpAndLatencyMetric(invocations, outboundLatency));
 
                 Map<String, String> callsRelationLabels = new ImmutableMap.Builder<String, String>()
                         .putAll(tenant.labels())
                         .putAll(region.labels())
-                        .put("job", name)
-                        .put("dst_job", callsService.getName())
-                        .put("dst_namespace", callsService.getNamespace())
+                        .put("lambda_name", name)
+                        .put("target_service", callsService.getName())
+                        .put("target_api", "applyDiscounts")
                         .build();
-                familySamples.add(buildFamily(callsRelationLabels, "asserts:relation:calls", 1.0D));
+                familySamples.add(buildFamily(callsRelationLabels, "lambda_outbound_calls", outboundLatency));
             });
         }
 
