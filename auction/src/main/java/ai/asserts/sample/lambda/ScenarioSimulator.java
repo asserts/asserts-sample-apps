@@ -217,17 +217,17 @@ public class ScenarioSimulator extends Collector implements InitializingBean {
 
         FunctionScenarios checkoutServiceScenarios = new FunctionScenarios(service);
 
-        checkoutServiceScenarios.getSimulators().add(normalState);
         checkoutServiceScenarios.getSimulators().add(new Latency(service));
-
         checkoutServiceScenarios.getSimulators().add(normalState);
+
         checkoutServiceScenarios.getSimulators().add(new MemorySaturation(service));
-
         checkoutServiceScenarios.getSimulators().add(normalState);
+
         checkoutServiceScenarios.getSimulators().add(new Throttle(service));
-
         checkoutServiceScenarios.getSimulators().add(normalState);
+
         checkoutServiceScenarios.getSimulators().add(new Error(service));
+        checkoutServiceScenarios.getSimulators().add(normalState);
         return checkoutServiceScenarios;
     }
 
