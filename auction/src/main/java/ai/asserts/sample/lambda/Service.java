@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import static io.prometheus.client.Collector.Type.COUNTER;
 import static io.prometheus.client.Collector.Type.GAUGE;
 
 @Getter
@@ -20,8 +21,10 @@ public class Service extends MetricSource {
     private final Tenant tenant;
     private final String name;
     private final String namespace;
-    private double latencyTotal;
-    private long latencyCount;
+    private double successLatencyTotal;
+    private double failureLatencyTotal;
+    private long successCount;
+    private long errorCount;
 
     public Service(Tenant tenant, String name, String namespace) {
         this.tenant = tenant;
@@ -29,7 +32,7 @@ public class Service extends MetricSource {
         this.namespace = namespace;
     }
 
-    public List<Collector.MetricFamilySamples> getUpAndLatencyMetric(int invocationCount, double latencyValue) {
+    public List<Collector.MetricFamilySamples> getUpAndLatencyMetric(int invocationCount, int errorCount, double latencyValue) {
         List<Collector.MetricFamilySamples> metricFamilySamples = new ArrayList<>();
         SortedMap<String, String> labels = new TreeMap<>();
         labels.putAll(tenant.labels());
@@ -60,13 +63,21 @@ public class Service extends MetricSource {
 
         labels.put("asserts_request_context", "/applyDiscounts");
 
-        metricFamilySamples.add(metricSample(GAUGE, labels, "my_server_requests_seconds_count",
-                latencyCount += invocationCount));
+        int successfulRequests = invocationCount - errorCount;
+        labels.put("status", "500");
+        metricFamilySamples.add(metricSample(COUNTER, labels, "my_server_requests_seconds_sum",
+                failureLatencyTotal += errorCount * latencyValue));
+        metricFamilySamples.add(metricSample(COUNTER, labels, "my_server_requests_seconds_count",
+                this.errorCount += errorCount));
 
-        metricFamilySamples.add(metricSample(GAUGE, labels, "my_server_requests_seconds_sum",
-                latencyTotal += invocationCount * latencyValue));
+        labels.put("status", "200");
+        metricFamilySamples.add(metricSample(COUNTER, labels, "my_server_requests_seconds_sum",
+                successLatencyTotal += successfulRequests * latencyValue));
+        metricFamilySamples.add(metricSample(COUNTER, labels, "my_server_requests_seconds_count",
+                this.successCount += successfulRequests));
 
         labels.put("quantile", "0.99");
+        labels.remove("status");
         metricFamilySamples.add(metricSample(GAUGE, labels, "my_server_requests_seconds",
                 latencyValue / 0.8));
         return metricFamilySamples;

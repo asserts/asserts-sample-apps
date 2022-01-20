@@ -125,7 +125,7 @@ public class Function extends MetricSource {
         if (!CollectionUtils.isEmpty(callsServices)) {
             callsServices.forEach(callsService -> {
                 double outboundLatency = (latencyAvg - 250.0D) / 1000;
-                familySamples.addAll(callsService.getUpAndLatencyMetric(invocations, outboundLatency));
+                familySamples.addAll(callsService.getUpAndLatencyMetric(invocations, errors, outboundLatency));
 
                 Map<String, String> callsRelationLabels = new ImmutableMap.Builder<String, String>()
                         .putAll(tenant.labels())
