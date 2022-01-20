@@ -92,6 +92,10 @@ public class Function extends MetricSource {
 
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_allocated_concurrency", 2.0D));
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_reserved_concurrency", 5.0D));
+
+        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_concurrent_executions_max", fnExecutionsAvg));
+        familySamples.add(buildFamily(functionLabels, "aws_lambda_concurrent_executions_max", fnExecutionsAvg));
+
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_concurrent_executions_avg", fnExecutionsAvg));
         familySamples.add(buildFamily(functionLabels, "aws_lambda_concurrent_executions_avg", fnExecutionsAvg));
 
