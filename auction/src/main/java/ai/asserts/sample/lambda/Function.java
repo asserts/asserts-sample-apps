@@ -52,6 +52,12 @@ public class Function extends MetricSource {
         Map<String, String> versionedFnLabels = new TreeMap<>(functionLabels);
         versionedFnLabels.put("d_executed_version", "1");
 
+        Map<String, String> versionedWithRequestContext = new TreeMap<>(versionedFnLabels);
+        Map<String, String> withRequestContext = new TreeMap<>(functionLabels);
+
+        versionedWithRequestContext.put("asserts_request_context", "handler");
+        withRequestContext.put("asserts_request_context", "handler");
+
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_memory_limit_mb", memoryLimitMb));
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_timeout_seconds", timeoutSeconds));
 
@@ -62,27 +68,27 @@ public class Function extends MetricSource {
         familySamples.add(buildFamily(functionLabels, "aws_lambda_cpu_total_time_sum", 0.2 * invocations * latencyAvg));
 
         int successfulInvocations = invocations - errors;
-        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_tx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
-        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_rx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+        familySamples.add(buildFamily(versionedWithRequestContext, "aws_lambda_tx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+        familySamples.add(buildFamily(versionedWithRequestContext, "aws_lambda_rx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
 
-        familySamples.add(buildFamily(functionLabels, "aws_lambda_tx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
-        familySamples.add(buildFamily(functionLabels, "aws_lambda_rx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+        familySamples.add(buildFamily(withRequestContext, "aws_lambda_tx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
+        familySamples.add(buildFamily(withRequestContext, "aws_lambda_rx_bytes_sum", successfulInvocations * (1024.0D * 8 + 4 * random * 1024.0D)));
 
 
-        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_invocations_sum", invocations * scrape_interval));
-        familySamples.add(buildFamily(functionLabels, "aws_lambda_invocations_sum", invocations * scrape_interval));
+        familySamples.add(buildFamily(versionedWithRequestContext, "aws_lambda_invocations_sum", invocations * scrape_interval));
+        familySamples.add(buildFamily(withRequestContext, "aws_lambda_invocations_sum", invocations * scrape_interval));
 
-        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_errors_sum", errors * scrape_interval));
-        familySamples.add(buildFamily(functionLabels, "aws_lambda_errors_sum", errors * scrape_interval));
+        familySamples.add(buildFamily(versionedWithRequestContext, "aws_lambda_errors_sum", errors * scrape_interval));
+        familySamples.add(buildFamily(withRequestContext, "aws_lambda_errors_sum", errors * scrape_interval));
 
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_throttles_sum", throttles * scrape_interval));
         familySamples.add(buildFamily(functionLabels, "aws_lambda_throttles_sum", throttles * scrape_interval));
 
-        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_duration_avg", latencyAvg));
-        familySamples.add(buildFamily(functionLabels, "aws_lambda_duration_avg", latencyAvg));
+        familySamples.add(buildFamily(versionedWithRequestContext, "aws_lambda_duration_avg", latencyAvg));
+        familySamples.add(buildFamily(withRequestContext, "aws_lambda_duration_avg", latencyAvg));
 
-        familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_duration_p99", latencyP99));
-        familySamples.add(buildFamily(functionLabels, "aws_lambda_duration_p99", latencyP99));
+        familySamples.add(buildFamily(versionedWithRequestContext, "aws_lambda_duration_p99", latencyP99));
+        familySamples.add(buildFamily(withRequestContext, "aws_lambda_duration_p99", latencyP99));
 
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_allocated_concurrency", 2.0D));
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_reserved_concurrency", 5.0D));
