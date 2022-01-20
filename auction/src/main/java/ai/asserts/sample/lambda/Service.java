@@ -58,20 +58,16 @@ public class Service extends MetricSource {
         String metricName = "asserts:mixin_pod_workload";
         metricFamilySamples.add(metricSample(GAUGE, copy, metricName, 1.0D));
 
-        labels.put("asserts_entity_type", "ServiceInstance");
-        labels.put("asserts_request_type", "inbound");
-        labels.put("asserts_source", "springboot");
         labels.put("asserts_request_context", "/applyDiscounts");
 
-        metricFamilySamples.add(metricSample(GAUGE, labels, "asserts:latency:count",
+        metricFamilySamples.add(metricSample(GAUGE, labels, "my_server_requests_seconds_count",
                 latencyCount += invocationCount));
 
-        metricFamilySamples.add(metricSample(GAUGE, labels, "asserts:latency:total",
+        metricFamilySamples.add(metricSample(GAUGE, labels, "my_server_requests_seconds_sum",
                 latencyTotal += invocationCount * latencyValue));
 
-        labels.remove("instance");
-        labels.put("asserts_entity_type", "Service");
-        metricFamilySamples.add(metricSample(GAUGE, labels, "asserts:latency:p99",
+        labels.put("quantile", "0.99");
+        metricFamilySamples.add(metricSample(GAUGE, labels, "my_server_requests_seconds",
                 latencyValue / 0.8));
         return metricFamilySamples;
     }
