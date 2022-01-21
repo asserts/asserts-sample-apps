@@ -10,20 +10,20 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class Error extends BaseSimulator {
-    private final static double delta = 10.0D / 120;
+    private final static double delta = 20.0D / 20;
     private double errorRatio = 0.0D;
 
     public Error(Function function) {
-        super(function, 280);
+        super(function, 48);
     }
 
     public List<Collector.MetricFamilySamples> emitMetrics() {
         // Start at 0% and go to 30% in 30 minutes, hover for 10 minutes and then ramp down to 0% in 30 minutes
         // Emit metrics every second
         double random = Math.random();
-        if (step < 120) {
+        if (step < 20) {
             errorRatio += delta;
-        } else if (160 <= step && step < 280) {
+        } else if (28 <= step && step < 48) {
             errorRatio -= delta;
         }
         errorCount = (int) Math.ceil(invocationCount * 0.01 * errorRatio);
