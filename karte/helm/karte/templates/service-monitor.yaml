@@ -11,6 +11,8 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
   endpoints:
   - port: http
+  {{- if .Values.multiEnv }}
   targetLabels:
     - asserts_env
     - asserts_site
+  {{- end }}

@@ -84,3 +84,5 @@ namespaceOverride: "default"
 tenant:
   auth:
     enabled: false
+
+multiEnv: false

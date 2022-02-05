@@ -15,8 +15,14 @@ dependencies:
   - name: karte
     version: "0.1.0"
     repository: "file://../karte"
+    condition: karte.enabled
+  - name: karte
+    version: "0.1.0"
+    repository: "file://../karte"
     alias: karte-prod
+    condition: karte-prod.multiEnv
   - name: karte
     version: "0.1.0"
     repository: "file://../karte"
     alias: karte-dev
+    condition: karte-dev.multiEnv
