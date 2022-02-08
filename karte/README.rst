@@ -21,13 +21,15 @@ From this directory, run:
 
 8. ``kubectl label namespace default istio-injection=enabled --overwrite``
 
-9. ``cd helm``
+9. ``kubectl label namespace karte-dev istio-injection=enabled --overwrite``
 
-10. ``kubectl apply -f karte-umbrella/istio-operator.yaml`` (note that the Istio operator must be installed before the application so that the Envoy sidecar is injected into each application pod).
+10. ``cd helm``
 
-11. ``helm dep up karte-umbrella``
+11. ``kubectl apply -f karte-umbrella/istio-operator.yaml`` (note that the Istio operator must be installed before the application so that the Envoy sidecar is injected into each application pod).
 
-12. ``helm install karte-umbrella --generate-name``
+12. ``helm dep up karte-umbrella``
+
+13. ``helm install karte-umbrella --generate-name``
 
 PyCharm
 =======
