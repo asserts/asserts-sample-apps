@@ -1,6 +1,9 @@
 {{- $labels := include "karte.labels" . }}
 {{- $selectorLabels := include "karte.selectorLabels" . }}
 {{- $namespace := include "karte.namespace" . }}
+{{- $multiEnv := .Values.multiEnv }}
+{{- $env := .Values.service.assertsEnvironment }}
+{{- $site := .Values.service.assertsSite }}
 {{- range .Values.additionalServices }}
 ---
 apiVersion: v1
@@ -11,6 +14,10 @@ metadata:
   labels:
     {{ $labels | nindent 4 }}
     service: {{ . }}
+    {{- if $multiEnv }}
+    asserts_env: {{ $env }}
+    asserts_site: {{ $site }}
+    {{- end }}
 spec:
   type: {{ $.Values.service.type }}
   ports:
