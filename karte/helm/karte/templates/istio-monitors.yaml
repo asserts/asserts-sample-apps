@@ -38,6 +38,7 @@ spec:
     - sourceLabels: [__meta_kubernetes_pod_name]
       action: replace
       targetLabel: pod_name
+    {{- if .Values.multiEnv }}
     - sourceLabels: [ namespace ]
       regex: "default"
       replacement: prod
@@ -54,6 +55,7 @@ spec:
       regex: "karte-dev"
       replacement: us-west-2
       targetLabel: asserts_site
+    {{- end }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

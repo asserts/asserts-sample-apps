@@ -1,8 +1,6 @@
-karte-prod:
+karte:
+  enabled: true
   namespaceOverride: "default"
-  service:
-    assertsEnvironment: "prod"
-    assertsSite: "us-west-2"
 
   # These services are not directly used in the demo story, but they all talk to each other and serve to add some
   # complexity to the graph.
@@ -19,35 +17,8 @@ karte-prod:
 
   problemStateEnabled: true
 
-karte-dev:
-  namespaceOverride: "karte-dev"
-  service:
-    assertsEnvironment: "dev"
-    assertsSite: "us-west-2"
-
-
 kube-prometheus-stack:
   namespaceOverride: "prometheus"
-
-  kubeStateMetrics:
-    serviceMonitor:
-      metricRelabelings:
-        - sourceLabels: [ namespace ]
-          regex: "default"
-          replacement: prod
-          targetLabel: asserts_env
-        - sourceLabels: [ namespace ]
-          regex: "default"
-          replacement: us-west-2
-          targetLabel: asserts_site
-        - sourceLabels: [ namespace ]
-          regex: "karte-dev"
-          replacement: dev
-          targetLabel: asserts_env
-        - sourceLabels: [ namespace ]
-          regex: "karte-dev"
-          replacement: us-west-2
-          targetLabel: asserts_site
 
   kube-state-metrics:
     namespaceOverride: "prometheus"
@@ -86,22 +57,6 @@ kube-prometheus-stack:
        - sourceLabels: [id]
          regex: \/docker\/.*
          action: drop
-       - sourceLabels: [ namespace ]
-         regex: "default"
-         replacement: prod
-         targetLabel: asserts_env
-       - sourceLabels: [ namespace ]
-         regex: "default"
-         replacement: us-west-2
-         targetLabel: asserts_site
-       - sourceLabels: [ namespace ]
-         regex: "karte-dev"
-         replacement: dev
-         targetLabel: asserts_env
-       - sourceLabels: [ namespace ]
-         regex: "karte-dev"
-         replacement: us-west-2
-         targetLabel: asserts_site
 
   # Monitoring Kubernetes's control plane produces a lot of metrics which aren't needed for the demo, so turn it off.
   kubeApiServer:
@@ -201,7 +156,7 @@ fluent-bit:
       [OUTPUT]
           Name                    gelf
           Match                   *
-          Host                    graylog-tcp-internal.monitoring.dev.asserts.ai
+          Host                    graylog-tcp-internal.monitoring.asserts.ai
           Port                    12201
           Mode                    tcp
           Gelf_Timestamp_Key      time
