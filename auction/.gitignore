@@ -1,7 +1,0 @@
-**/*.jar
-**/*.class
-build/
-.gradle/
-.idea/
-
-
