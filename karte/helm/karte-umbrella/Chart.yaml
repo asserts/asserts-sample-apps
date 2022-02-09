@@ -12,6 +12,7 @@ dependencies:
   - name: fluent-bit
     version: "0.12.3"
     repository: "https://fluent.github.io/helm-charts"
+    condition: fluent-bit.enabled
   - name: karte
     version: "0.1.0"
     repository: "file://../karte"
