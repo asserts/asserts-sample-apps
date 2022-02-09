@@ -61,6 +61,10 @@ public class Function extends MetricSource {
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_memory_limit_mb", memoryLimitMb));
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_timeout_seconds", timeoutSeconds));
 
+        Map<String, String> resourceTypeLabels = new TreeMap<>(functionLabels);
+        resourceTypeLabels.put("aws_resource_type", "AWS::Lambda::Function");
+
+        familySamples.add(buildFamily(resourceTypeLabels, "aws_resource", 1.0D));
         familySamples.add(buildFamily(versionedFnLabels, "aws_lambda_memory_utilization_avg", memoryUtilization));
         familySamples.add(buildFamily(functionLabels, "aws_lambda_memory_utilization_avg", memoryUtilization));
 
