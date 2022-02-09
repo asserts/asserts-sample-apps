@@ -64,6 +64,7 @@ kube-prometheus-stack:
 
 
 fluent-bit:
+  enabled: false
   # Default values for fluent-bit.
   # kind -- DaemonSet or Deployment
   kind: DaemonSet
@@ -152,7 +153,7 @@ fluent-bit:
       [FILTER]
           Name                modify
           Match               *
-          Set     cluster     kind-control-plane
+          Set     cluster     demo
       [OUTPUT]
           Name                    gelf
           Match                   *
