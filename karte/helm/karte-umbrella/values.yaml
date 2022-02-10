@@ -18,6 +18,7 @@ karte:
   problemStateEnabled: true
 
 kube-prometheus-stack:
+  enabled: false
   namespaceOverride: "prometheus"
 
   kube-state-metrics:
