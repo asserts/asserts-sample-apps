@@ -6,8 +6,10 @@ metadata:
   labels:
     {{- include "karte.labels" . | nindent 4 }}
     service: auth
+    {{- if .Values.multiEnv }}
     asserts_env: {{ .Values.service.assertsEnvironment }}
     asserts_site: {{ .Values.service.assertsSite }}
+    {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:

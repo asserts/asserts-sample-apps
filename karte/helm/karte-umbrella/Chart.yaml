@@ -9,17 +9,25 @@ dependencies:
   - name: kube-prometheus-stack
     version: "17.1.0"
     repository: "https://prometheus-community.github.io/helm-charts"
+    condition: kube-prometheus-stack.enabled
   - name: fluent-bit
     version: "0.12.3"
     repository: "https://fluent.github.io/helm-charts"
+    condition: fluent-bit.enabled
   - name: postgresql
     version: "10.12.4"
     repository: "https://charts.bitnami.com/bitnami"
   - name: karte
     version: "0.1.0"
     repository: "file://../karte"
+    condition: karte.enabled
+  - name: karte
+    version: "0.1.0"
+    repository: "file://../karte"
     alias: karte-prod
+    condition: karte-prod.multiEnv
   - name: karte
     version: "0.1.0"
     repository: "file://../karte"
     alias: karte-dev
+    condition: karte-dev.multiEnv

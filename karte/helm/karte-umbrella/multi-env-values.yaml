@@ -1,0 +1,92 @@
+karte:
+  enabled: false
+
+karte-prod:
+  multiEnv: true
+  namespaceOverride: "default"
+  service:
+    assertsEnvironment: "prod"
+    assertsSite: "us-west-2"
+
+  # These services are not directly used in the demo story, but they all talk to each other and serve to add some
+  # complexity to the graph.
+  additionalServices:
+    - "currant"
+    - "acai"
+    - "agarita"
+    - "amla"
+    - "bane"
+    - "mul"
+    - "boysen"
+    - "buffalo"
+    - "caper"
+
+  problemStateEnabled: true
+
+karte-dev:
+  multiEnv: true
+  namespaceOverride: "karte-dev"
+  service:
+    assertsEnvironment: "dev"
+    assertsSite: "us-west-2"
+  postgres:
+    enabled: false
+
+kube-prometheus-stack:
+  namespaceOverride: "prometheus"
+
+  kubeStateMetrics:
+    serviceMonitor:
+      metricRelabelings:
+        - sourceLabels: [ namespace ]
+          regex: "default"
+          replacement: prod
+          targetLabel: asserts_env
+        - sourceLabels: [ namespace ]
+          regex: "default"
+          replacement: us-west-2
+          targetLabel: asserts_site
+        - sourceLabels: [ namespace ]
+          regex: "karte-dev"
+          replacement: dev
+          targetLabel: asserts_env
+        - sourceLabels: [ namespace ]
+          regex: "karte-dev"
+          replacement: us-west-2
+          targetLabel: asserts_site
+
+  # Prevent istio from interfering with the Prometheus operator install. Without this, `helm install` will timeout
+  # waiting for an installation job.
+  prometheusOperator:
+    admissionWebhooks:
+      patch:
+        podAnnotations:
+          sidecar.istio.io/inject: "false"
+
+  kubelet:
+    serviceMonitor:
+      # When running on kind, cAdvisor will discover metrics via both the docker container that kind's node run in
+      # and through Kubernetes. The result is that container metrics will be duplicated which causes problems.
+      # To avoid that, drop the metrics sourced from kind's docker container.
+      #
+      # For more, see: https://app.clubhouse.io/asserts/story/2648/
+      cAdvisorMetricRelabelings:
+       - sourceLabels: [id]
+         regex: \/docker\/.*
+         action: drop
+       - sourceLabels: [ namespace ]
+         regex: "default"
+         replacement: prod
+         targetLabel: asserts_env
+       - sourceLabels: [ namespace ]
+         regex: "default"
+         replacement: us-west-2
+         targetLabel: asserts_site
+       - sourceLabels: [ namespace ]
+         regex: "karte-dev"
+         replacement: dev
+         targetLabel: asserts_env
+       - sourceLabels: [ namespace ]
+         regex: "karte-dev"
+         replacement: us-west-2
+         targetLabel: asserts_site
