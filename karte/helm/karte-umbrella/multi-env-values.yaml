@@ -29,7 +29,8 @@ karte-dev:
   service:
     assertsEnvironment: "dev"
     assertsSite: "us-west-2"
-
+  postgres:
+    enabled: false
 
 kube-prometheus-stack:
   namespaceOverride: "prometheus"

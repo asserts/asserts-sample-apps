@@ -85,4 +85,7 @@ tenant:
   auth:
     enabled: false
 
+postgres:
+  enabled: true
+
 multiEnv: false

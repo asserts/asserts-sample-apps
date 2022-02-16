@@ -5,8 +5,10 @@ from random import Random
 
 import requests
 from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
 from json_log_formatter import JSONFormatter
 from kubernetes import config, client
+from prometheus_client import Gauge
 from prometheus_flask_exporter import PrometheusMetrics
 from flask_apscheduler import APScheduler
 from pytz import timezone
@@ -14,6 +16,10 @@ from pytz import timezone
 app = Flask(__name__)
 metrics = PrometheusMetrics(app)
 random = Random(1)
+
+build_info = Gauge('prometheus_build_info', 'Build information',
+                   ['branch', 'revision', 'version'])
+
 
 log_formatter = JSONFormatter()
 log_handler = logging.StreamHandler()
@@ -24,6 +30,58 @@ logging.basicConfig(level=logging.ERROR, handlers=[log_handler])
 scheduler = APScheduler()
 scheduler.init_app(app)
 scheduler.start()
+
+GOOD_BUILD_INFO = ['HEAD', '3e86781f2880e95781aab292a78906572b49d073', '1.0.0']
+BAD_BUILD_INFO = ['HEAD', 'd3421337a09132240d7056ed7a2657c930c28975', '1.0.1']
+
+
+def set_use_extra_database_calls(extra_db_calls):
+    global use_extra_db_queries
+    use_extra_db_queries = extra_db_calls
+
+    if use_extra_db_queries:
+        if build_info.labels(*GOOD_BUILD_INFO):
+            build_info.remove(*GOOD_BUILD_INFO)
+        build_info.labels(*BAD_BUILD_INFO).set(1)
+    else:
+        if build_info.labels(*BAD_BUILD_INFO):
+            build_info.remove(*BAD_BUILD_INFO)
+        build_info.labels(*GOOD_BUILD_INFO).set(1)
+
+
+@scheduler.task('interval', minutes=1)
+def update_database_settings():
+    if postgres_service:
+        utc_now = datetime.utcnow()
+        us_pacific_tz = timezone('US/Pacific')
+        local_time = utc_now.astimezone(us_pacific_tz)
+
+        # Send excessive database calls between 9:30 and 10am pacific time.
+        extra_db_calls = local_time.hour == 9 and local_time.minute >= 30
+        set_use_extra_database_calls(extra_db_calls)
+
+
+postgres_service = os.getenv('POSTGRES_SERVICE')
+if postgres_service:
+    postgres_user = os.getenv('POSTGRES_USERNAME')
+    postgres_password = os.getenv('POSTGRES_PASSWORD')
+    assert postgres_user and postgres_password
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{postgres_user}:{postgres_password}@{postgres_service}:5432'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    update_database_settings()
+
+db = SQLAlchemy(app)
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+
+if postgres_service:
+    db.create_all()
+    print('Created database tables.')
+
+use_extra_db_queries = False
 
 
 # Map service endpoints:
@@ -44,9 +102,25 @@ def _call_auth(authv2_percentage: int):
 
 
 # User service endpoints:
-@app.route('/user')
+@app.route('/user', methods=['GET', 'POST'])
 def load_users():
-    return ''
+    if request.method == 'POST':
+        for _ in range(1000):
+            db.session.add(User())
+        db.session.commit()
+        users = db.session.query(User).all()
+        db.session.commit()
+        return str(len(users))
+    elif request.method == 'GET':
+        users = db.session.query(User).all()
+
+        if use_extra_db_queries:
+            for _ in range(200):
+                db.session.query(User).all()
+
+        db.session.commit()
+
+        return str(len(users))
 
 
 # Auth service endpoints:
@@ -130,6 +204,7 @@ def _calculate_desired_authv2_percentage():
         return 10
     else:
         return 0
+
 
 # The code below demonstrates various features of the Flask prometheus exporter.
 

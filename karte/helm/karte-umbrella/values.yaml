@@ -164,3 +164,19 @@ fluent-bit:
           Gelf_Timestamp_Key      time
           Gelf_Host_Key           stream
           Gelf_Short_Message_Key  log_proc_message
+
+postgresql:
+  postgresqlDatabase: "karte"
+  postgresqlPassword: "F.t7oQs*aWfHYjzB_qvG7upjM!hXb9g*!"
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      additionalLabels:
+        release: "karte-eks"
+      metricRelabelings:
+        - action: replace
+          sourceLabels: [namespace]
+          regex: "default"
+          replacement: "prod"
+          targetLabel: "asserts_env"

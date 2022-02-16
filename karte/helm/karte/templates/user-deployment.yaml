@@ -53,6 +53,18 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.postgres.enabled }}
+          env:
+            - name: POSTGRES_SERVICE
+              value: "karte-eks-postgresql"
+            - name: POSTGRES_USERNAME
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "karte-eks-postgresql"
+                  key: "postgresql-password"
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
