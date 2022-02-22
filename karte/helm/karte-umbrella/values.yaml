@@ -180,3 +180,8 @@ postgresql:
           regex: "default"
           replacement: "prod"
           targetLabel: "asserts_env"
+        - action: replace
+          sourceLabels: [ namespace ]
+          regex: "default"
+          replacement: "us-west-2"
+          targetLabel: "asserts_site"
