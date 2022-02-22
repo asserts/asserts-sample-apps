@@ -17,7 +17,7 @@ app = Flask(__name__)
 metrics = PrometheusMetrics(app)
 random = Random(1)
 
-build_info = Gauge('prometheus_build_info', 'Build information',
+build_info = Gauge('karte_build_info', 'Build information',
                    ['branch', 'revision', 'version'])
 
 
