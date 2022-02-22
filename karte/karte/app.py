@@ -8,7 +8,7 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from json_log_formatter import JSONFormatter
 from kubernetes import config, client
-from prometheus_client import Gauge
+from prometheus_client import Gauge, Counter
 from prometheus_flask_exporter import PrometheusMetrics
 from flask_apscheduler import APScheduler
 from pytz import timezone
@@ -19,6 +19,8 @@ random = Random(1)
 
 build_info = Gauge('karte_build_info', 'Build information',
                    ['branch', 'revision', 'version'])
+db_counter = Counter('postgres_calls', 'Calls to Postgres',
+                     ['dst_workload', 'dst_namespace'])
 
 
 log_formatter = JSONFormatter()
@@ -112,15 +114,21 @@ def load_users():
         db.session.commit()
         return str(len(users))
     elif request.method == 'GET':
-        users = db.session.query(User).all()
+        users = _fetch_users()
 
         if use_extra_db_queries:
             for _ in range(200):
-                db.session.query(User).all()
+                _fetch_users()
 
         db.session.commit()
 
         return str(len(users))
+
+
+def _fetch_users():
+    users = db.session.query(User).all()
+    db_counter.labels('karte-eks-postgresql', 'default').inc()
+    return users
 
 
 # Auth service endpoints:
