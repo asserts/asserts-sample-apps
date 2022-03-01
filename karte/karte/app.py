@@ -207,8 +207,8 @@ def _calculate_desired_authv2_percentage():
     local_time = utc_now.astimezone(us_pacific_tz)
 
     # Put the application in the problem state -- in which 10% of map service traffic is sent to the bad authv2
-    # service -- between 10:30 and 11am.
-    if local_time.hour == 10 and local_time.minute >= 30:
+    # service -- between 1 and 1:30pm.
+    if local_time.hour == 13 and local_time.minute <= 30:
         return 10
     else:
         return 0
