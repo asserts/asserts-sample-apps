@@ -65,7 +65,7 @@ kube-prometheus-stack:
 
 
 fluent-bit:
-  enabled: false
+  enabled: true
   # Default values for fluent-bit.
   # kind -- DaemonSet or Deployment
   kind: DaemonSet
@@ -86,84 +86,6 @@ fluent-bit:
       cpu: 10m
       memory: 20Mi
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
-  config:
-    ## https://docs.fluentbit.io/manual/service
-    service: |
-      [SERVICE]
-          Flush 1
-          Daemon Off
-          Log_Level info
-          Parsers_File parsers.conf
-          Parsers_File custom_parsers.conf
-          HTTP_Server On
-          HTTP_Listen 0.0.0.0
-          HTTP_Port 2020
-    ## https://docs.fluentbit.io/manual/pipeline/inputs
-    inputs: |
-      [INPUT]
-          Name                    tail
-          Tag                     kube.*
-          Path                    /var/log/containers/authv2-*.log
-          Parser                  docker
-          DB                      /var/log/flb_kube.db
-          Mem_Buf_Limit           5MB
-          Refresh_Interval        10
-    ## https://docs.fluentbit.io/manual/pipeline/filters
-    filters: |
-      [FILTER]
-          Name                    kubernetes
-          Match                   kube.*
-          Merge_Log_Key           log_processed
-          Merge_Log               On
-          Keep_Log                On
-          Annotations             Off
-          Labels                  Off
-          K8S-Logging.Parser On
-          K8S-Logging.Exclude On
-      [FILTER]
-          Name                nest
-          Match               *
-          Operation lift
-          Nested_under log_processed
-          Add_prefix log_proc_
-      # Filter out log messages that didn't come in the JSON format used by karte, in which the short log
-      # message is in the `message` property.
-      [FILTER]
-          Name                grep
-          Match               *
-          regex               log_proc_message .+
-      [FILTER]
-          Name                nest
-          Match               kube.*
-          Operation lift
-          Nested_under kubernetes
-          Add_prefix   kubernetes_
-      [FILTER]
-          Name                modify
-          Match               kube.*
-          Copy     kubernetes_pod_name pod
-          Copy     kubernetes_namespace_name namespace
-          Copy     kubernetes_container_name container
-          Copy     kubernetes_container_name tag
-    ## https://docs.fluentbit.io/manual/pipeline/outputs
-    outputs: |
-      [FILTER]
-          Name                modify
-          Match               *
-          Remove_wildcard kubernetes
-      [FILTER]
-          Name                modify
-          Match               *
-          Set     cluster     demo
-      [OUTPUT]
-          Name                    gelf
-          Match                   *
-          Host                    graylog-tcp-internal.monitoring.asserts.ai
-          Port                    12201
-          Mode                    tcp
-          Gelf_Timestamp_Key      time
-          Gelf_Host_Key           stream
-          Gelf_Short_Message_Key  log_proc_message
 
 postgresql:
   postgresqlDatabase: "karte"

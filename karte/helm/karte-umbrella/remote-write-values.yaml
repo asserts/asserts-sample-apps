@@ -1,20 +1,5 @@
-tenants:
-  - name: demo
-    auth_enabled: true
-    password: AgB8dBGokhEdrF2TfLgDfJMprpTqJ9iduUOIO3Ww4mgjksj4xAqCD40Em10rs96k//2VjLmUfPhBCYuQapb+zpYSlexjMU5m0JlJzJmvU62Wfr9mIfdJs/Yr5ZDMbDmwN5TpqFE38wQL48/uzTU6QdOAiTCahCYJ92GEXeDZ3Uw1xvXB1SUSdnPM0tWJv3tQZBCHLrQnzkh+Cajda55+l/CcLLQqBqBjDUHbnKeH0pYECukIRRT4mONzKIdCY/j9Z3EEIOAFPIvewddbnnEXcKjTxIgBIYiwAO7wVeHxO480e9HfEfgvVjkcGJkcFZJ8Wwdi1Qcl+vt6rxYmAiNGtLb8r0/1yuFkHFeXJ30lRUcM4U95Izo7j41j9x8xaFEUpsLTOJ3Or4Q1tA1MHEEuTtXsyGCGOqZBsKg+QZqB1+JVZHrj5mYdpSzEaXjDRw8KGdC+i9mhYJLL5XbJ/v//yrSP21EshYXLGNSzxlgGBNFZ3gabr4sbAhtwP+GbklffI3IV0fanoB2pXBubsYlLnfJvo0j9CK2HGBbtGqmwbt11dD8IrKgPqPUHtExUr7TmxJIV7De+JBRFxhJcmMbqE0U10SDTf7P5oItVcViP0syn23Ps5Y/n0FpgBtSy3XJSgKbrJxEaEnqpvplQCFf8JCmK22TTCdIxPWlmcl7/O4uV62OQ8jrLxGr6HvZCJTc+G5V0k64WkwCN94k/zh8GP+a484hAKA==
-    username: AgCM+FsEssbrMyCLqSqAdzgnrUP9WAaFQYKn83AGVXLVB9hrBDq/P5/yLLzpdDXNUeySuFvzu+wkLpBysDMt/bJjFo7nhUXTY4TZMDPp5iDp7b+2Dk/6VMB54JfaEv5ilUBxW9tZ4v1YaP/oParHLlrZZH99DnkumtBFVK+Axzo706Zl9FhQu6X1T9vCXBzEUzb3jMQFFE2GaFAel0s2yAA399lC34Jq4D5jppOmM7jW4fuAL8FiLOGm4kYTZ0oXrY9M2xf2JAoadcU6G/PBqovUPdBa+OlnPykN1G3gcgz0VcnkCTaPreczHxZrQ9HCszO54NYxUnpA/9nKAeeJiVffBR6biL254UL0h5+8bumREEYAv6ibGiGMlR0NM8766Muy2oHzHCHSOkcXxI8MJWYJxurJkR4kzCbN4A0sDzurWHltFOzCYa1K+ugk4xigCLn/COWvz4KvC5idl5YKDzsoUCHcS/Jw72cJyCtixGHAl6Qtn4YT6PKMyh9IXwMU7Kl6+9SEcThaWsjH7K2YZ/xC4DAl6v5AbMl+UudEFwjL5YYwX0eRBNSa7Xkr9oNv+eh09W0wBn9HrmfWR8RjHr/JEqCm7ioZr8WDfK9PwlzXoDkK/s1TWI7IMQ/6ymwOt7sVO+nTeOWJdykIfrxYV4m5g2fQwuScy/VS+1nu2iEewYjV08/hKvFany7xaARi3xX6YErr
-
 kube-prometheus-stack:
   prometheus:
     prometheusSpec:
       replicaExternalLabelNameClear: true
       prometheusExternalLabelNameClear: true
-      remoteWrite:
-        - url: https://demo-internal.tsdb.monitoring.asserts.ai/api/v1/write
-          basicAuth:
-            password:
-              name: demo-tsdb-remote-write
-              key: password
-            username:
-              name: demo-tsdb-remote-write
-              key: username

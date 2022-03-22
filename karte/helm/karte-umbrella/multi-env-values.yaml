@@ -33,6 +33,7 @@ karte-dev:
     enabled: false
 
 kube-prometheus-stack:
+  enabled: true
   namespaceOverride: "prometheus"
 
   kubeStateMetrics:
