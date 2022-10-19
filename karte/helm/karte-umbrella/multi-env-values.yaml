@@ -7,6 +7,8 @@ karte-prod:
   service:
     assertsEnvironment: "prod"
     assertsSite: "us-west-2"
+  postgres:
+    enabled: false
 
   # These services are not directly used in the demo story, but they all talk to each other and serve to add some
   # complexity to the graph.
@@ -24,7 +26,7 @@ karte-prod:
   problemStateEnabled: true
 
 karte-dev:
-  multiEnv: true
+  multiEnv: false
   namespaceOverride: "karte-dev"
   service:
     assertsEnvironment: "dev"
@@ -90,3 +92,4 @@ kube-prometheus-stack:
          regex: "karte-dev"
          replacement: us-west-2
          targetLabel: asserts_site
+

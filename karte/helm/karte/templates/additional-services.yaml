@@ -48,7 +48,7 @@ metadata:
     service: {{ . }}
 spec:
   {{- if not $.Values.autoscaling.enabled }}
-  replicas: {{ $.Values.replicaCount }}
+  replicas: {{ $.Values.additionalServicesReplicaCount }}
   {{- end }}
   selector:
     matchLabels:
